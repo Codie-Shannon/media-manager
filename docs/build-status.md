@@ -1,32 +1,32 @@
-# Recovered build status
+# Build status
 
 Date: 2026-07-26
 
 ## Verified
 
 - NuGet package restore succeeds using the repository `NuGet.Config`.
-- `MediaControlsLibrary`: Debug x64 and Release x64 builds succeed from this curated repository.
-- `MediaControlsTester`: Debug x64 and Release x64 builds succeed from this curated repository, and the tester launches.
-- The recovered `Media_Manager` executable launches and displays the full shell when `%LOCALAPPDATA%\Media_Manager` exists.
-- An isolated application build succeeds when the recovered controls-library output is supplied explicitly as a reference path.
+- The complete `MediaManager.sln` rebuilds in Debug x64 and Release x64 with zero errors.
+- `MediaControlsLibrary`, `MediaControlsTester`, and `Media_Manager` build from their repository project relationships.
+- `Media_Manager` launches from both Debug x64 and Release x64 output.
+- The same restore, builds, and launches succeed from a fresh tracked-file checkout with no inherited `packages`, `bin`, or `obj` directories.
+- A fresh Windows profile creates `%LOCALAPPDATA%\Media_Manager`, `MediaManagerDB.db`, and all eight required image directories automatically.
+- A controlled exception raised after managed startup begins displays `Media Manager Startup Error`, its root-cause details, and a working Close button.
 
-## Not yet reproducible
+## Restored dependency relationship
 
-The application project contains a stale file reference:
+The recovered project previously referenced a generated DLL through a path outside the repository:
 
 ```text
 ..\..\..\Project Files\Projects\MediaControlsLibrary\MediaControlsLibrary\bin\x64\Debug\MediaControlsLibrary.dll
 ```
 
-That path does not exist in the curated repository. Existing recovery output could appear to build because an old DLL remained in `bin`; generated output is intentionally excluded here.
+Group 2 replaced it with a project reference to `src/MediaControlsLibrary/MediaControlsLibrary.csproj`. The application no longer depends on stale generated output.
 
-Group 2 will replace the file reference with a project reference to `src/MediaControlsLibrary/MediaControlsLibrary.csproj`.
+## Restored startup
 
-## Startup issue
+Database initialization now validates its data path, creates the directory, and combines the database filename safely. Application startup is explicit so managed construction failures can be shown without relying on application resources or the controls library.
 
-On a fresh profile, startup throws `DirectoryNotFoundException` because SQLite attempts to create `MediaManagerDB.db` before the application creates `%LOCALAPPDATA%\Media_Manager`.
-
-Creating that directory externally allows the recovered executable to launch. Group 2 will make startup create its own required directories and report failures clearly.
+Failures that occur before managed WPF startup, such as Windows being unable to load the executable or CLR, remain operating-system loader errors.
 
 ## Known compiler-warning themes
 
@@ -37,6 +37,8 @@ Creating that directory externally allows the recovered executable to launch. Gr
 - unused error strings.
 
 Warnings are retained in the baseline and will be triaged during restoration.
+
+The verified full-solution rebuild currently reports 42 compiler warnings and zero errors in each configuration.
 
 ## Dependency audit notices
 

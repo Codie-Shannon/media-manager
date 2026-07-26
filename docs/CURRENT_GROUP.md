@@ -1,22 +1,21 @@
 # Current group
 
-## Group 1 - Freeze and prove the recovered baseline
+## Group 2 - Restore reproducible build and startup
 
 Status: complete
 
 Completed:
 
-- Confirmed an external immutable archive exists.
-- Identified the authoritative full application source.
-- Verified the recovered controls library and tester build and launch independently.
-- Captured original-state application navigation, forms, details, metadata-search state, and tester UI.
-- Created a curated repository without generated packages, databases, private paths, or recovered backup projects.
-- Verified package restore and Debug/Release x64 builds for the controls library and tester from the curated repository.
-- Commit and tag the curated baseline.
-- Push the private GitHub repository.
-- Recorded and verified a short silent recovered-state walkthrough.
-- Finalized the controls, styles, templates, and resources inventory.
+- Replaced the broken controls DLL hint with a project reference.
+- Made database initialization create its LocalAppData directory before opening SQLite.
+- Removed implicit `StartupUri` construction and added controlled managed startup.
+- Added a dependency-free WPF startup error window.
+- Verified the complete solution in Debug x64 and Release x64.
+- Verified restore, both builds, and both launches from a fresh tracked-file checkout.
+- Verified fresh-profile creation of the database and all required image directories.
+- Preserved the original user profile after isolated startup testing.
+- Captured and visually audited all 13 restored-state screenshots.
 
 Next group:
 
-- Group 2 begins by replacing the broken controls DLL hint with a project reference and proving clean Debug and Release builds.
+- Group 3 modernizes the application from this working, documented restoration checkpoint.

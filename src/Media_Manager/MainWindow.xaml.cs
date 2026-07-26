@@ -62,7 +62,10 @@ namespace Media_Manager
             DataContext = new MoviesViewModel();
 
             //Initialize Application's Local Data Path
-            string localdata = $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData)}\\{Application.Current.MainWindow.GetType().Assembly.GetName().Name}";
+            string applicationName = typeof(MainWindow).Assembly.GetName().Name;
+            string localdata = Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),
+                applicationName);
 
             //Initialize Database
             Database.Initialize(localdata);

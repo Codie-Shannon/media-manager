@@ -4,14 +4,16 @@ Media Manager is a local-first Windows desktop application for organizing movies
 
 ## Current status
 
-Group 1 is complete. The repository records the recovered baseline before application restoration:
+Group 2 is complete. The recovered application now builds and starts reproducibly from the curated repository:
 
-- `MediaControlsLibrary` builds and its tester launches.
-- The recovered Media Manager executable can launch after its LocalAppData directory exists.
-- A clean application build is not yet reproducible because the app references a stale controls DLL by a broken path.
+- The full solution restores and builds in Debug x64 and Release x64.
+- `Media_Manager` references `MediaControlsLibrary` as a project dependency instead of a stale external DLL.
+- A fresh profile creates its LocalAppData database directory and required image directories automatically.
+- Startup failures raised after managed startup begins are presented in a dependency-free error window.
+- Clean tracked-file checkouts build and launch without inherited `bin`, `obj`, or package output.
 - Metadata retrieval still contains legacy direct-site automation and has not yet been replaced by a provider abstraction.
 - No real media library, user database, credentials, or private paths are included.
-- Original-state screenshots, a silent walkthrough, and a complete UI/resource inventory are preserved as fixed before evidence.
+- Original and restored screenshot groups are preserved as fixed comparison evidence.
 
 See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
 
@@ -32,7 +34,7 @@ See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/
 - .NET Framework 4.7.2 developer pack
 - NuGet package restore
 
-Open `MediaManager.sln`. The controls projects are the currently verified build targets. Restoring the full application build is Group 2 work.
+Open `MediaManager.sln`, restore NuGet packages, and build the `x64` configuration. The complete solution is verified in both Debug and Release.
 
 ## Privacy and sample-data policy
 

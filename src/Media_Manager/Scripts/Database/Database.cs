@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System.IO;
 using System.Data;
+using System;
 using System.Linq;
 using System.Data.SQLite;
 using System.Configuration;
@@ -80,18 +81,27 @@ namespace Media_Manager
         // =======================================================
         public static void Initialize(string localdata, string connectionstringId = "Default")
         {
+            if (string.IsNullOrWhiteSpace(localdata))
+            {
+                throw new ArgumentException("A local data directory is required.", nameof(localdata));
+            }
+
+            //Ensure the database directory exists before SQLite creates the file.
+            Directory.CreateDirectory(localdata);
+
             //Initialize Variables
             string name = "MediaManagerDB.db";
-            string connectionstring = $"Data Source={localdata}\\{name};Version=3;";
+            string databasePath = Path.Combine(localdata, name);
+            string connectionstring = $"Data Source={databasePath};Version=3;";
 
             //Update Connection String
             UpdateConnectionString(connectionstringId, connectionstring);
 
             //Check if the Database File Does Not Exist
-            if (!File.Exists($"{localdata}\\{name}"))
+            if (!File.Exists(databasePath))
             {
                 //Create Database File
-                SQLiteConnection.CreateFile($"{localdata}\\{name}");
+                SQLiteConnection.CreateFile(databasePath);
 
                 //Initialize Connection String
                 SQLiteConnection connection = new SQLiteConnection(connectionstring);
