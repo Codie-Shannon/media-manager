@@ -63,9 +63,12 @@ namespace Media_Manager
 
             //Initialize Application's Local Data Path
             string applicationName = typeof(MainWindow).Assembly.GetName().Name;
-            string localdata = Path.Combine(
-                System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),
-                applicationName);
+            string dataDirectoryOverride = System.Environment.GetEnvironmentVariable("MEDIA_MANAGER_DATA_DIRECTORY");
+            string localdata = string.IsNullOrWhiteSpace(dataDirectoryOverride)
+                ? Path.Combine(
+                    System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),
+                    applicationName)
+                : Path.GetFullPath(dataDirectoryOverride);
 
             //Initialize Database
             Database.Initialize(localdata);

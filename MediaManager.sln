@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaControlsLibrary", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaControlsTester", "src\MediaControlsTester\MediaControlsTester.csproj", "{A1E2E0E7-8865-4245-AE0B-D7B2F5CC80C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaManager.StabilityTests", "tests\MediaManager.StabilityTests\MediaManager.StabilityTests.csproj", "{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,14 @@ Global
 		{A1E2E0E7-8865-4245-AE0B-D7B2F5CC80C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1E2E0E7-8865-4245-AE0B-D7B2F5CC80C6}.Release|x64.ActiveCfg = Release|x64
 		{A1E2E0E7-8865-4245-AE0B-D7B2F5CC80C6}.Release|x64.Build.0 = Release|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Debug|Any CPU.Build.0 = Debug|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Debug|x64.ActiveCfg = Debug|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Debug|x64.Build.0 = Debug|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Release|Any CPU.ActiveCfg = Release|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Release|Any CPU.Build.0 = Release|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Release|x64.ActiveCfg = Release|x64
+		{D7F4B458-6B2A-4AC4-9C72-43769985B6BE}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,4 +58,3 @@ Global
 		SolutionGuid = {5DA6E81F-D039-44DE-92B1-F6508AB58D8F}
 	EndGlobalSection
 EndGlobal
-

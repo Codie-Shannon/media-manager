@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System;
 using System.Linq;
 using System.Windows;
 using Media_Manager.Models;
@@ -170,6 +171,14 @@ namespace Media_Manager
         // ========================================
         public static void DeleteTVShowFolder(out bool isCancel, out bool isDeleted, TVShowFolder tvshowfoler, List<SeasonFolder> seasonfolders, List<Episode> episodes)
         {
+            isCancel = false;
+            isDeleted = false;
+
+            if (tvshowfoler == null || seasonfolders == null || episodes == null)
+            {
+                return;
+            }
+
             //Initialize Variables
             bool isoverride = false;
 
@@ -182,59 +191,76 @@ namespace Media_Manager
                 //Get Deletion Type
                 RecycleOption recycleoption = GetDeletionType(result);
 
-                //Loop through Season Folders
-                for (int i = 0; i < seasonfolders.Count; i++)
+                try
                 {
-                    //Get Current Looped Season's Episodes
-                    List<Episode> episodestoremove = episodes.Where(j => j.OwnerId == seasonfolders[i].Id).ToList();
-
-                    //Loop through and Delete Current Looped Seaon's Episodes 
-                    foreach (Episode item in episodes) { DeletePath(recycleoption, item.FilePath, FileType.File); }
-
-                    //Validate Season Folder Deletion
-                    if (Directory.GetFiles(seasonfolders[i].FilePath, "*", System.IO.SearchOption.AllDirectories).Length == 0)
+                    //Validate all paths and obtain consent for untracked files before deleting anything.
+                    for (int i = 0; i < seasonfolders.Count; i++)
                     {
-                        //Delete Season Folder
-                        DeletePath(recycleoption, seasonfolders[i].FilePath, FileType.Folder);
-                    }
-                    else
-                    {
-                        //Validate isoverride Variable
-                        if (!isoverride)
+                        if (!Directory.Exists(seasonfolders[i].FilePath))
                         {
-                            //Confirm Deletion with User
-                            result = CustomMessageBox.ShowYesNoCancel($"Are you sure you would like to delete season {seasonfolders[i].SeasonNumber}'s folder from the computer system?\n\nPlease note this will also delete all files stored within the season folder.", "WARNING", "Yes", "Yes to All", "Cancel", MessageBoxImage.Warning);
+                            return;
                         }
 
-                        //Check if result is yes
-                        if (result == MessageBoxResult.Yes || result == MessageBoxResult.No)
+                        List<Episode> seasonEpisodes = episodes.Where(j => j.OwnerId == seasonfolders[i].Id).ToList();
+                        if (seasonEpisodes.Any(item => !File.Exists(item.FilePath)))
                         {
-                            //Delete Season Folder
-                            DeletePath(recycleoption, seasonfolders[i].FilePath, FileType.Folder);
+                            return;
+                        }
 
-                            //Check if result is no
+                        HashSet<string> trackedPaths = new HashSet<string>(
+                            seasonEpisodes.Select(item => Path.GetFullPath(item.FilePath)),
+                            StringComparer.OrdinalIgnoreCase);
+                        bool containsUntrackedFiles = Directory
+                            .EnumerateFiles(seasonfolders[i].FilePath, "*", System.IO.SearchOption.AllDirectories)
+                            .Any(path => !trackedPaths.Contains(Path.GetFullPath(path)));
+
+                        if (containsUntrackedFiles && !isoverride)
+                        {
+                            result = CustomMessageBox.ShowYesNoCancel($"Are you sure you would like to delete season {seasonfolders[i].SeasonNumber}'s folder from the computer system?\n\nPlease note this will also delete files that are not tracked by Media Manager.", "WARNING", "Yes", "Yes to All", "Cancel", MessageBoxImage.Warning);
+
+                            if (result != MessageBoxResult.Yes && result != MessageBoxResult.No)
+                            {
+                                isCancel = true;
+                                return;
+                            }
+
                             if (result == MessageBoxResult.No)
                             {
-                                //Set isoverride to True
                                 isoverride = true;
                             }
                         }
-                        else
+                    }
+
+                    //Loop through Season Folders
+                    for (int i = 0; i < seasonfolders.Count; i++)
+                    {
+                        //Get Current Looped Season's Episodes
+                        List<Episode> episodestoremove = episodes.Where(j => j.OwnerId == seasonfolders[i].Id).ToList();
+
+                        //Loop through and Delete Current Looped Season's Episodes
+                        foreach (Episode item in episodestoremove)
                         {
-                            //Show Error Message
-                            CustomMessageBox.ShowOK("Cannot delete season folder from computer system due to occupancy.", "ERROR", "OK", MessageBoxImage.Error);
+                            if (!DeletePath(recycleoption, item.FilePath, FileType.File))
+                            {
+                                return;
+                            }
+                        }
+
+                        //Delete Season Folder
+                        if (!DeletePath(recycleoption, seasonfolders[i].FilePath, FileType.Folder))
+                        {
+                            return;
                         }
                     }
+
+                    isDeleted = true;
+                    return;
                 }
-
-                //Set isCancel to False
-                isCancel = false;
-
-                //Set isDeleted to True
-                isDeleted = true;
-
-                //Return Method
-                return;
+                catch (Exception exception)
+                {
+                    CustomMessageBox.ShowOK($"The TV show could not be deleted.\n\n{exception.Message}", "ERROR", "OK", MessageBoxImage.Error);
+                    return;
+                }
             }
             else if (result == MessageBoxResult.Cancel || result == MessageBoxResult.None)
             {
@@ -248,11 +274,6 @@ namespace Media_Manager
                 return;
             }
 
-            //Set isCancel to False
-            isCancel = false;
-
-            //Set isDeleted to False
-            isDeleted = false;
         }
 
 
@@ -261,6 +282,14 @@ namespace Media_Manager
         // ========================================
         public static void DeleteSeasonFolder(out bool isCancel, out bool isDeleted, SeasonFolder selectedSeasonFolder, List<Episode> episodes)
         {
+            isCancel = false;
+            isDeleted = false;
+
+            if (selectedSeasonFolder == null || episodes == null || !Directory.Exists(selectedSeasonFolder.FilePath))
+            {
+                return;
+            }
+
             //Initialize Variables
             string yes = "Delete", no = "Recycle";
 
@@ -273,39 +302,51 @@ namespace Media_Manager
                 //Get Deletion Type
                 RecycleOption recycleoption = GetDeletionType(result);
 
-                //Loop through and Delete Episodes
-                foreach (Episode item in episodes) { DeletePath(recycleoption, item.FilePath, FileType.File); }
-
-                //Validate Season Folder Deletion
-                if (Directory.GetFiles(selectedSeasonFolder.FilePath, "*", System.IO.SearchOption.AllDirectories).Length == 0)
+                try
                 {
-                    //Delete Season Folder
-                    DeletePath(recycleoption, selectedSeasonFolder.FilePath, FileType.Folder);
-                }
-                else
-                {
-                    //Get Deletion Type
-                    string type = result == MessageBoxResult.Yes ? yes : no;
-
-                    //Confirm Deletion with User
-                    result = CustomMessageBox.ShowYesNo($"Are you sure you would like to delete season {selectedSeasonFolder.SeasonNumber}'s folder from the computer system?\n\nPlease note this will also delete all files stored within the season folder.", "WARNING", type, "Cancel", MessageBoxImage.Warning);
-
-                    //Check if result is yes
-                    if (result == MessageBoxResult.Yes)
+                    //Validate all paths and obtain consent for untracked files before deleting anything.
+                    if (episodes.Any(item => !File.Exists(item.FilePath)))
                     {
-                        //Delete Season Folder
-                        DeletePath(recycleoption, selectedSeasonFolder.FilePath, FileType.Folder);
+                        return;
                     }
+
+                    HashSet<string> trackedPaths = new HashSet<string>(
+                        episodes.Select(item => Path.GetFullPath(item.FilePath)),
+                        StringComparer.OrdinalIgnoreCase);
+                    bool containsUntrackedFiles = Directory
+                        .EnumerateFiles(selectedSeasonFolder.FilePath, "*", System.IO.SearchOption.AllDirectories)
+                        .Any(path => !trackedPaths.Contains(Path.GetFullPath(path)));
+
+                    if (containsUntrackedFiles)
+                    {
+                        string type = result == MessageBoxResult.Yes ? yes : no;
+                        result = CustomMessageBox.ShowYesNo($"Are you sure you would like to delete season {selectedSeasonFolder.SeasonNumber}'s folder from the computer system?\n\nPlease note this will also delete files that are not tracked by Media Manager.", "WARNING", type, "Cancel", MessageBoxImage.Warning);
+
+                        if (result != MessageBoxResult.Yes)
+                        {
+                            isCancel = true;
+                            return;
+                        }
+                    }
+
+                    //Loop through and Delete Episodes
+                    foreach (Episode item in episodes)
+                    {
+                        if (!DeletePath(recycleoption, item.FilePath, FileType.File))
+                        {
+                            return;
+                        }
+                    }
+
+                    //Delete Season Folder
+                    isDeleted = DeletePath(recycleoption, selectedSeasonFolder.FilePath, FileType.Folder);
+                    return;
                 }
-
-                //Set isCancel to False
-                isCancel = false;
-
-                //Set isDeleted to True
-                isDeleted = true;
-
-                //Return Method
-                return;
+                catch (Exception exception)
+                {
+                    CustomMessageBox.ShowOK($"The season could not be deleted.\n\n{exception.Message}", "ERROR", "OK", MessageBoxImage.Error);
+                    return;
+                }
             }
             else if (result == MessageBoxResult.Cancel || result == MessageBoxResult.None)
             {
@@ -319,11 +360,6 @@ namespace Media_Manager
                 return;
             }
 
-            //Set isCancel to False
-            isCancel = false;
-
-            //Set isDeleted to False
-            isDeleted = false;
         }
 
 
@@ -332,6 +368,14 @@ namespace Media_Manager
         // ========================================
         public static void DeleteItem(out bool isCancel, out bool isDeleted, MediaType type, FileType filetype, string path)
         {
+            isCancel = false;
+            isDeleted = false;
+
+            if (!PathExists(path, filetype))
+            {
+                return;
+            }
+
             //Get Item Type
             string itemtype = GetItemType(type);
 
@@ -344,17 +388,17 @@ namespace Media_Manager
                 //Get Deletion Type
                 RecycleOption recycleoption = GetDeletionType(result);
 
-                //Delete Item
-                DeletePath(recycleoption, path, filetype);
-
-                //Set isCancel to False
-                isCancel = false;
-
-                //Set isDeleted to True
-                isDeleted = true;
-
-                //Return Method
-                return;
+                try
+                {
+                    //Delete Item
+                    isDeleted = DeletePath(recycleoption, path, filetype);
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    CustomMessageBox.ShowOK($"The {itemtype} could not be deleted.\n\n{exception.Message}", "ERROR", "OK", MessageBoxImage.Error);
+                    return;
+                }
             }
             else if (result == MessageBoxResult.Cancel || result == MessageBoxResult.None)
             {
@@ -368,11 +412,6 @@ namespace Media_Manager
                 return;
             }
 
-            //Set isCancel to False
-            isCancel = false;
-
-            //Set isDeleted to False
-            isDeleted = false;
         }
         #endregion Methods
 
@@ -382,8 +421,13 @@ namespace Media_Manager
         // Delete File
         // ========================================
         // ========================================
-        private static void DeletePath(RecycleOption recycleOption, string path, FileType filetype)
+        private static bool DeletePath(RecycleOption recycleOption, string path, FileType filetype)
         {
+            if (!PathExists(path, filetype))
+            {
+                return false;
+            }
+
             //Check File Type
             if (filetype == FileType.File)
             {
@@ -392,6 +436,8 @@ namespace Media_Manager
 
                 //Delete File
                 FileSystem.DeleteFile(path, UIOption.OnlyErrorDialogs, recycleOption, UICancelOption.ThrowException);
+
+                return !File.Exists(path);
             }
             else if(filetype == FileType.Folder)
             {
@@ -399,14 +445,33 @@ namespace Media_Manager
                 DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
                 //Loop through Files to Set Their Attributes Value to Normal
-                directoryInfo.EnumerateFiles("*", System.IO.SearchOption.AllDirectories).Sum(fi => (int)(fi.Attributes = FileAttributes.Normal));
+                foreach (FileInfo file in directoryInfo.EnumerateFiles("*", System.IO.SearchOption.AllDirectories))
+                {
+                    file.Attributes = FileAttributes.Normal;
+                }
 
                 //Set Game Directory's Attributes to Normal
                 directoryInfo.Attributes = FileAttributes.Normal;
 
                 //Delete Directory
                 FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, recycleOption, UICancelOption.ThrowException);
+
+                return !Directory.Exists(path);
             }
+
+            return false;
+        }
+
+        private static bool PathExists(string path, FileType filetype)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return false;
+            }
+
+            return filetype == FileType.Folder
+                ? Directory.Exists(path)
+                : File.Exists(path);
         }
 
 

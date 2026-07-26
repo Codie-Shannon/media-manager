@@ -689,7 +689,7 @@ namespace Media_Manager.Views
                     try
                     {
                         //Create and Configure New Process Object
-                        Process game = new Process() { StartInfo = new ProcessStartInfo() { FileName = selectedGame.FilePath, WorkingDirectory = Path.GetDirectoryName(selectedGame.FilePath) } };
+                        Process game = new Process() { StartInfo = new ProcessStartInfo() { FileName = selectedGame.FilePath, WorkingDirectory = selectedGame.BaseDirectory } };
 
                         //Start Game Process
                         game.Start();
@@ -702,8 +702,6 @@ namespace Media_Manager.Views
                             //Show Error Message
                             CustomMessageBox.ShowOK($"An Error Occured\n\n{e.Message}", "ERROR", "OK", MessageBoxImage.Error);
 
-                            //Close Application
-                            Application.Current.Shutdown();
                         }
                     }
                 }

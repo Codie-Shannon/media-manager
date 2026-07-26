@@ -1,28 +1,28 @@
 # Current group
 
-## Group 2 - Restore reproducible build and startup
+## Group 3 - Verify and stabilize existing functionality
 
 Status: complete
 
 Completed:
 
-- Replaced the broken controls DLL hint with a project reference.
-- Made database initialization create its LocalAppData directory before opening SQLite.
-- Removed implicit `StartupUri` construction and added controlled managed startup.
-- Added a dependency-free WPF startup error window.
-- Verified the complete solution in Debug x64 and Release x64.
-- Verified restore, both builds, and both launches from a fresh tracked-file checkout.
-- Verified fresh-profile creation of the database and all required image directories.
-- Preserved the original user profile after isolated startup testing.
-- Captured and visually audited all 13 restored-state screenshots.
+- Added an opt-in data-directory override so verification can run in a disposable profile without touching the user's real database.
+- Exercised Movies, TV Shows, Videos, Pictures, Music, and Games using neutral synthetic folders and media.
+- Verified hierarchy navigation, Back/Forward, selection/details, favourites surfaces, add, edit, remove, delete, cancel, Explorer reveal, video/picture playback surfaces, game launch, and resize behavior.
+- Fixed null and missing cover crashes, invalid/empty date crashes, and a null TV-show parent lookup.
+- Fixed TV-show ownership deletion so removing one show cannot remove a sibling show's seasons or episodes.
+- Made destructive workflows preflight paths and untracked files, preserve cancellation, and report success only after deletion succeeds.
+- Fixed folder-browser selection, duplicate registration, stale selection, and close cleanup.
+- Made missing Explorer targets and game-launch failures non-fatal.
+- Added and passed `MediaManager.StabilityTests` in Debug x64 and Release x64.
+- Preserved the original user database byte-for-byte during isolated verification.
 
 Next group:
 
-- Group 3 verifies and stabilizes the existing functionality from this working, documented restoration checkpoint. It does not redesign the UI.
+- Group 4 replaces direct-site metadata scraping with a supported, swappable metadata-provider architecture. It does not redesign the UI.
 
 Remaining roadmap:
 
-- Group 4 replaces direct IMDb scraping with a supported, swappable metadata-provider architecture.
 - Group 5 improves data reliability and prepares the application for release.
 - Group 6 performs the modern UI redesign and captures the final screenshot group.
 - Group 7 completes packaging and portfolio closure.

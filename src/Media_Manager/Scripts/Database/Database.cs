@@ -552,41 +552,45 @@ namespace Media_Manager
 
         public static void RemoveTVShowFolder(TVShowFolder tvshowfolder)
         {
+            //Do not attempt ownership lookups for an unset selection.
+            if (tvshowfolder == null)
+            {
+                return;
+            }
+
             //Open a Protected Connection to the SQLite Database
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //Variables
-                List<SeasonFolder> seasonfolders = cnn.Query<SeasonFolder>(FormatLoad(ElementType.Folders, MediaType.TVShows, FolderType.SeasonFolders), new DynamicParameters()).Where(i => i.OwnerId == tvshowfolder.OwnerId).ToList();
+                //Load only seasons owned by the selected TV show.
+                List<SeasonFolder> seasonfolders = cnn.Query<SeasonFolder>(
+                    FormatLoad(ElementType.Folders, MediaType.TVShows, FolderType.SeasonFolders),
+                    new DynamicParameters()).Where(i => i.OwnerId == tvshowfolder.Id).ToList();
 
-                //Validate TV Show Folder
-                if (tvshowfolder != null)
+                //Loop through Season Folders
+                for (int i = 0; i < seasonfolders.Count; i++)
                 {
-                    //Loop through Season Folders
-                    for (int i = 0; i < seasonfolders.Count; i++)
+                    //Get Current Looped Season's Episodes
+                    List<Episode> episodestoremove = cnn.Query<Episode>(FormatLoad(ElementType.Files, MediaType.Episodes), new DynamicParameters()).Where(j => j.OwnerId == seasonfolders[i].Id).ToList();
+
+                    //Loop through Current Looped Season's Episodes
+                    foreach (Episode item in episodestoremove)
                     {
-                        //Get Current Looped Season's Episodes
-                        List<Episode> episodestoremove = cnn.Query<Episode>(FormatLoad(ElementType.Files, MediaType.Episodes), new DynamicParameters()).Where(j => j.OwnerId == seasonfolders[i].Id).ToList();
-
-                        //Loop through Current Looped Seaon's Episodes
-                        foreach (Episode item in episodestoremove)
-                        {
-                            //Remove Episode
-                            RemoveItem(MediaType.Episodes, item.Id, string.Empty);
-                        }
-
-                        //Delete Current Looped Season Folder from SQLite Database
-                        cnn.Execute($"delete from {FolderType.SeasonFolders} where Id = {seasonfolders[i].Id}");
+                        //Remove Episode
+                        RemoveItem(MediaType.Episodes, item.Id, string.Empty);
                     }
 
-                    //Try Delete TV Show Cover Image
-                    if (!string.IsNullOrEmpty(tvshowfolder.CoverImage)) { try { File.Delete(tvshowfolder.CoverImage); } catch { } }
-
-                    //Try Delete TV Show Custom Cover Image
-                    if (!string.IsNullOrEmpty(tvshowfolder.CoverImage)) { try { File.Delete(tvshowfolder.CustomCoverImage); } catch { } }
-
-                    //Delete Specified Season Folder from SQLite Database
-                    cnn.Execute($"delete from {FolderType.TVShowFolders} where Id = {tvshowfolder.Id}");
+                    //Delete Current Looped Season Folder from SQLite Database
+                    cnn.Execute($"delete from {FolderType.SeasonFolders} where Id = {seasonfolders[i].Id}");
                 }
+
+                //Try Delete TV Show Cover Image
+                if (!string.IsNullOrEmpty(tvshowfolder.CoverImage)) { try { File.Delete(tvshowfolder.CoverImage); } catch { } }
+
+                //Try Delete TV Show Custom Cover Image
+                if (!string.IsNullOrEmpty(tvshowfolder.CustomCoverImage)) { try { File.Delete(tvshowfolder.CustomCoverImage); } catch { } }
+
+                //Delete Specified TV Show Folder from SQLite Database
+                cnn.Execute($"delete from {FolderType.TVShowFolders} where Id = {tvshowfolder.Id}");
             }
         }
 

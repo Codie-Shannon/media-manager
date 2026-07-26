@@ -20,14 +20,14 @@ namespace MediaControlsLibrary.Dependencies
         // =========================================================
         // =========================================================
         private const string str_Content = "PART_Content";
-        private static Button PART_Content { get; set; }
+        private Button PART_Content { get; set; }
 
 
         // Background
         // =========================================================
         // =========================================================
         private const string str_Background = "PART_Image";
-        private static Image PART_Background { get; set; }
+        private Image PART_Background { get; set; }
 
 
         // Element States
@@ -106,11 +106,17 @@ namespace MediaControlsLibrary.Dependencies
             PART_Background = (Image)this.Template.FindName(str_Background, this);
 
             //Set Background Image
-            SetImage(Background);
+            if (PART_Background != null)
+            {
+                SetImage(Background);
+            }
 
             //Set Event Handlers
-            PART_Content.MouseEnter += Element_Entered;
-            PART_Content.MouseLeave += Element_Leave;
+            if (PART_Content != null)
+            {
+                PART_Content.MouseEnter += Element_Entered;
+                PART_Content.MouseLeave += Element_Leave;
+            }
         }
 
 
@@ -162,24 +168,39 @@ namespace MediaControlsLibrary.Dependencies
         // =========================================================
         private void SetImage(string path)
         {
-            //Create Bitmap Image Object
-            BitmapImage source = new BitmapImage();
+            PART_Background.Source = null;
 
-            //Begin Initialization of Bitmap Image Object
-            source.BeginInit();
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
 
-            //Set Settings
-            source.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            source.CacheOption = BitmapCacheOption.OnLoad;
+            try
+            {
+                //Create Bitmap Image Object
+                BitmapImage source = new BitmapImage();
 
-            //Set UriSource
-            source.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
+                //Begin Initialization of Bitmap Image Object
+                source.BeginInit();
 
-            //End Initialization
-            source.EndInit();
+                //Set Settings
+                source.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                source.CacheOption = BitmapCacheOption.OnLoad;
 
-            //Set Background
-            PART_Background.Source = source;
+                //Set UriSource
+                source.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
+
+                //End Initialization
+                source.EndInit();
+
+                //Set Background
+                PART_Background.Source = source;
+            }
+            catch (Exception)
+            {
+                //Missing or malformed artwork must not terminate the application.
+                PART_Background.Source = null;
+            }
         }
 
         private void SwitchState(string state)

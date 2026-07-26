@@ -2051,7 +2051,8 @@ namespace Media_Manager.Views
             {
                 //Validate Custom Cover Image
                 bool isCustomCoverImageUsed = SeasonFolders.Any(i => i.Id != selectedSeasonFolder.Id && i.CustomCoverImage == selectedSeasonFolder.CustomCoverImage);
-                bool isCustomCoverImageParent = TVShowFolders.FirstOrDefault(i => i.Id == selectedSeasonFolder.OwnerId).CustomCoverImage == selectedSeasonFolder.CustomCoverImage;
+                TVShowFolder parentTVShow = TVShowFolders.FirstOrDefault(i => i.Id == selectedSeasonFolder.OwnerId);
+                bool isCustomCoverImageParent = parentTVShow != null && parentTVShow.CustomCoverImage == selectedSeasonFolder.CustomCoverImage;
 
                 //Remove Season From Application
                 bool isRemoved = DiscardElements.RemoveSeasonFolder(type, selectedSeasonFolder, isCustomCoverImageUsed, isCustomCoverImageParent);

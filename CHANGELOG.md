@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Functional stabilization
+
+- Added an isolated data-directory override and a publication-safe synthetic verification workflow.
+- Verified all six libraries, hierarchy navigation, details, add/edit/remove/delete behavior, Explorer actions, playback surfaces, game launch, and resizing.
+- Fixed TV-show ownership deletion and cross-season destructive-deletion defects.
+- Fixed cancellation and deletion-result handling so database removal follows confirmed filesystem outcomes.
+- Fixed folder-browser selection, stale state, duplicate registration, and close cleanup.
+- Fixed crashes caused by blank artwork, missing default covers, invalid dates, missing TV-show parents, and folder selection.
+- Made missing Explorer paths and game-launch failures non-fatal.
+- Added the x64 `MediaManager.StabilityTests` executable and passed it in Debug and Release.
+
 ### Restored application startup
 
 - Replaced the stale controls-library DLL hint with a repository project reference.

@@ -16,3 +16,4 @@ No test may operate on a real personal media library.
 Completed records:
 
 - [Group 2 restoration verification](group-2-restoration.md)
+- [Group 3 functional verification and stabilization](group-3-stabilization.md)

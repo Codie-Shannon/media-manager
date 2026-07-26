@@ -26,7 +26,18 @@ namespace Media_Manager
             }
 
             //Format and Return Default Cover Image
-            return new BitmapImage(new Uri($"{Directory.GetCurrentDirectory()}\\Textures\\{type}_Cover_Default.png"));
+            string defaultCover = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "Textures",
+                $"{type}_Cover_Default.png");
+
+            if (Validation.File(defaultCover))
+            {
+                return new BitmapImage(new Uri(defaultCover, UriKind.Absolute));
+            }
+
+            //Missing artwork must not terminate item selection or details rendering.
+            return null;
         }
 
 
@@ -197,6 +208,11 @@ namespace Media_Manager
         // =======================================================
         public static string FormatVirtualEntertainmentReleaseDate(string date, string region)
         {
+            if (string.IsNullOrWhiteSpace(date))
+            {
+                return string.Empty;
+            }
+
             //Format Date
             date = FormatDate(date.Trim(), "MMMM d, yyyy", "dddd, dd MMMM yyyy");
 
@@ -224,16 +240,14 @@ namespace Media_Manager
         public static string FormatGameReleaseDate(string date)
         {
             //Check if date is Not Null or Empty
-            if (!string.IsNullOrEmpty(date))
+            if (!string.IsNullOrWhiteSpace(date)
+                && DateTime.TryParse(date, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime releaseDate))
             {
                 //Get Years Since Release Date
-                int span = (DateTime.Now - Convert.ToDateTime(date, CultureInfo.InvariantCulture)).Duration().Days / 365;
-
-                //Format Date
-                date = FormatDate(date.Trim(), "MMM d, yyyy", "dddd, dd MMMM yyyy");
+                int span = (DateTime.Now - releaseDate).Duration().Days / 365;
 
                 //Format and Return Release Date
-                return $"{date} ({span} Years)";
+                return $"{releaseDate:dddd, dd MMMM yyyy} ({span} Years)";
             }
 
             //Return Empty String
@@ -249,8 +263,21 @@ namespace Media_Manager
         // =======================================================
         public static string FormatDate(string date, string originalFormat, string newFormat)
         {
+            if (string.IsNullOrWhiteSpace(date))
+            {
+                return string.Empty;
+            }
+
             //Convert String to Date
-            DateTime temp = DateTime.ParseExact(date, originalFormat, CultureInfo.InvariantCulture);
+            if (!DateTime.TryParseExact(
+                date.Trim(),
+                originalFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime temp))
+            {
+                return date.Trim();
+            }
 
             //Format and Return Date
             return temp.ToString(newFormat);

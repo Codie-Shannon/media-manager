@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.IO;
 using System.Diagnostics;
 using Media_Manager.Models;
 using System.Windows.Media;
@@ -613,16 +614,41 @@ namespace Media_Manager
         #region Show In Explorer
         public static void ShowInExplorer(FileType type, string path)
         {
-            //Check File Type
-            if (type == FileType.Folder)
+            bool pathExists = type == FileType.Folder
+                ? Directory.Exists(path)
+                : File.Exists(path);
+
+            if (!pathExists)
             {
-                //Open Folder in File Explorer
-                Process.Start("explorer.exe", path);
+                CustomMessageBox.ShowOK(
+                    "The selected path no longer exists.",
+                    "ERROR",
+                    "OK",
+                    MessageBoxImage.Error);
+                return;
             }
-            else if (type == FileType.File)
+
+            try
             {
-                //Open File Explorer with the Passed Path Selected
-                Process.Start("explorer.exe", "/select, \"" + path + "\"");
+                //Check File Type
+                if (type == FileType.Folder)
+                {
+                    //Open Folder in File Explorer
+                    Process.Start("explorer.exe", path);
+                }
+                else if (type == FileType.File)
+                {
+                    //Open File Explorer with the Passed Path Selected
+                    Process.Start("explorer.exe", "/select, \"" + path + "\"");
+                }
+            }
+            catch (Exception exception)
+            {
+                CustomMessageBox.ShowOK(
+                    $"The selected path could not be opened.\n\n{exception.Message}",
+                    "ERROR",
+                    "OK",
+                    MessageBoxImage.Error);
             }
         }
         #endregion Show In Explorer

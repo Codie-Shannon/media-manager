@@ -7,10 +7,12 @@ Date: 2026-07-26
 - NuGet package restore succeeds using the repository `NuGet.Config`.
 - The complete `MediaManager.sln` rebuilds in Debug x64 and Release x64 with zero errors.
 - `MediaControlsLibrary`, `MediaControlsTester`, and `Media_Manager` build from their repository project relationships.
+- `MediaManager.StabilityTests` builds and passes in Debug x64 and Release x64.
 - `Media_Manager` launches from both Debug x64 and Release x64 output.
 - The same restore, builds, and launches succeed from a fresh tracked-file checkout with no inherited `packages`, `bin`, or `obj` directories.
 - A fresh Windows profile creates `%LOCALAPPDATA%\Media_Manager`, `MediaManagerDB.db`, and all eight required image directories automatically.
 - A controlled exception raised after managed startup begins displays `Media Manager Startup Error`, its root-cause details, and a working Close button.
+- An isolated Group 3 profile passes the existing-functionality matrix without modifying the real user database.
 
 ## Restored dependency relationship
 
@@ -38,7 +40,7 @@ Failures that occur before managed WPF startup, such as Windows being unable to 
 
 Warnings are retained in the baseline and will be triaged during restoration.
 
-The verified full-solution rebuild currently reports 42 compiler warnings and zero errors in each configuration.
+The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Group 3 introduces no new compiler warnings.
 
 ## Dependency audit notices
 

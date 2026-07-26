@@ -212,6 +212,11 @@ namespace MediaControlsLibrary
                 //Setup CloseDispatcher for Close
                 CloseDispatcher_Setup();
             }
+            else
+            {
+                //Do not retain a visual owned by a window that is being destroyed.
+                selectedElement = null;
+            }
         }
 
 
@@ -240,8 +245,15 @@ namespace MediaControlsLibrary
         // ========================================================
         private void Folder_Click(object sender, ExecutedRoutedEventArgs e)
         {
-            //Get Folder
-            CoverFolder folder = (CoverFolder)((Button)e.OriginalSource).TemplatedParent;
+            //Get Folder. Keyboard and UI Automation invocations can raise the
+            //command from the CoverFolder itself instead of its template button.
+            CoverFolder folder = e.OriginalSource as CoverFolder
+                ?? (e.OriginalSource as FrameworkElement)?.TemplatedParent as CoverFolder;
+
+            if (folder == null)
+            {
+                return;
+            }
 
             //Select Folder
             SelectFolder(folder);
@@ -281,6 +293,8 @@ namespace MediaControlsLibrary
         // ========================================================
         public static KeyValuePair<int, string> Show(int defaultfolder, string caption)
         {
+            ResetSelection();
+
             //Create FolderBrowser Object
             FolderBrowser folderBrowser = new FolderBrowser();
 
@@ -302,6 +316,8 @@ namespace MediaControlsLibrary
 
         public static Tuple<int, string, Stack<Folder>> ShowDialog(int defaultfolder, string caption)
         {
+            ResetSelection();
+
             //Create FolderBrowser Object
             FolderBrowser folderBrowser = new FolderBrowser();
 
@@ -375,11 +391,7 @@ namespace MediaControlsLibrary
         public static void AddFolder(int id, int ownerid, string name)
         {
             //Check if the Folders List Already Contains the Specified Folder
-            if (FoldersReserve.Any(i => i.Id == id && i.OwnerId == ownerid))
-            {
-                //Remove Folder from Folders List
-                FoldersReserve.RemoveAt(Folders.IndexOf(Folders.Single(i => i.Id == id && i.OwnerId == ownerid)));
-            }
+            FoldersReserve.RemoveAll(i => i.Id == id && i.OwnerId == ownerid);
 
             //Add Folder to Folders List
             FoldersReserve.Add(new Folder() { Id = id, OwnerId = ownerid, Name = name });
@@ -538,11 +550,16 @@ namespace MediaControlsLibrary
             FoldersReserve = new List<Folder>();
 
             //Reset Selected Variables
-            selectedElement = null;
-            selectedFolder = null;
+            ResetSelection();
 
             //Reset Active Folder
             ActiveFolder = 0;
+        }
+
+        private static void ResetSelection()
+        {
+            selectedElement = null;
+            selectedFolder = null;
         }
 
 
@@ -575,6 +592,10 @@ namespace MediaControlsLibrary
 
         private void Close_Tick(object sender, EventArgs e)
         {
+            CloseDispatcher.Stop();
+            CloseDispatcher.Tick -= Close_Tick;
+            CloseDispatcher = null;
+
             //Close Window
             Close();
         }
