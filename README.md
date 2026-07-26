@@ -4,15 +4,16 @@ Media Manager is a local-first Windows desktop application for organizing movies
 
 ## Current status
 
-The repository currently records the recovered baseline before application restoration:
+Group 1 is complete. The repository records the recovered baseline before application restoration:
 
 - `MediaControlsLibrary` builds and its tester launches.
 - The recovered Media Manager executable can launch after its LocalAppData directory exists.
 - A clean application build is not yet reproducible because the app references a stale controls DLL by a broken path.
 - Metadata retrieval still contains legacy direct-site automation and has not yet been replaced by a provider abstraction.
 - No real media library, user database, credentials, or private paths are included.
+- Original-state screenshots, a silent walkthrough, and a complete UI/resource inventory are preserved as fixed before evidence.
 
-See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md) and [docs/build-status.md](docs/build-status.md) for the precise state.
+See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
 
 ## Repository layout
 
@@ -48,4 +49,3 @@ Only synthetic sample data and publication-safe evidence may be committed.
 ## License
 
 No license has been selected yet. Dependency and recovered-asset provenance must be reviewed before a license is added.
-

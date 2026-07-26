@@ -2,7 +2,7 @@
 
 ## Group 1 - Freeze and prove the recovered baseline
 
-Status: in progress
+Status: complete
 
 Completed:
 
@@ -12,13 +12,10 @@ Completed:
 - Captured original-state application navigation, forms, details, metadata-search state, and tester UI.
 - Created a curated repository without generated packages, databases, private paths, or recovered backup projects.
 - Verified package restore and Debug/Release x64 builds for the controls library and tester from the curated repository.
-
-Remaining Group 1 work:
-
 - Commit and tag the curated baseline.
 - Push the private GitHub repository.
-- Record a short silent recovered-state walkthrough.
-- Finalize the controls/style/resource inventory.
+- Recorded and verified a short silent recovered-state walkthrough.
+- Finalized the controls, styles, templates, and resources inventory.
 
 Next group:
 
