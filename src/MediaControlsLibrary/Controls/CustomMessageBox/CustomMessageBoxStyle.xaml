@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="CustomMessageBoxTemplate" TargetType="{x:Type MediaControls:CustomMessageBox}">
+        <Grid Background="{TemplateBinding Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="42"/>
+            </Grid.RowDefinitions>
+            <!-- Icon and Text -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Grid Style="{StaticResource CustomMessageBox.Text.Grid}">
+                <DockPanel>
+                    <TextBlock x:Name="PART_Icon" Style="{StaticResource CustomMessageBox.Icon}"/>
+                    <TextBlock x:Name="PART_Message" Style="{StaticResource CustomMessageBox.Message}"/>
+                </DockPanel>
+            </Grid>
+            
+            
+            <!-- Buttons -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <StackPanel Style="{StaticResource CustomMessageBox.Buttons.StackPanel}">
+                <!-- OK Button -->
+                <!-- ==================================== -->
+                <Button x:Name="PART_OK" Style="{StaticResource CustomMessageBox.Button}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource CustomMessageBox.Button.Text}"/>
+                    </Button.Content>
+                </Button>
+
+
+                <!-- Yes Button -->
+                <!-- ==================================== -->
+                <Button x:Name="PART_Yes" Style="{StaticResource CustomMessageBox.Button}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource CustomMessageBox.Button.Text}"/>
+                    </Button.Content>
+                </Button>
+
+
+                <!-- No Button -->
+                <!-- ==================================== -->
+                <Button x:Name="PART_No" Style="{StaticResource CustomMessageBox.Button}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource CustomMessageBox.Button.Text}"/>
+                    </Button.Content>
+                </Button>
+
+
+                <!-- Cancel Button -->
+                <!-- ==================================== -->
+                <Button x:Name="PART_Cancel" Style="{StaticResource CustomMessageBox.Button}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource CustomMessageBox.Button.Text}"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </ControlTemplate>
+
+    
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:CustomMessageBox}">
+        <Setter Property="MaxWidth" Value="500"/>
+        <Setter Property="MaxHeight" Value="250"/>
+        <Setter Property="Template" Value="{StaticResource CustomMessageBoxTemplate}"/>
+        <Setter Property="Background" Value="#FF262626"/>
+        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Icon" Value="pack://application:,,,/MediaControlsLibrary;component/Textures/blankicon.ico"/>
+    </Style>
+</ResourceDictionary>

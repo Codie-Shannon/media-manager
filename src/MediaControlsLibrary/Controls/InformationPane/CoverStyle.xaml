@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="CoverTemplate" TargetType="{x:Type MediaControls:ipCover}">
+        <Image>
+            <Image.Source>
+                <BitmapImage CacheOption="OnLoad"/>
+            </Image.Source>
+        </Image>
+    </ControlTemplate>
+</ResourceDictionary>

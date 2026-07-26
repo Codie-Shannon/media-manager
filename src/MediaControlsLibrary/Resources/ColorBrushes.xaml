@@ -1,0 +1,343 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- #region Custom Message Box -->
+    <SolidColorBrush x:Key="CustomMessageBox.Text.Static.Foreground" Color="White"/>
+    <!-- #endregion Custom Message Box -->
+
+
+
+    <!-- #region Elements -->
+    <!-- Generic -->
+    <SolidColorBrush x:Key="Element.Static.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="Element.Static.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="Element.Overlay.Foreground" Color="White"/>
+    
+
+    <!-- Items -->
+    <SolidColorBrush x:Key="Item.Overlay.Background" Color="#BF000000"/>
+    <!-- #endregion Elementss -->
+
+
+
+    <!-- #region Folder Browser -->
+    <!-- Folder Selection -->
+    <SolidColorBrush x:Key="FolderBrowser.Static.Background" Color="#FF262626"/>
+    
+    
+    <!-- Folder Selection -->
+    <SolidColorBrush x:Key="FolderBrowser.Selection.TextBox.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="FolderBrowser.Selection.TextBox.Static.Border" Color="LightGray"/>
+    <SolidColorBrush x:Key="FolderBrowser.Selection.TextBox.Static.Foreground" Color="White"/>
+    
+    
+    <!-- Buttons -->
+    <SolidColorBrush x:Key="FolderBrowser.Button.Static.Border" Color="LightGray"/>
+    <SolidColorBrush x:Key="FolderBrowser.Button.Pressed.Border" Color="LightGray"/>
+    <!-- #endregion Folder Browser -->
+
+
+
+    <!-- #region Information Pane -->
+    <!-- Main -->
+    <SolidColorBrush x:Key="Information.Pane.Static.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="Information.Pane.Static.Background" Color="#FF191919"/>
+    <SolidColorBrush x:Key="InformationPane.Static.Foreground" Color="White"/>
+
+    
+    <!-- Details -->
+    <SolidColorBrush x:Key="InformationPane.Details.Static.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="InformationPane.Details.Static.Background" Color="Transparent"/>
+    <!-- #endregion -->
+
+
+
+    <!-- #region Navigation Bar -->
+    <SolidColorBrush x:Key="NavigationBar.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="NavigationBar.Item.Button.MouseOver.Border" Color="Transparent"/>
+    <!-- #endregion Navigation Bar -->
+
+
+
+    <!-- #region Navigation View -->
+    <SolidColorBrush x:Key="NavigationView.Static.Background" Color="#FF2B2B2B"/>
+
+    
+    <!-- Navigation View Item Header -->
+    <SolidColorBrush x:Key="NavigationViewItemHeader.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="NavigationViewItemHeader.Static.Foreground" Color="White"/>
+
+    
+    <!-- Navigation View Item -->
+    <Color x:Key="NavigationViewItem.Transparent"/>
+    <Color x:Key="NavigationViewItem.MouseOver.Foreground" R="211" G="211" B="211" A="255"/>
+    <Color x:Key="NavigationViewItem.Selected.Border" R="255" G="0" B="0" A="255"/>
+    <Color x:Key="NavigationViewItem.Selected.Foreground" R="255" G="255" B="255" A="255"/>
+    <Color x:Key="NavigationViewItem.Unselected.Foreground" R="170" G="170" B="170" A="255"/>
+    
+    
+    <!-- Navigation View Settings Button -->
+    <SolidColorBrush x:Key="NavigationViewSettings.Transparent"/>
+    <SolidColorBrush x:Key="NavigationViewSettings.Static.Foreground" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="NavigationViewSettings.MouseOver.Foreground" Color="LightGray"/>
+    <SolidColorBrush x:Key="NavigationViewSettings.Pressed.Foreground" Color="White"/>
+    <!-- #endregion -->
+
+
+
+    <!-- #region Options Panel -->
+    <!-- Panel -->
+    <SolidColorBrush x:Key="OptionsPanel.Static.Overlay" Color="#CC000000"/>
+    <SolidColorBrush x:Key="OptionsPanel.Static.Background" Color="#FF191919"/>
+    <SolidColorBrush x:Key="OptionsPanel.Static.Border" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Title.Static.Foreground" Color="White"/>
+
+    
+    <!-- Title -->
+    <SolidColorBrush x:Key="OptionsPanel.Title.TextBox.Static.Foreground" Color="White" />
+    
+    
+    <!-- Numeric Box -->
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Content.Static.Background" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Content.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Content.Static.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Button.Transparent" Color="Transparent"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Button.Static.Foreground" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Button.MouseOver.Background" Color="LightGray"/>
+    <SolidColorBrush x:Key="OptionsPanel.NumericBox.Button.Pressed.Background" Color="#FFC2C2C2"/>
+
+
+    <!-- Radio Button -->
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Static.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.MouseOver.Background" Color="#FFF3F9FF"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.MouseOver.Border" Color="#FF5593FF"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.MouseOver.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Pressed.Background" Color="#FFD9ECFF"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Pressed.Border" Color="#FF3C77DD"/>
+    <SolidColorBrush x:Key="OptionsPanel.RadioButton.Mark.Pressed.Glyph" Color="#FF212121"/>
+
+
+    <!-- Search Box -->
+    <SolidColorBrush x:Key="Search.Content.Border.Background" Color="White"/>
+    <SolidColorBrush x:Key="Search.Content.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="Search.Content.TextBlock.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="Search.Popup.Message.Border" Color="#FFADAFB4"/>
+    <SolidColorBrush x:Key="Search.Popup.Message.Border.Background" Color="White"/>
+    <SolidColorBrush x:Key="Search.Popup.Message.Foreground" Color="#FF858585"/>
+    <SolidColorBrush x:Key="Search.Popup.Message.Background" Color="White"/>
+
+
+    <!-- Rounded Textbox -->
+    <SolidColorBrush x:Key="OptionsPanel.TextBox.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="OptionsPanel.TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+    <SolidColorBrush x:Key="OptionsPanel.TextBox.Focus.Border" Color="#FF569DE5"/>
+
+    
+    <!-- Placeholder Text -->
+    <SolidColorBrush x:Key="OptionsPanel.Item.Placeholder.Text.Static.Foreground" Color="#FF858585"/>
+
+    
+    <!-- Hyperlink Header -->
+    <SolidColorBrush x:Key="OptionsPanel.Hyperlink.Header.Static.Foreground" Color="#FF0046FF"/>
+    <SolidColorBrush x:Key="OptionsPanel.Hyperlink.Header.MouseOver.Foreground" Color="#FF0097FF"/>
+
+    
+    <!-- Button -->
+    <SolidColorBrush x:Key="OptionsPanel.Button.Static.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Static.Border" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.MouseOver.Background" Color="#FF626262"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.MouseOver.Border" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Pressed.Background" Color="#FF7F7D7D"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Pressed.Border" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="OptionsPanel.Button.Disabled.Foreground" Color="#FF838383"/>
+
+    
+    <!-- ComboBox -->
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Static.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Static.Background" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Static.Glyph" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.MouseOver.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.MouseOver.Background" Color="LightBlue"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.MouseOver.Glyph" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Pressed.Border" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Pressed.Background" Color="LightBlue"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Pressed.Glyph" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Disabled.Glyph" Color="LightGray"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Disabled.Background" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Disabled.Border" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Dropdown.Menu.Static.Background" Color="White"/>
+
+    
+    <!-- ComboBoxItem -->
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Hover.Background" Color="#1F26A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Hover.Border" Color="#A826A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Selected.Background" Color="#3D26A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Selected.Border" Color="#FF26A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.SelectedHover.Background" Color="#2E0080FF"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.SelectedHover.Border" Color="#99006CD9"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Selected.NoFocus.Background" Color="#3DDADADA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Selected.NoFocus.Border" Color="#FFDADADA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.Focus.Border" Color="#FF26A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.HoverFocus.Background" Color="#5426A0DA"/>
+    <SolidColorBrush x:Key="OptionsPanel.ComboBoxItem.Itemsview.HoverFocus.Border" Color="#FF26A0DA"/>
+
+    <SolidColorBrush x:Key="OptionsPanel.ComboBox.Placeholder.Text.Static.Foreground" Color="Black"/>
+
+    
+    <!-- Dialog Content -->
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Content.Static.Background" Color="White"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Content.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Content.Static.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Clear.Button.Transparent" Color="Transparent"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Clear.Button.Static.Foreground" Color="Gray"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Clear.Button.MouseOver.Background" Color="LightGray"/>
+    <SolidColorBrush x:Key="OptionsPanel.Dialog.Clear.Button.Pressed.Background" Color="#FFC2C2C2"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.Button.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.Button.MouseOver.Border" Color="Red"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.TextBlock.Static.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.ContextMenu.Static.Background" Color="#FF191919"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.ContextMenu.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Dialog.Multiselect.Item.ContextMenu.Static.Foreground" Color="White"/>
+    <!-- #endregion -->
+
+
+
+    <!-- #region Submenu -->    
+    <!-- Group -->
+    <SolidColorBrush x:Key="Submenu.Group.Title.Static.Foreground" Color="White"/>
+
+    
+    <!-- Group Separator -->
+    <SolidColorBrush x:Key="Submenu.GroupSeparator.Static.Stroke" Color="DarkGray"/>
+
+
+    <!-- Button Text -->
+    <SolidColorBrush x:Key="Submenu.Button.Icon.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="Submenu.Button.Text.Static.Foreground" Color="White"/>
+
+    
+    <!-- Toggle -->
+    <SolidColorBrush x:Key="Submenu.Toggle.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Submenu.Toggle.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Submenu.Toggle.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="Submenu.Toggle.Static.Glyph" Color="#FF212121"/>
+
+    
+    <!-- ComboBox -->
+    <SolidColorBrush x:Key="Submenu.ComboBox.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Menu.Static.Background" Color="#FF191919"/>
+
+    
+    <!-- ComboBoxItem -->
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Hover.Background" Color="#5426A0DA"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Hover.Border" Color="#FF26A0DA"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Selected.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Selected.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.SelectedHover.Background" Color="#5426A0DA"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.SelectedHover.Border" Color="#FF26A0DA"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Selected.NoFocus.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Selected.NoFocus.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.Focus.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.HoverFocus.Background" Color="#5426A0DA"/>
+    <SolidColorBrush x:Key="Submenu.ComboBoxItem.HoverFocus.Border" Color="#FF26A0DA"/>
+
+    
+    <!-- ComboBox Separator -->
+    <SolidColorBrush x:Key="Submenu.ComboBox.Separator.Static.Background" Color="Transparent"/>
+
+    
+    <!-- ComboBox Radio Button and CheckBox -->
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.MouseOver.Background" Color="#FFF3F9FF"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.MouseOver.Border" Color="#FF5593FF"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.MouseOver.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Disabled.Background" Color="#FFE6E6E6"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Disabled.Border" Color="#FFBCBCBC"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Disabled.Glyph" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Pressed.Background" Color="#FFD9ECFF"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Pressed.Border" Color="#FF3C77DD"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Pressed.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="Submenu.ComboBox.Item.Static.Glyph" Color="#FF212121"/>
+    <!-- #endregion -->
+    
+    
+    
+    <!-- #region Viewer -->
+    <!-- Viewer -->
+    <SolidColorBrush x:Key="Viewer.Background" Color="Black"/>
+
+    
+    <!-- Bar -->
+    <SolidColorBrush x:Key="Viewer.Bar.Background" Color="#FF191919"/>
+
+    
+    <!-- Volume Bar -->
+    <!-- =================================================================== -->
+    <!-- =================================================================== -->
+    <!-- Volume Bar Button -->
+    <SolidColorBrush x:Key="VolumeBar.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="VolumeBar.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="VolumeBar.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="VolumeBar.MouseOver.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="VolumeBar.MouseOver.Border" Color="LightGray"/>
+    <SolidColorBrush x:Key="VolumeBar.Pressed.Background" Color="#FF6E6E6E"/>
+    <SolidColorBrush x:Key="VolumeBar.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="VolumeBar.Disabled.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="VolumeBar.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="VolumeBar.Disabled.Foreground" Color="#FF838383"/>
+    
+    <!-- Volume Bar Menu -->
+    <SolidColorBrush x:Key="VolumeBar.Menu.Static.Background" Color="#FF191919"/>
+
+    <!-- Volume Bar Slider -->
+    <SolidColorBrush x:Key="VolumeBar.Slider.Static.Background" Color="White"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.MouseOver.Background" Color="#FFCDCDCD"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Pressed.Background" Color="#FFB3B3B3"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Disabled.Background" Color="DarkGray"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Background" Color="White"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Fill" Color="Red"/>
+
+    <!-- Volume Bar Value Text -->
+    <SolidColorBrush x:Key="VolumeBar.Value.Text.Foreground" Color="White"/>
+    <!-- #endregion Viewer -->
+    
+    
+    
+    <!-- #region Other -->
+    <!-- Menu -->
+    <SolidColorBrush x:Key="Menu.Static.Border" Color="LightGray"/>
+    <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF191919"/>
+
+    
+    <!-- Button -->
+    <SolidColorBrush x:Key="Button.Static.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="LightGray"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF6E6E6E"/>
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+    
+    
+    <!-- Button Secondary -->
+    <SolidColorBrush x:Key="Button.Secondary.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Button.Secondary.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Button.Secondary.MouseOver.Background" Color="#FFBEE6FD"/>
+    <SolidColorBrush x:Key="Button.Secondary.MouseOver.Border" Color="#FF3C7FB1"/>
+    <SolidColorBrush x:Key="Button.Secondary.Pressed.Background" Color="#FFC4E5F6"/>
+    <SolidColorBrush x:Key="Button.Secondary.Pressed.Border" Color="#FF2C628B"/>
+    <SolidColorBrush x:Key="Button.Secondary.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Button.Secondary.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Secondary.Disabled.Foreground" Color="#FF838383"/>
+    <!-- #endregion Other -->
+</ResourceDictionary>

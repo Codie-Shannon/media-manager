@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="PanelTemplate" TargetType="{x:Type MediaControls:optPanel}">
+        <Grid x:Name="PART_Content" Style="{StaticResource OptionsPanel.Overlay}">
+            <Border x:Name="PART_Border" Style="{StaticResource OptionsPanel.Border}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding PanelWidth}" Height="{TemplateBinding PanelHeight}">
+                <StackPanel Style="{StaticResource OptionsPanel.Background}">
+                    <ItemsPresenter/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optPanel}">
+        <Setter Property="Template" Value="{StaticResource PanelTemplate}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+</ResourceDictionary>

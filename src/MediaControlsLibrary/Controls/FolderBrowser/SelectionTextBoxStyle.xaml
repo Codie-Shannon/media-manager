@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="TextBoxTemplate" TargetType="{x:Type MediaControls:fbSelectionTextBox}">
+        <TextBox x:Name="PART_Content" Text="{TemplateBinding DBName}" Style="{StaticResource FolderBrowser.Selection.TextBox}" MaxLength="{TemplateBinding MaxLength}"/>
+    </ControlTemplate>
+
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:fbSelectionTextBox}">
+        <Setter Property="Template" Value="{StaticResource TextBoxTemplate}"/>
+    </Style>
+</ResourceDictionary>

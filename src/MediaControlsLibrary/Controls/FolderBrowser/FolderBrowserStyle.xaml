@@ -1,0 +1,151 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary"
+                    xmlns:VWP="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+                    xmlns:Commands="clr-namespace:MediaControlsLibrary.Commands"
+                    xmlns:Converters="clr-namespace:MediaControlsLibrary.Converters.FolderBrowser">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+    <!-- Converters -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Converters:fbSelectedFolderConverter x:Key="fbSelectedFolderConverter"/>
+
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="FolderBrowserTemplate" TargetType="{x:Type MediaControls:FolderBrowser}">
+        <Grid Background="{TemplateBinding Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Navigation Bar -->
+            <!-- =============================== -->
+            <!-- =============================== -->
+            <MediaControls:NavigationBar x:Name="PART_Navigation"/>
+
+
+            <!-- Folders -->
+            <!-- =============================== -->
+            <!-- =============================== -->
+            <ItemsControl x:Name="PART_Content" Grid.Row="1" Padding="2" Background="Transparent">
+                <!-- Items Panel -->
+                <!-- ============================== -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Virtualizing Wrap Panel -->
+                        <VWP:VirtualizingWrapPanel IsVirtualizing="True" VirtualizationMode="Recycling" SpacingMode="Uniform"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+
+                <!-- Item Template -->
+                <!-- ============================== -->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <MediaControls:CoverFolder Tag="{Binding Id, Mode=OneTime}" Content="{Binding Name, Mode=OneTime}" Background="pack://application:,,,/MediaControlsLibrary;component/Textures/CoverFolder_Icon.png" Command="{x:Static Commands:FolderBrowserCommands.FolderClick}">
+                            <MediaControls:CoverFolder.IsSelected>
+                                <MultiBinding Converter="{StaticResource fbSelectedFolderConverter}">
+                                    <Binding Path="selectedId" RelativeSource="{RelativeSource AncestorType={x:Type Window}}"/>
+                                    <Binding Path="Id"/>
+                                </MultiBinding>
+                            </MediaControls:CoverFolder.IsSelected>
+                        </MediaControls:CoverFolder>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+
+                <!-- Items Control Template -->
+                <!-- ============================== -->
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <ScrollViewer CanContentScroll="True" Padding="{TemplateBinding Padding}" Focusable="False">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+
+
+            <!-- Selection and Buttons -->
+            <!-- =============================== -->
+            <!-- =============================== -->
+            <Border Style="{StaticResource FolderBrowser.Selection.Grid}" Grid.Row="2">
+                <Grid Background="{StaticResource Menu.Static.Background}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Folder Name Header -->
+                    <!-- =============================== -->
+                    <TextBlock Text="Folder Name:" Style="{StaticResource FolderBrowser.Selection.Header}" Grid.Row="1"/>
+
+
+                    <!-- Folder Name TextBox -->
+                    <!-- =============================== -->
+                    <MediaControls:fbSelectionTextBox x:Name="PART_TextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" MaxLength="{TemplateBinding MaxLength}"/>
+
+                    
+                    <!-- Open and Close Buttons -->
+                    <!-- =============================== -->
+                    <Grid Margin="0 0 9 0" Grid.Row="3" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.14*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Select Button -->
+                        <Button x:Name="PART_Select" Content="Select" Style="{StaticResource FolderBrowser.Button}"/>
+                        
+                        
+                        <!-- Cancel Button -->
+                        <Button x:Name="PART_Cancel" Content="Cancel" Style="{StaticResource FolderBrowser.Button}" Grid.Column="2"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:FolderBrowser}">
+        <Setter Property="MaxWidth" Value="1025"/>
+        <Setter Property="MaxHeight" Value="565"/>
+        <Setter Property="Template" Value="{StaticResource FolderBrowserTemplate}"/>
+        <Setter Property="Background" Value="{StaticResource FolderBrowser.Static.Background}"/>
+        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Icon" Value="pack://application:,,,/MediaControlsLibrary;component/Textures/blankicon.ico"/>
+    </Style>
+</ResourceDictionary>

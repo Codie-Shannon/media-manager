@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="ItemTemplate" TargetType="{x:Type MediaControls:NavigationBarItem}">
+        <Button x:Name="PART_Content" Content="{TemplateBinding DBName}" Style="{StaticResource NavigationBar.Item.Button}"/>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:NavigationBarItem}">
+        <Setter Property="Template" Value="{StaticResource ItemTemplate}"/>
+    </Style>
+</ResourceDictionary>

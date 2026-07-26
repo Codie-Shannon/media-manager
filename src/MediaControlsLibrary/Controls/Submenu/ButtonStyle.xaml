@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="ButtonTemplate"  TargetType="{x:Type MediaControls:subButton}">
+        <Button x:Name="PART_Content" Style="{StaticResource Submenu.Button}">
+            <Grid Style="{StaticResource Submenu.Button.Grid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!-- Icon -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource Submenu.Button.Icon}"/>
+                
+                
+                <!-- Content -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Submenu.Button.Text}"/>
+            </Grid>
+        </Button>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:subButton}">
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+    </Style>
+</ResourceDictionary>

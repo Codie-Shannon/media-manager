@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="GroupSeparatorTemplate"  TargetType="{x:Type MediaControls:subGroupSeparator}">
+        <StackPanel Style="{StaticResource Submenu.GroupSeparator}">
+            <!-- Line (Separator) -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Line Style="{StaticResource Submenu.GroupSeparator.Line}"/>
+        </StackPanel>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:subGroupSeparator}">
+        <Setter Property="Template" Value="{StaticResource GroupSeparatorTemplate}"/>
+    </Style>
+</ResourceDictionary>

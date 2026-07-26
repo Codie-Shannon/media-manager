@@ -1,0 +1,232 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Models="clr-namespace:MediaControlsLibrary.Models"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary" xmlns:Converters="clr-namespace:MediaControlsLibrary.Converters">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+
+
+    <!-- Converters -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Converters:SearchBoxMessageConverter x:Key="MessageConverter"/>
+    <Converters:SearchBoxHeightConverter x:Key="SearchBoxHeightConverter"/>
+
+
+
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="SearchBoxTemplate" TargetType="{x:Type MediaControls:optSearchBox}">
+        <Grid Style="{StaticResource OptionsPanel.Item}" Margin="10 0" Height="130">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.34*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <TextBlock Text="{TemplateBinding Header}" Style="{StaticResource OptionsPanel.Item.Header}"/>
+
+
+
+            
+            <!-- Content -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <Border Style="{StaticResource OptionsPanel.Search.Content.Border}">
+                <!-- Button -->
+                <!-- ====================================================== -->
+                <!-- ====================================================== -->
+                <!-- ====================================================== -->
+                <Button x:Name="PART_Button" Style="{StaticResource OptionsPanel.Search.Content.Button}">
+                    <StackPanel Style="{StaticResource OptionsPanel.Search.Content.StackPanel}" Width="{Binding ElementName=PART_Button, Path=ActualWidth}">
+                        <Border Style="{StaticResource OptionsPanel.Search.Content.Image.Border}">
+                            <Border.Background>
+                                <!-- Image -->
+                                <!-- ====================================================== -->
+                                <ImageBrush x:Name="PART_Image" Stretch="Uniform"/>
+                            </Border.Background>
+                        </Border>
+
+
+                        <StackPanel Orientation="Vertical">
+                            <!-- Placeholder -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <TextBlock Text="{TemplateBinding LabelPlaceholder}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="FontSize" Value="13"/>
+                                        <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Item.Placeholder.Text.Static.Foreground}"/>
+                                        <Setter Property="IsHitTestVisible" Value="False"/>
+                                        <Setter Property="Margin" Value="5"/>
+
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PART_Title}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+
+                            <!-- Title -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <TextBlock x:Name="PART_Title" Text="{TemplateBinding Title}" Style="{StaticResource OptionsPanel.Search.Content.TextBlock}"/>
+
+
+                            <!-- Platforms -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <TextBlock x:Name="PART_Platforms" Style="{StaticResource OptionsPanel.Search.Content.TextBlock}"/>
+
+
+                            <!-- Type -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <TextBlock x:Name="PART_Type" Text="{TemplateBinding Type}" Style="{StaticResource OptionsPanel.Search.Content.TextBlock}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+
+
+            
+            <!-- Popup -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <!-- ====================================================== -->
+            <Popup x:Name="PART_Popup" Height="{TemplateBinding PopupHeight}" Width="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.ActualWidth}" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_Button}">
+                <StackPanel>
+                    <!-- Grid -->
+                    <!-- ====================================================== -->
+                    <!-- ====================================================== -->
+                    <!-- ====================================================== -->
+                    <StackPanel x:Name="PART_StackPanel" Orientation="Vertical">
+                        <Grid>
+                            <!-- Search Text -->
+                            <!-- ====================================================== -->
+                            <TextBox x:Name="PART_SearchText" Style="{StaticResource OptionsPanel.Search.Popup.TextBox}"/>
+
+                            <!-- Search Placeholder -->
+                            <!-- ====================================================== -->
+                            <TextBlock Text="{TemplateBinding SearchPlaceholder}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="FontSize" Value="13"/>
+                                        <Setter Property="Padding" Value="8 0 6 0"/>
+                                        <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Item.Placeholder.Text.Static.Foreground}"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="Grid.Row" Value="0"/>
+                                        <Setter Property="IsHitTestVisible" Value="False"/>
+
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PART_SearchText}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+
+                        <!-- Loading Text -->
+                        <!-- ====================================================== -->
+                        <!-- ====================================================== -->
+                        <Border x:Name="PART_Loading" Visibility="{TemplateBinding isLoading, Converter={StaticResource MessageConverter}}" Style="{StaticResource OptionsPanel.Search.Popup.Message.Border}">
+                            <TextBlock Text="Loading..." Style="{StaticResource OptionsPanel.Search.Popup.Message.TextBlock}"/>
+                        </Border>
+
+
+                        <!-- Error Text -->
+                        <!-- ====================================================== -->
+                        <!-- ====================================================== -->
+                        <Border x:Name="PART_Error" Visibility="{TemplateBinding isError, Converter={StaticResource MessageConverter}}" Style="{StaticResource OptionsPanel.Search.Popup.Message.Border}">
+                            <TextBlock Text="{TemplateBinding SearchError}" Style="{StaticResource OptionsPanel.Search.Popup.Message.TextBlock}"/>
+                        </Border>
+                    </StackPanel>
+
+
+                    
+                    <!-- ListBox -->
+                    <!-- ====================================================== -->
+                    <!-- ====================================================== -->
+                    <!-- ====================================================== -->
+                    <ListBox x:Name="PART_ListBox" ItemTemplateSelector="{Binding Source={StaticResource ElementSelector}}" ItemsSource="{TemplateBinding Items}" BorderThickness="1 0 1 1">
+                        <ListBox.Resources>
+                            <!-- Movie Template -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <DataTemplate x:Key="MovieTemplate" DataType="{x:Type Models:MovieSearch}">
+                                <!-- ListBox Item -->
+                                <!-- ====================================================== -->
+                                <MediaControls:optSearchBoxMovie Content="{Binding Name}" CoverImage="{Binding CoverImage}"/>
+                            </DataTemplate>
+
+
+                            <!-- Game Template -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <DataTemplate x:Key="GameTemplate" DataType="{x:Type Models:GameSearch}">
+                                <!-- ListBox Item -->
+                                <!-- ====================================================== -->
+                                <MediaControls:optSearchBoxGame IGDBLink="{Binding IGDBLink}" Content="{Binding Name}" CoverImage="{Binding CoverImage}" Type="{Binding Type}" Platforms="{Binding Platforms}"/>
+                            </DataTemplate>
+                        </ListBox.Resources>
+                        <ListBox.Height>
+                            <!-- Search Box Height Converter -->
+                            <!-- ====================================================== -->
+                            <!-- ====================================================== -->
+                            <MultiBinding Converter="{StaticResource SearchBoxHeightConverter}">
+                                <Binding ElementName="PART_Popup" Path="Height" Mode="OneWay"/>
+                                <Binding ElementName="PART_StackPanel" Path="ActualHeight" Mode="OneWay"/>
+                            </MultiBinding>
+                        </ListBox.Height>
+                    </ListBox>
+                </StackPanel>
+            </Popup>
+        </Grid>
+    </ControlTemplate>
+
+
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optSearchBox}">
+        <Setter Property="Template" Value="{StaticResource SearchBoxTemplate}"/>
+    </Style>
+</ResourceDictionary>

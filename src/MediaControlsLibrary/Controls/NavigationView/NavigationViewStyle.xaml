@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary"
+                    xmlns:Converters="clr-namespace:MediaControlsLibrary.Converters">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    <!-- Converters -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Converters:NavigationViewSettingsConverter x:Key="NavigationViewSettingsConverter"/>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="NavigationViewTemplate" TargetType="{x:Type MediaControls:NavigationView}">
+        <Grid>
+            <!-- Menu -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <StackPanel IsItemsHost="True" Style="{StaticResource NavigationView}"/>
+
+            
+            <!-- Settings Button -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Button x:Name="PART_Button" Content="&#xe713;" Style="{StaticResource NavigationViewSettings.Button}" Visibility="{TemplateBinding IsSettings, Converter={StaticResource NavigationViewSettingsConverter}}"/>
+        </Grid>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:NavigationView}">
+        <Setter Property="Template" Value="{StaticResource NavigationViewTemplate}"/>
+        <Setter Property="Panel.ZIndex" Value="1"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="RadioButtonGroupTemplate" TargetType="{x:Type MediaControls:optRadioButtonGroup}">
+        <Grid Style="{StaticResource OptionsPanel.Item}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Text="{TemplateBinding Header}" Style="{StaticResource OptionsPanel.Item.Header}"/>
+
+
+            <!-- Group -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 0 0 0" IsItemsHost="True"/>
+        </Grid>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optRadioButtonGroup}">
+        <Setter Property="Template" Value="{StaticResource RadioButtonGroupTemplate}"/>
+    </Style>
+</ResourceDictionary>

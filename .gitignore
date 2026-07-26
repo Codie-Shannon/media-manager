@@ -1,0 +1,46 @@
+# Visual Studio
+.vs/
+**/bin/
+**/obj/
+TestResults/
+artifacts/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+
+# NuGet restore output
+packages/
+src/packages/
+*.nupkg
+
+# Local application data
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+SyntheticFixtures/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pfx
+*.key
+*.secrets.json
+appsettings.*.local.json
+
+# Logs and temporary output
+*.log
+*.tmp
+*.cache
+*.bak
+*.orig
+
+# Private evidence must remain outside the public repository
+docs/evidence/private/
+docs/screenshot-groups/private/
+

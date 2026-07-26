@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Other="clr-namespace:MediaControlsLibrary"
+                    xmlns:converters="clr-namespace:MediaControlsLibrary.Converters">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    
+    <!-- Converters -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <converters:DiameterAndThicknessToStrokeDashArrayConverter x:Key="DiameterAndThicknessToStrokeDashArrayConverter"/>
+
+
+    
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="LoadingTemplate" TargetType="{x:Type Other:Loading}">
+        <Grid Background="{TemplateBinding Background}" Visibility="{TemplateBinding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <!-- Ellipse -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Ellipse
+            Width="{TemplateBinding Diameter}"
+            Height="{TemplateBinding Diameter}"
+            RenderTransformOrigin="0.5 0.5"
+            Stroke="{TemplateBinding Foreground}"
+            StrokeDashCap="{TemplateBinding Cap}"
+            StrokeThickness="{TemplateBinding Thickness}">
+
+                <!-- Stroke Dash Array -->
+                <!-- ==================================== -->
+                <Ellipse.StrokeDashArray>
+                    <MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
+                        <Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        <Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}"/>
+                    </MultiBinding>
+                </Ellipse.StrokeDashArray>
+
+                
+                <!-- Render Transform -->
+                <!-- ==================================== -->
+                <Ellipse.RenderTransform>
+                    <RotateTransform x:Name="Rotation" Angle="0"/>
+                </Ellipse.RenderTransform>
+
+                
+                <!-- Storyboard -->
+                <!-- ==================================== -->
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="Rotation" Storyboard.TargetProperty="Angle" From="0" To="360"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+        </Grid>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type Other:Loading}">
+        <Setter Property="Template" Value="{StaticResource LoadingTemplate}"/>
+    </Style>
+</ResourceDictionary>

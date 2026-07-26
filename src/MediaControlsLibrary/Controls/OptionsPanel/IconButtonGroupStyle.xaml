@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="GroupTemplate" TargetType="{x:Type MediaControls:optIconButtonGroup}">
+        <Grid Style="{StaticResource Options.Panel.IconButton.Group}">
+            <StackPanel Style="{StaticResource Options.Panel.IconButton.Group.StackPanel}"/>
+        </Grid>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optIconButtonGroup}">
+        <Setter Property="Template" Value="{StaticResource GroupTemplate}"/>
+    </Style>
+</ResourceDictionary>

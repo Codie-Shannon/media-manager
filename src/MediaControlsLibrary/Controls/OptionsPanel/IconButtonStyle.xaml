@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="IconButtonTemplate" TargetType="{x:Type MediaControls:optIconButton}">
+        <Button Style="{StaticResource Options.Panel.IconButton}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.4*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Icon -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <TextBlock Text="{TemplateBinding Icon}" Style="{StaticResource Options.Panel.IconButton.Icon}"/>
+
+
+                <!-- Content -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Options.Panel.IconButton.Content}"/>
+            </Grid>
+        </Button>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optIconButton}">
+        <Setter Property="Template" Value="{StaticResource IconButtonTemplate}"/>
+    </Style>
+</ResourceDictionary>

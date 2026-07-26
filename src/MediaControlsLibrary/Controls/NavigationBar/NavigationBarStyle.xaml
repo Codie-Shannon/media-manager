@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="NavigationBarTemplate" TargetType="{x:Type MediaControls:NavigationBar}">
+        <Border Style="{StaticResource NavigationBar.Border}">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Back Button -->
+                <!-- ================================= -->
+                <!-- ================================= -->
+                <Button x:Name="PART_Back" Content="&#xF0D3;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="0"/>
+
+
+                <!-- Forward Button -->
+                <!-- ================================= -->
+                <!-- ================================= -->
+                <Button x:Name="PART_Forward" Content="&#xF0D2;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="1"/>
+
+
+                <!-- Folder Items -->
+                <!-- ================================= -->
+                <!-- ================================= -->
+                <Border x:Name="PART_Content" Style="{StaticResource NavigationBar.Items.Border}" Grid.Column="2">
+                    <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </Border>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:NavigationBar}">
+        <Setter Property="Template" Value="{StaticResource NavigationBarTemplate}"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+</ResourceDictionary>

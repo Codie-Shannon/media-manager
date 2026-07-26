@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <!-- Main -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+
+
+        <!-- Message Box -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\CustomMessageBox\CustomMessageBoxStyle.xaml"/>
+
+
+        <!-- Elements -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Elements\ContextMenuItemStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Elements\CoverFolderStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Elements\CoverItemStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Elements\ImageFolderStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Elements\ImageItemStyle.xaml"/>
+
+
+        <!-- Folder Browser -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\FolderBrowser\SelectionTextBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\FolderBrowser\FolderBrowserStyle.xaml"/>
+
+
+        <!-- Information Pane -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\CoverStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\DetailsStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\DetailsTitleStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\PropertyStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\RatingStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\InformationPane\TitleStyle.xaml"/>
+
+
+        <!-- Navigation Bar -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationBar\NavigationBarStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationBar\NavigationBarItemStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationBar\NavigationBarItemSeparatorStyle.xaml"/>
+
+
+        <!-- Navigation View -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationView\NavigationViewBackStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationView\NavigationViewItemHeaderStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationView\NavigationViewItemStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\NavigationView\NavigationViewStyle.xaml"/>
+
+        
+        <!-- OptionsPanel -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\ButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\FolderBrowserDialogStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\IconButtonGroupStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\IconButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\LinkTextBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\OpenDialogStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\PanelStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\RadioButtonGroupStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\RadioButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\SearchBoxMovieStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\SearchBoxGameStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\SearchBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\TextBoxLongStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\TextBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\NumericBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\OptionsPanel\TitleStyle.xaml"/>
+
+        
+        <!-- Other -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Other\LoadingStyle.xaml"/>
+
+        
+        <!-- Picture -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Picture\imgPictureStyle.xaml"/>
+
+        
+        <!-- Submenu -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\ButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\CheckBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\ComboBoxItemSeparatorStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\ComboBoxStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\GroupSeparatorStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\GroupStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\MenuStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\RadioButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Submenu\ToggleButtonStyle.xaml"/>
+
+        
+        <!-- Viewer -->
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Viewer\ViewerStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Viewer\BarStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Viewer\IconButtonStyle.xaml"/>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Controls\Viewer\VolumeBarStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

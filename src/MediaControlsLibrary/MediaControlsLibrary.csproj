@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B77A359-B14B-473C-8A8A-4753D6F62C0E}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>MediaControlsLibrary</RootNamespace>
+    <AssemblyName>MediaControlsLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Elements\ContextMenuItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Elements\CoverFolderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Elements\CoverItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FolderBrowser\FolderBrowserStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Elements\ImageFolderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Elements\ImageItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CustomMessageBox\CustomMessageBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FolderBrowser\SelectionTextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigationBar\NavigationBarItemSeparatorStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigationBar\NavigationBarItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigationBar\NavigationBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\FolderBrowserDialogStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\IconButtonGroupStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\IconButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\NumericBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\RadioButtonGroupStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\SearchBoxGameStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\SearchBoxMovieStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\SearchBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsPanel\RadioButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Picture\imgPictureStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InformationPane\CoverStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InformationPane\DetailsStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InformationPane\DetailsTitleStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InformationPane\PropertyStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InformationPane\RatingStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InformationPane\TitleStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NavigationView\NavigationViewBackStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigationView\NavigationViewItemHeaderStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NavigationView\NavigationViewItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NavigationView\NavigationViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\LinkTextBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\OpenDialogStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\PanelStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\TextBoxLongStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\TextBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsPanel\TitleStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Other\LoadingStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Submenu\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\CheckBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\ComboBoxItemSeparatorStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\ComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\GroupSeparatorStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\GroupStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\MenuStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\RadioButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Submenu\ToggleButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Viewer\BarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Viewer\IconButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Viewer\ViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Viewer\VolumeBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ColorBrushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\FolderBrowser\FolderBrowserCommands.cs" />
+    <Compile Include="Commands\OptionsPanel\OpenDialogCommands.cs" />
+    <Compile Include="Converters\Elements\TVShowFolderToggle.cs" />
+    <Compile Include="Converters\FolderBrowser\fbSelectedFolderConverter.cs" />
+    <Compile Include="Converters\InformationPane\VacantVisibilityConverter.cs" />
+    <Compile Include="Converters\NavigationView\NavigationViewSettingsConverter.cs" />
+    <Compile Include="Converters\OptionsPanel\DialogClearPaddingConverter.cs" />
+    <Compile Include="Converters\OptionsPanel\DialogClearVisibilityConverter.cs" />
+    <Compile Include="Converters\OptionsPanel\SearchBoxHeightConverter.cs" />
+    <Compile Include="Converters\OptionsPanel\SearchBoxMessageConverter.cs" />
+    <Compile Include="Converters\Other\DiameterAndThicknessToStrokeDashArrayConverter.cs" />
+    <Compile Include="Converters\InformationPane\RatingIconConverter.cs" />
+    <Compile Include="Converters\InformationPane\ReviewCountConverter.cs" />
+    <Compile Include="Converters\InformationPane\VacantConverter.cs" />
+    <Compile Include="Converters\InformationPane\VisibilityConverter.cs" />
+    <Compile Include="Converters\InformationPane\ScoreConverter.cs" />
+    <Compile Include="Converters\Viewer\VolumeBarIconConverter.cs" />
+    <Compile Include="Dependencies\BaseClass\CheckBoxBase.cs" />
+    <Compile Include="Dependencies\BaseClass\ComboBoxBase.cs" />
+    <Compile Include="Dependencies\BaseClass\FolderBase.cs" />
+    <Compile Include="Dependencies\BaseClass\FolderBrowserDialogBase.cs" />
+    <Compile Include="Dependencies\BaseClass\IconButtonBase.cs" />
+    <Compile Include="Dependencies\BaseClass\ElementBase.cs" />
+    <Compile Include="Dependencies\BaseClass\LoadingBase.cs" />
+    <Compile Include="Dependencies\BaseClass\NavigationBarItemBase.cs" />
+    <Compile Include="Dependencies\BaseClass\NavigationViewBase.cs" />
+    <Compile Include="Dependencies\BaseClass\NumericBoxBase.cs" />
+    <Compile Include="Dependencies\BaseClass\OpenDialogBase.cs" />
+    <Compile Include="Dependencies\BaseClass\optRadioButtonBase.cs" />
+    <Compile Include="Dependencies\BaseClass\RadioButtonBase.cs" />
+    <Compile Include="Dependencies\BaseClass\RadioButtonGroupBase.cs" />
+    <Compile Include="Dependencies\BaseClass\RatingBase.cs" />
+    <Compile Include="Dependencies\BaseClass\SearchBoxBase.cs" />
+    <Compile Include="Dependencies\BaseClass\SearchBoxItemBase.cs" />
+    <Compile Include="Dependencies\BaseClass\SelectionTextBoxBase.cs" />
+    <Compile Include="Dependencies\BaseClass\SubmenuGroupBase.cs" />
+    <Compile Include="Dependencies\BaseClass\TextBoxBase.cs" />
+    <Compile Include="Dependencies\Elements\CoverFolder.cs" />
+    <Compile Include="Dependencies\FolderBrowser\fbSelectionTextBox.cs" />
+    <Compile Include="Dependencies\FolderBrowser\FolderBrowser.cs" />
+    <Compile Include="Dependencies\Elements\ImageFolder.cs" />
+    <Compile Include="Dependencies\GlobalVariables\gvVacant.cs" />
+    <Compile Include="Dependencies\Elements\ContextMenuItem.cs" />
+    <Compile Include="Dependencies\Elements\CoverItem.cs" />
+    <Compile Include="Dependencies\Elements\ImageItem.cs" />
+    <Compile Include="Dependencies\CustomMessageBox\MessageBox.cs" />
+    <Compile Include="Dependencies\NavigationBar\NavigationBar.cs" />
+    <Compile Include="Dependencies\NavigationBar\NavigationBarItem.cs" />
+    <Compile Include="Dependencies\NavigationBar\NavigationBarItemSeparator.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optFolderBrowserDialog.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optIconButton.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optIconButtonGroup.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optNumericBox.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optRadioButton.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optRadioButtonGroup.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optSearchBox.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optSearchBoxGame.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optSearchBoxMovie.cs" />
+    <Compile Include="Dependencies\Other\Loading.cs" />
+    <Compile Include="Dependencies\Picture\imgPicture.cs" />
+    <Compile Include="Dependencies\Picture\imgPicture_IScrollInfo.cs" />
+    <Compile Include="Dependencies\InformationPane\ipCover.cs" />
+    <Compile Include="Dependencies\InformationPane\ipDetails.cs" />
+    <Compile Include="Dependencies\InformationPane\ipDetailsTitle.cs" />
+    <Compile Include="Dependencies\InformationPane\ipProperty.cs" />
+    <Compile Include="Dependencies\InformationPane\ipRating.cs" />
+    <Compile Include="Dependencies\InformationPane\ipTitle.cs" />
+    <Compile Include="Dependencies\NavigationView\NavigationView.cs" />
+    <Compile Include="Dependencies\NavigationView\NavigationViewBack.cs" />
+    <Compile Include="Dependencies\NavigationView\NavigationViewItem.cs" />
+    <Compile Include="Dependencies\NavigationView\NavigationViewItemHeader.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optButton.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optLinkTextBox.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optOpenDialog.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optPanel.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optTextBox.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optTextBoxLong.cs" />
+    <Compile Include="Dependencies\OptionsPanel\optTitle.cs" />
+    <Compile Include="Dependencies\Submenu\subButton.cs" />
+    <Compile Include="Dependencies\Submenu\subCheckBox.cs" />
+    <Compile Include="Dependencies\Submenu\subComboBox.cs" />
+    <Compile Include="Dependencies\Submenu\subComboBoxItemSeparator.cs" />
+    <Compile Include="Dependencies\Submenu\subGroup.cs" />
+    <Compile Include="Dependencies\Submenu\subGroupSeparator.cs" />
+    <Compile Include="Dependencies\Submenu\subMenu.cs" />
+    <Compile Include="Dependencies\Submenu\subRadioButton.cs" />
+    <Compile Include="Dependencies\Submenu\subToggleButton.cs" />
+    <Compile Include="Dependencies\Viewer\viewBar.cs" />
+    <Compile Include="Dependencies\Viewer\Viewer.cs" />
+    <Compile Include="Dependencies\Viewer\viewIconButton.cs" />
+    <Compile Include="Dependencies\Viewer\viewVolumeBar.cs" />
+    <Compile Include="Extensions\StackExtension.cs" />
+    <Compile Include="Helpers\Picture\imgPictureAnimationHelper.cs" />
+    <Compile Include="Models\Folder.cs" />
+    <Compile Include="Models\GameSearch.cs" />
+    <Compile Include="Models\MovieSearch.cs" />
+    <Compile Include="Models\OpenDialogItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Selectors\ElementSelector.cs" />
+    <Compile Include="Types\FolderType.cs" />
+    <Compile Include="Types\NavigationBarStackTypes.cs" />
+    <Compile Include="Types\OpenDialogType.cs" />
+    <Compile Include="Types\FolderPath.cs" />
+    <Compile Include="Types\Icons.cs" />
+    <Compile Include="Types\MessageBoxIcon.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ookii.Dialogs.Wpf">
+      <Version>5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="VirtualizingWrapPanel">
+      <Version>1.5.7</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Textures\blankicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Textures\ImageFolder_Icon.png" />
+    <Resource Include="Textures\CoverFolder_Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

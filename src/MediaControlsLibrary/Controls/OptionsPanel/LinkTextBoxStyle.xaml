@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="LinkTextBoxTemplate" TargetType="{x:Type MediaControls:optLinkTextBox}">
+        <Grid Style="{StaticResource OptionsPanel.Item}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Style="{StaticResource OptionsPanel.Item.Header}">
+                <Hyperlink x:Name="PART_Link" NavigateUri="{TemplateBinding Link}" Style="{StaticResource OptionsPanel.Hyperlink.Header}"><Run Text="{TemplateBinding Header}"/></Hyperlink>
+            </TextBlock>
+
+            
+            <!-- Text -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBox x:Name="PART_Text" Text="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.TextBox.Rounded.Corners}"/>
+
+            
+            <!-- Placeholder Text -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Text="{TemplateBinding Placeholder}" Grid.Row="1" FontSize="13" Padding="8 0 6 0" Foreground="{StaticResource OptionsPanel.Item.Placeholder.Text.Static.Foreground}" VerticalAlignment="Center" IsHitTestVisible="False">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=PART_Text}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+    
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optLinkTextBox}">
+        <Setter Property="Template" Value="{StaticResource LinkTextBoxTemplate}"/>
+    </Style>
+</ResourceDictionary>

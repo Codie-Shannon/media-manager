@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="ComboBoxItemSeparatorTemplate" TargetType="{x:Type MediaControls:subComboBoxItemSeparator}">
+        <ComboBoxItem Style="{StaticResource ComboBoxItemSeparator}">
+            <StackPanel Style="{StaticResource ComboBoxItemSeparator.StackPanel}">
+                <!-- Line (Separator) -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <Line Style="{StaticResource ComboBoxItemSeparator.Line}"/>
+            </StackPanel>
+        </ComboBoxItem>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:subComboBoxItemSeparator}">
+        <Setter Property="Template" Value="{StaticResource ComboBoxItemSeparatorTemplate}"/>
+    </Style>
+</ResourceDictionary>

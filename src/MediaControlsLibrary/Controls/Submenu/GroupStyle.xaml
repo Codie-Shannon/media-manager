@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="GroupTemplate" TargetType="{x:Type MediaControls:subGroup}">
+        <Grid Style="{StaticResource Submenu.Group.Grid}">
+            <!-- Header -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Text="{TemplateBinding Header}" Style="{StaticResource Submenu.Group.Title.TextBlock}"/>
+            
+            
+            <!-- Group -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <StackPanel IsItemsHost="True" Style="{StaticResource Submenu.Group.StackPanel}"/>
+        </Grid>
+    </ControlTemplate>
+
+    
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:subGroup}">
+        <Setter Property="Template" Value="{StaticResource GroupTemplate}"/>
+    </Style>
+</ResourceDictionary>

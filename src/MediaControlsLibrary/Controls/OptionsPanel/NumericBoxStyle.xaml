@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="NumericBoxTemplate" TargetType="{x:Type MediaControls:optNumericBox}">
+        <Grid Style="{StaticResource OptionsPanel.Item}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Text="{TemplateBinding Header}" Style="{StaticResource OptionsPanel.Item.Header}"/>
+
+
+            <!-- Text -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Grid Style="{StaticResource OptionsPanel.NumericBox.Content.Group}">
+                <!-- Text -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <TextBox Text="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.NumericBox.Content}"/>
+
+
+
+
+                <!-- Increment and Decrement Buttons -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <!-- ==================================== -->
+                <StackPanel>
+                    <!-- Increment Button -->
+                    <!-- ==================================== -->
+                    <!-- ==================================== -->
+                    <Button x:Name="PART_Increment" Content="&#xE70E;" Style="{StaticResource OptionsPanel.NumericBox.Content.Button}"/>
+
+
+
+                    <!-- Decrement Button -->
+                    <!-- ==================================== -->
+                    <!-- ==================================== -->
+                    <Button x:Name="PART_Decrement" Content="&#xE70D;" Style="{StaticResource OptionsPanel.NumericBox.Content.Button}"/>
+                </StackPanel>
+            </Grid>
+
+
+            <!-- Placeholder Text -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <TextBlock Text="{TemplateBinding Placeholder}" Grid.Row="1" FontSize="13" Padding="8 0 6 0" Foreground="{StaticResource OptionsPanel.Item.Placeholder.Text.Static.Foreground}" VerticalAlignment="Center" IsHitTestVisible="False">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=PART_Text}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:optNumericBox}">
+        <Setter Property="Template" Value="{StaticResource NumericBoxTemplate}"/>
+    </Style>
+</ResourceDictionary>

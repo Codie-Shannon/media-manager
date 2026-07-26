@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary"
+                    xmlns:Converters="clr-namespace:MediaControlsLibrary.Converters">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    
+    <!-- Converters -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Converters:VolumeBarIconConverter x:Key="VolumeBarIconConverter"/>
+
+    
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="VolumeBarTemplate" TargetType="{x:Type MediaControls:viewVolumeBar}">
+        <ComboBox x:Name="PART_Content" Text="{TemplateBinding Icon, Converter={StaticResource VolumeBarIconConverter}}" Style="{StaticResource VolumeBar}" FontSize="{TemplateBinding FontSize}">
+            <!-- Visual States -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="TestComboBoxStates">
+                    <VisualState x:Name="Inactive">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="Transparent" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="Transparent" Duration="0"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#FF3D3D3D" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="LightGray" Duration="0"/>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Active">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#FF3D3D3D" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="LightGray" Duration="0"/>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+            
+            <!-- Selection Event Blocker -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Button Style="{StaticResource VolumeBar.Selection.Blocker}">
+                <Grid Width="340" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.01*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Mute Button -->
+                    <!-- ==================================== -->
+                    <Button x:Name="PART_Mute" Content="{TemplateBinding Icon, Converter={StaticResource VolumeBarIconConverter}}" Style="{StaticResource VolumeBar.Volume.Button}"/>
+                    
+                    
+                    <!-- Slider -->
+                    <!-- ==================================== -->
+                    <Slider x:Name="PART_Slider" Style="{StaticResource VolumeBar.Slider}"/>
+                    
+                    
+                    <!-- Slider Value Text -->
+                    <!-- ==================================== -->
+                    <TextBlock Text="{Binding ElementName=PART_Slider, Path=Value, StringFormat=0}" Style="{StaticResource VolumeBar.Value.Text}"/>
+                </Grid>
+            </Button>
+        </ComboBox>
+    </ControlTemplate>
+
+
+    
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:viewVolumeBar}">
+        <Setter Property="Template" Value="{StaticResource VolumeBarTemplate}"/>
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+</ResourceDictionary>

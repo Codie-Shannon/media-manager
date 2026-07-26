@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="ImageFolderTemplate" TargetType="{x:Type MediaControls:ImageFolder}">
+        <Button x:Name="PART_Content" Style="{StaticResource Image.Folder.Button}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="ElementStates">
+                    <VisualState x:Name="Unselected"/>
+                    <VisualState x:Name="Selected">
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0"/>
+                            <ThicknessAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="BorderThickness" To="2" Duration="0" FillBehavior="HoldEnd"/>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <!-- Main Grid -->
+            <!-- ==================================== -->
+            <!-- ==================================== -->
+            <Grid>
+                <!-- Cover Image -->
+                <!-- ==================================== -->
+                <Image x:Name="PART_Image" Source="{TemplateBinding Background}"/>
+
+
+                <!-- Content -->
+                <!-- ==================================== -->
+                <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Folder.Button.Overlay.TextBlock}"/>
+            </Grid>
+        </Button>
+    </ControlTemplate>
+
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:ImageFolder}">
+        <Setter Property="Template" Value="{StaticResource ImageFolderTemplate}"/>
+        <Setter Property="Background" Value="pack://application:,,,/MediaControlsLibrary;component/Textures/ImageFolder_Icon.png"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,291 @@
+﻿<Window x:Class="MediaControlsTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MediaControls="clr-namespace:MediaControlsLibrary;assembly=MediaControlsLibrary" xmlns:FFME="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Navigation View -->
+        <MediaControls:NavigationView x:Name="NavigationMenu" IsSettings="True">
+            <MediaControls:NavigationViewBack Content="&#xE72B;"/>
+            <MediaControls:NavigationViewItemHeader Content="Libraries"/>
+            <MediaControls:NavigationViewItem x:Name="GamesNavItem" Icon="&#xE990;" Label="Games" IsEnabled="False"/>
+            <MediaControls:NavigationViewItem x:Name="GameEmulatorsNavItem" Icon="&#xE8F1;" Label="Game Emulators"/>
+        </MediaControls:NavigationView>
+
+        <!-- Other -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Submenu -->
+            <MediaControls:subMenu Grid.ColumnSpan="2">
+                <MediaControls:subGroup Header="File Manager">
+                    <MediaControls:subButton x:Name="btnAdd" Icon="&#xecc8;" Content="Add" ToolTip="Add a Game" Click="btnAdd_Click"/>
+                    <MediaControls:subButton x:Name="btnDelete" Icon="&#xe74d;" Content="Delete" ToolTip="Delete the selected game from the system." Click="btnDelete_Click"/>
+                    <MediaControls:subButton x:Name="btnEdit" Icon="&#xeb7e;" Content="Edit" ToolTip="Edit the selected game's information."/>
+                    <MediaControls:subButton x:Name="btnRemove" Icon="&#xecc9;" Content="Remove" ToolTip="Remove the selected game."/>
+                    <MediaControls:subButton x:Name="btnShowInExplorer" Icon="&#xec50;" Content="Show in Explorer" ToolTip="Show the selected game in file explorer."/>
+                </MediaControls:subGroup>
+
+                <MediaControls:subGroupSeparator/>
+
+                <MediaControls:subGroup Header="Other">
+                    <MediaControls:subToggleButton x:Name="tbtnShowNA" Icon="&#xE9CE;" Content="Show N / A"/>
+                </MediaControls:subGroup>
+            </MediaControls:subMenu>
+            
+            <!-- Navigation Bar -->
+            <MediaControls:NavigationBar Grid.Row="1" Back="NavigationBar_Back" Forward="NavigationBar_Forward"/>
+
+            <!-- Placeholder for Information Pane Column Width -->
+            <Grid x:Name="IPCSize" Grid.Row="1" Grid.Column="1"/>
+
+            <!-- Information Pane -->
+            <Border x:Name="InformationPane" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource InformationPane.Border}">
+                <Grid Style="{StaticResource InformationPane}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="1.5*" />
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="0.4*" />
+                        <RowDefinition Height="10*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Title -->
+                    <MediaControls:ipTitle x:Name="tbTitle" Content="Synthetic Baseline Game" Grid.Row="1" Grid.Column="1"/>
+
+                    <!-- Cover -->
+                    <MediaControls:ipCover x:Name="imgCover" Source="Image.jpg" Grid.Row="3" Grid.Column="1"/>
+
+                    <!-- Details -->
+                    <MediaControls:ipDetails Grid.Row="6" Grid.ColumnSpan="3">
+                        <!-- Standard Details -->
+                        <MediaControls:ipDetailsTitle Content="Standard Details"/>
+                        <MediaControls:ipRating x:Name="tbRating" Header="User Rating" Score="25"/>
+                        <MediaControls:ipProperty x:Name="tbPlatform" Header="Platform"/>
+                        <MediaControls:ipProperty x:Name="tbEmulator" Header="Emulator"/>
+                        <MediaControls:ipProperty x:Name="tbFormat" Header="Format"/>
+                        <MediaControls:ipProperty x:Name="tbSize" Header="File Size"/>
+                        <MediaControls:ipProperty x:Name="tbAccessed" Header="Accessed"/>
+                        <MediaControls:ipProperty x:Name="tbCreated" Header="Created"/>
+
+                        <!-- IGDB Details -->
+                        <MediaControls:ipDetailsTitle Content="IGDB Details"/>
+                        <MediaControls:ipProperty x:Name="tbPublisher" Header="Publisher"/>
+                        <MediaControls:ipProperty x:Name="tbReleaseDate" Header="Release Date"/>
+                        <MediaControls:ipProperty x:Name="tbMemberRating" Header="Member Rating"/>
+                        <MediaControls:ipProperty x:Name="tbCriticRating" Header="Critic Rating"/>
+                        <MediaControls:ipProperty x:Name="tbGenre" Header="Genres"/>
+                        <MediaControls:ipProperty x:Name="tbAvailablePlatform" Header="Available Platforms"/>
+                    </MediaControls:ipDetails>
+                </Grid>
+            </Border>
+
+            <!-- Game Items -->
+            <ScrollViewer x:Name="GameItems" Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid>
+                    <MediaControls:ImageFolder Content="Folder Name"/>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Add Panel -->
+            <MediaControls:optPanel x:Name="AddPanel" Grid.RowSpan="3" Grid.ColumnSpan="2" Visibility="Collapsed">
+                <!-- Title -->
+                <MediaControls:optTitle Content="Add Game"/>
+
+                <!-- Custom Name -->
+                <MediaControls:optTextBoxLong x:Name="tboxCustomName" Header="Custom Name" Placeholder="Enter a Custom Name..."/>
+
+                <!-- Launcher Path -->
+                <MediaControls:optOpenDialog x:Name="ofdLauncherPath" Header="* Launch File Path" Placeholder="Select the Game's Launch File using the Browse Button..." ButtonContent="Browse" Type="File" SelectionName="Select Game Launcher" Selectables="exe, iso"/>
+
+                <!-- Base Directory -->
+                <MediaControls:optOpenDialog x:Name="ofdBaseDirectory" Header="* Base Directory" Placeholder="Select the Game's Base Directory using the Browse Button..." ButtonContent="Browse" Type="Folder" RootDirectory="Music"/>
+
+                <!-- Base Directory -->
+                <MediaControls:optFolderBrowserDialog x:Name="fbdSaveLocation" Header="* Save Location" Placeholder="Select a Location to Save the Element..." ButtonContent="Browse" WindowCaption="Select a Folder" InitialFolderID="-1"/>
+
+                <!-- IGDB Link -->
+                <MediaControls:optLinkTextBox x:Name="tboxIGDBLink" Header="* IGDB Link" Link="https://www.igdb.com/" Placeholder="Enter the Games IGDB Link..."/>
+
+                <!-- Add, Back and Cancel Buttons -->
+                <Grid Style="{DynamicResource Options.Panel.Buttons.Grid}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="0.07*"/>
+                        <ColumnDefinition Width="0.6*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <MediaControls:optButton x:Name="btnAddGame" Content="Add"/>
+                    <MediaControls:optButton x:Name="btnAddBack" Content="Back" Grid.Column="2" ButtonBase.Click="btnAddBack_Click"/>
+                    <MediaControls:optButton x:Name="btnAddCanceled" Content="Cancel" Grid.Column="2" Visibility="Hidden"/>
+                </Grid>
+            </MediaControls:optPanel>
+        </Grid>
+
+        <!-- Loading -->
+        <MediaControls:Loading Grid.Row="1" Visibility="Collapsed"/>
+
+        <!-- Select Panel -->
+        <MediaControls:optPanel Grid.RowSpan="2" Grid.ColumnSpan="2" PanelWidth="520" PanelHeight="300" Visibility="Collapsed">
+            <!-- Title -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optTitle Content="What Item Do You Want to Add?"/>
+
+
+            <!-- Icon Button Group -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optIconButtonGroup>
+                <MediaControls:optIconButton Icon="&#xEA69;" Content="Movie"/>
+                <MediaControls:optIconButton Icon="&#xF12B;" Content="Folder"/>
+            </MediaControls:optIconButtonGroup>
+        </MediaControls:optPanel>
+
+        
+        
+        
+        <!-- Item Panel -->
+        <!-- ========================================================================== -->
+        <!-- ========================================================================== -->
+        <MediaControls:optPanel x:Name="ItemPanel" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <!-- Title -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optTitle x:Name="ItemPanelTitle" Content="Add Movie"/>
+
+
+            <MediaControls:optNumericBox x:Name="nbSeason" Max="5" Click="optNumericBox_Click"/>
+
+
+            <!-- Custom Name -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optTextBoxLong x:Name="tbCustomName" Header="Custom Name" Placeholder="Enter a Custom Name..."/>
+
+
+            <MediaControls:optSearchBox x:Name="sbTitle" Header="* Movie Title" Content="Synthetic Example Movie" SearchPlaceholder="Enter Search Text..." LabelPlaceholder="Select a Movie Title..." SearchChanged="sbTitle_SearchChanged" SelectionChanged="sbTitle_SelectionChanged" DefaultCover="Image.jpg"/>
+
+
+            <!-- IMDB Link -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optLinkTextBox x:Name="tbIMDB" Header="* IMDB Link" Link="https://www.imdb.com/?ref_=nv_home" Placeholder="Enter the Movies IMDB Link..."/>
+
+
+            <!-- Toggle -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optRadioButtonGroup Header="* Folder Type">
+                <MediaControls:optRadioButton Content="Folder" GroupName="FolderType" IsChecked="True"/>
+                <MediaControls:optRadioButton Content="TV Show" GroupName="FolderType"/>
+                <MediaControls:optRadioButton Content="TV Show - Season" GroupName="FolderType"/>
+            </MediaControls:optRadioButtonGroup>
+
+
+            <!-- Movie Path -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optOpenDialog x:Name="odSongPath" Header="* Song Selection" RemoveHeader="Remove Song" Placeholder="Select All Song Files using the Browse Button..." IsMultiSelection="True" Cover="SongMultiselect.png" ButtonContent="Browse" Type="File" SelectionName="Select Song" Selectables="mkv, mp4, avi, mov" RootDirectory="Music"/>
+
+            
+            <!-- Path -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optOpenDialog x:Name="odPath" Header="* Path" Placeholder="Select the Path File using the Browse Button..." IsClear="True" ClearClick="odPath_ClearClick" ButtonContent="Browse" Type="File" SelectionName="Select Movie" Selectables="mp4, mkv, avi" RootDirectory="Videos"/>
+
+
+            <!-- Save Location -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <MediaControls:optFolderBrowserDialog x:Name="fbdItemSaveLocation" Header="* Save Location" Placeholder="Select a Location to Save the Movie..." ButtonContent="Browse" InitialFolderID="-1"/>
+
+
+            <!-- Process and Back Buttons -->
+            <!-- ============================== -->
+            <!-- ============================== -->
+            <Grid Style="{DynamicResource Options.Panel.Buttons.Grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.07*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Process Button -->
+                <!-- ============================== -->
+                <MediaControls:optButton x:Name="btnProcessItem" Tag="item" Content="Add" ButtonBase.Click="btnProcessItem_Click"/>
+
+
+                <!-- Back Button -->
+                <!-- ============================== -->
+                <MediaControls:optButton Content="Back" Grid.Column="2"/>
+            </Grid>
+        </MediaControls:optPanel>
+
+        
+        
+        
+        <!-- Viewer -->
+        <MediaControls:Viewer Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <!-- Media Element -->
+            <FFME:MediaElement x:Name="meVideo" Style="{DynamicResource VideoPlayer.MediaElement}"/>
+            <!-- Bar -->
+            <MediaControls:viewBar Grid.Row="1">
+                <!-- Play / Pause -->
+                <MediaControls:viewIconButton x:Name="btnPlay" PrimaryIcon="&#xE769;" SecondaryIcon="&#xf5b0;"/>
+
+
+                <!-- Movie Controls -->
+                <!-- ================================================================================ -->
+                <!-- ================================================================================ -->
+                <!-- Go Backward 10 Seconds -->
+                <MediaControls:viewIconButton x:Name="btnReverse" Icon="&#xed3c;"/>
+
+                <!-- Go Forward 30 Seconds -->
+                <MediaControls:viewIconButton x:Name="btnForward" Icon="&#xed3d;"/>
+
+
+                <!-- Video Controls -->
+                <!-- ================================================================================ -->
+                <!-- ================================================================================ -->
+                <!-- Previous Button -->
+                <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xe892;"/>
+
+                <!-- Next Button -->
+                <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xe893;"/>
+
+
+                <!-- Volume -->
+                <MediaControls:viewVolumeBar x:Name="VolumeBar"/>
+
+                <!-- Duration Slider -->
+                <Slider x:Name="videoSlider" Style="{StaticResource Viewer.VideoSlider}"/>
+            </MediaControls:viewBar>
+        </MediaControls:Viewer>
+    </Grid>
+</Window>

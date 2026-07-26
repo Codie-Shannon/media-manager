@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:MediaControls="clr-namespace:MediaControlsLibrary">
+    <!-- Styles -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\MediaControlsLibrary;component\Resources\Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- Control Template -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type MediaControls:viewIconButton}">
+        <!-- Icon -->
+        <!-- ==================================== -->
+        <!-- ==================================== -->
+        <Button x:Name="PART_Content" Content="{TemplateBinding Icon}" Style="{StaticResource IconButton}" FontSize="{TemplateBinding FontSize}"/>
+    </ControlTemplate>
+
+
+    <!-- Default Element Style -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <Style TargetType="{x:Type MediaControls:viewIconButton}">
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+</ResourceDictionary>
