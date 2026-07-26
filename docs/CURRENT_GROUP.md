@@ -18,4 +18,11 @@ Completed:
 
 Next group:
 
-- Group 3 modernizes the application from this working, documented restoration checkpoint.
+- Group 3 verifies and stabilizes the existing functionality from this working, documented restoration checkpoint. It does not redesign the UI.
+
+Remaining roadmap:
+
+- Group 4 replaces direct IMDb scraping with a supported, swappable metadata-provider architecture.
+- Group 5 improves data reliability and prepares the application for release.
+- Group 6 performs the modern UI redesign and captures the final screenshot group.
+- Group 7 completes packaging and portfolio closure.

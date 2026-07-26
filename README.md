@@ -15,6 +15,8 @@ Group 2 is complete. The recovered application now builds and starts reproducibl
 - No real media library, user database, credentials, or private paths are included.
 - Original and restored screenshot groups are preserved as fixed comparison evidence.
 
+The next milestone is Group 3 functional verification and stabilization. The metadata-provider migration is Group 4, and the visible UI redesign remains Group 6.
+
 See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
 
 ## Repository layout
