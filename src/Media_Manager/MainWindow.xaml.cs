@@ -4,6 +4,7 @@ using MediaControlsLibrary;
 using System.Threading.Tasks;
 using Media_Manager.ViewModels;
 using System.Collections.Generic;
+using Media_Manager.Metadata;
 
 namespace Media_Manager
 {
@@ -70,6 +71,9 @@ namespace Media_Manager
                     applicationName)
                 : Path.GetFullPath(dataDirectoryOverride);
 
+            //Initialize metadata providers and their local encrypted settings/cache.
+            MetadataService.Initialize(localdata);
+
             //Initialize Database
             Database.Initialize(localdata);
 
@@ -120,6 +124,31 @@ namespace Media_Manager
 
             //Load Browse Locations
             LoadBrowseLocations();
+        }
+
+        private void btnProviders_Click(object sender, RoutedEventArgs e)
+        {
+            BrowseLocationsPanel.Visibility = Visibility.Collapsed;
+            ProviderSettingsPanel.Visibility = Visibility.Visible;
+            LoadProviderStatus();
+        }
+
+        private void btnProviderApply_Click(object sender, RoutedEventArgs e)
+        {
+            MetadataService.SaveSettings(
+                pbTmdbAccessToken.Password,
+                $"{tbIgdbClientId.Content}",
+                pbIgdbClientSecret.Password);
+            pbTmdbAccessToken.Clear();
+            pbIgdbClientSecret.Clear();
+            tbIgdbClientId.Content = string.Empty;
+            LoadProviderStatus();
+        }
+
+        private void btnProviderBack_Click(object sender, RoutedEventArgs e)
+        {
+            ProviderSettingsPanel.Visibility = Visibility.Collapsed;
+            BrowseLocationsPanel.Visibility = Visibility.Visible;
         }
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
@@ -216,6 +245,15 @@ namespace Media_Manager
             Properties.Settings.Default.SongCoverBrowse = $"{odSongCover.Content}";
             Properties.Settings.Default.GameBrowse = $"{odGames.Content}";
             Properties.Settings.Default.Save();
+        }
+
+        private void LoadProviderStatus()
+        {
+            MetadataProviderStatus status = MetadataService.GetStatus();
+            txtProviderStatus.Text =
+                $"TMDB: {(status.TmdbConfigured ? "configured" : "not configured")} ({status.TmdbSource})\n"
+                + $"IGDB: {(status.IgdbConfigured ? "configured" : "not configured")} ({status.IgdbSource})\n"
+                + "Leave a secret field blank to keep its current saved value.";
         }
 
 

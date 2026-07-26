@@ -178,15 +178,15 @@
                         <MediaControls:ipProperty x:Name="tbfProductionCompanies" Header="Production Companies"/>
 
 
-                        <!-- IMDB Details -->
+                        <!-- TMDB Details -->
                         <!-- ============================== -->
-                        <MediaControls:ipDetailsTitle Content="IMDB Details"/>
+                        <MediaControls:ipDetailsTitle Content="TMDB Details"/>
                         <MediaControls:ipProperty x:Name="tbfCreators" Header="Creators"/>
 
 
-                        <!-- Metacritic Details -->
+                        <!-- Provider Ratings -->
                         <!-- ============================== -->
-                        <MediaControls:ipDetailsTitle Content="Metacritic Details"/>
+                        <MediaControls:ipDetailsTitle Content="Provider Ratings"/>
                         <MediaControls:ipRating x:Name="tbfUserRating" Header="User Rating"/>
                         <MediaControls:ipRating x:Name="tbfCriticRating" Header="Critic Rating" IsCritic="True"/>
                     </MediaControls:ipDetails>
@@ -245,9 +245,9 @@
                         <MediaControls:ipProperty x:Name="tbiProductionCompanies" Header="Production Companies"/>
 
 
-                        <!-- IMDB Details -->
+                        <!-- TMDB Details -->
                         <!-- ============================== -->
-                        <MediaControls:ipDetailsTitle Content="IMDB Details"/>
+                        <MediaControls:ipDetailsTitle Content="TMDB Details"/>
                         <MediaControls:ipProperty x:Name="tbiAgeRating" Header="Age Rating"/>
                         <MediaControls:ipProperty x:Name="tbiGenres" Header="Genres"/>
                         <MediaControls:ipProperty x:Name="tbiStars" Header="Stars"/>

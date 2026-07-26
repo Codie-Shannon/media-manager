@@ -1,29 +1,28 @@
 # Current group
 
-## Group 3 - Verify and stabilize existing functionality
+## Group 4 - Introduce metadata-provider architecture
 
 Status: complete
 
 Completed:
 
-- Added an opt-in data-directory override so verification can run in a disposable profile without touching the user's real database.
-- Exercised Movies, TV Shows, Videos, Pictures, Music, and Games using neutral synthetic folders and media.
-- Verified hierarchy navigation, Back/Forward, selection/details, favourites surfaces, add, edit, remove, delete, cancel, Explorer reveal, video/picture playback surfaces, game launch, and resize behavior.
-- Fixed null and missing cover crashes, invalid/empty date crashes, and a null TV-show parent lookup.
-- Fixed TV-show ownership deletion so removing one show cannot remove a sibling show's seasons or episodes.
-- Made destructive workflows preflight paths and untracked files, preserve cancellation, and report success only after deletion succeeds.
-- Fixed folder-browser selection, duplicate registration, stale selection, and close cleanup.
-- Replaced unsafe metadata-search thread abortion with serialized, exception-contained driver cleanup so provider-window failures remain non-fatal.
-- Made missing Explorer targets and game-launch failures non-fatal.
-- Added and passed `MediaManager.StabilityTests` in Debug x64 and Release x64.
+- Added `IMetadataProvider` and provider-neutral search/detail models.
+- Added TMDB for movies, TV shows, seasons, and episodes.
+- Added IGDB for games and verified the existing local credentials against the live supported API without committing them.
+- Replaced both popup search and Add/Edit detail scraping with provider calls.
+- Added cancellation, timeouts, timestamped search/detail caching, stale-cache fallback, and friendly provider errors.
+- Added manual search results so local library workflows remain available with no key or no network.
+- Added local DPAPI-encrypted provider settings and environment-variable overrides.
+- Added provider attribution to the Settings surface.
+- Removed Selenium, Chrome-driver, WebDriverManager, AngleSharp, and all active direct-site selectors from the application project.
+- Added mocked provider, cancellation, caching, encrypted-settings, and offline/manual regression coverage.
 - Preserved the original user database byte-for-byte during isolated verification.
 
 Next group:
 
-- Group 4 replaces direct-site metadata scraping with a supported, swappable metadata-provider architecture. It does not redesign the UI.
+- Group 5 improves local-data reliability, backup/export/import behavior, identifiers, and release preparation.
 
 Remaining roadmap:
 
-- Group 5 improves data reliability and prepares the application for release.
 - Group 6 performs the modern UI redesign and captures the final screenshot group.
 - Group 7 completes packaging and portfolio closure.

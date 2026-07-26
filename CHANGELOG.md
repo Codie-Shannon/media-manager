@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### Metadata provider architecture
+
+- Replaced active IMDb, Metacritic, and IGDB browser automation with `IMetadataProvider`.
+- Added TMDB support for movie, TV, season, and episode search/details and IGDB support for game search/details.
+- Added provider-neutral request, result, and detail models with configuration-driven provider selection.
+- Added cancellation, 12-second operation timeouts, friendly rate-limit/authentication handling, and stale-cache fallback.
+- Added timestamped disk caching for searches and details.
+- Added a first-class manual search result when credentials, network, or a provider match are unavailable.
+- Added per-user DPAPI-encrypted provider settings plus environment-variable overrides; no credential is stored in source control.
+- Added required TMDB attribution and IGDB source acknowledgement to the provider-settings surface.
+- Removed Selenium, Chrome-driver, WebDriverManager, and AngleSharp from the active application project and runtime output.
+- Added mocked TMDB/IGDB, cancellation, cache, credential-encryption, and manual-fallback regression tests.
+
 ### Functional stabilization
 
 - Added an isolated data-directory override and a publication-safe synthetic verification workflow.

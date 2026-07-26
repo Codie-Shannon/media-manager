@@ -24,3 +24,16 @@ A demonstration harness for the controls library. Some navigation labels are int
 
 The restoration plan first makes this architecture reproducible and safe, then separates responsibilities incrementally without rewriting the product.
 
+## Metadata providers
+
+Group 4 adds a provider boundary inside `Media_Manager.Metadata`:
+
+- `IMetadataProvider` defines supported media kinds, search, and detail retrieval.
+- `MetadataService` selects TMDB for film/TV metadata and IGDB for game metadata without exposing provider response types to the UI.
+- `TmdbMetadataProvider` also resolves legacy IMDb title IDs through TMDB's supported external-ID endpoint.
+- `MetadataCache` stores provider, retrieval time, and provider-neutral payload under the active local-data profile.
+- `ProviderSettingsStore` protects credentials with Windows DPAPI for the current user; environment variables override local settings.
+- `Fetcher` retains local MediaInfo/filesystem extraction but consumes only provider-neutral `MediaMetadata`.
+- `SearchEngine` owns cancellation and maps neutral results into the recovered search control until its visual/API naming is modernized in Group 6.
+
+Legacy database columns and CLR properties named after IMDb, Metacritic, or IGDB remain for schema compatibility. They hold external/provider references only; no page is scraped. Schema naming and migration belong to Group 5.

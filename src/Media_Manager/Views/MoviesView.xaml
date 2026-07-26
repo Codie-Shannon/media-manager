@@ -176,16 +176,16 @@
                     <MediaControls:ipProperty x:Name="tbiFramerateMode" Header="Framerate Mode"/>
 
 
-                    <!-- MetaCritic Details -->
+                    <!-- Provider Ratings -->
                     <!-- ============================== -->
-                    <MediaControls:ipDetailsTitle Content="MetaCritic Details"/>
+                    <MediaControls:ipDetailsTitle Content="Provider Ratings"/>
                     <MediaControls:ipRating x:Name="UserRating" Header="User Rating"/>
                     <MediaControls:ipRating x:Name="CriticRating" Header="Critic Rating" IsCritic="True"/>
 
 
-                    <!-- IMDB Details -->
+                    <!-- TMDB Details -->
                     <!-- ============================== -->
-                    <MediaControls:ipDetailsTitle Content="IMDB Details"/>
+                    <MediaControls:ipDetailsTitle Content="TMDB Details"/>
                     <MediaControls:ipProperty x:Name="tbiReleaseDate" Header="Release Date"/>
                     <MediaControls:ipProperty x:Name="tbiAgeRating" Header="Age Rating"/>
                     <MediaControls:ipProperty x:Name="tbiGenres" Header="Genres"/>

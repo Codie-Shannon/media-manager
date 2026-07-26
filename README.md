@@ -4,7 +4,7 @@ Media Manager is a local-first Windows desktop application for organizing movies
 
 ## Current status
 
-Group 3 is complete. The recovered application now builds, starts, and passes its stabilization matrix from the curated repository:
+Group 4 is complete. The recovered application now uses supported, swappable metadata providers instead of browser automation:
 
 - The full solution restores and builds in Debug x64 and Release x64.
 - `Media_Manager` references `MediaControlsLibrary` as a project dependency instead of a stale external DLL.
@@ -12,14 +12,17 @@ Group 3 is complete. The recovered application now builds, starts, and passes it
 - Startup failures raised after managed startup begins are presented in a dependency-free error window.
 - An isolated synthetic profile verifies all six libraries, hierarchy navigation, card details, add/edit/remove/delete flows, Explorer actions, playback surfaces, game launch, and resize behavior.
 - Critical TV-show ownership, destructive deletion, folder-browser, missing-path, missing-artwork, invalid-date, and game-launch failures are repaired.
-- Legacy metadata searches are failure-contained until their Selenium implementation is replaced in Group 4.
-- A repeatable `MediaManager.StabilityTests` executable protects TV-show ownership isolation and null/invalid metadata formatting.
+- TMDB supplies movie, TV, season, and episode metadata; IGDB supplies game metadata.
+- Search and detail retrieval use `IMetadataProvider`, provider-neutral models, cancellation, timeouts, encrypted local credentials, caching, and stale-cache fallback.
+- Manual results remain available without credentials or network access.
+- Selenium, Chrome-driver, direct IMDb, and direct Metacritic automation are removed from the active application and its runtime output.
+- Existing IMDb references can be resolved through TMDB's supported external-ID endpoint without scraping.
+- A repeatable `MediaManager.StabilityTests` executable protects Group 3 stability plus mocked TMDB/IGDB parsing, cancellation, cache, credential encryption, and manual fallback.
 - Clean tracked-file checkouts build and launch without inherited `bin`, `obj`, or package output.
-- Metadata retrieval still contains legacy direct-site automation and has not yet been replaced by a provider abstraction.
 - No real media library, user database, credentials, or private paths are included.
 - Original and restored screenshot groups are preserved as fixed comparison evidence.
 
-The next milestone is Group 4 metadata-provider migration. The visible UI redesign remains Group 6.
+The next milestone is Group 5 data reliability and release preparation. The visible UI redesign remains Group 6.
 
 See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
 
@@ -41,6 +44,8 @@ See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/
 - NuGet package restore
 
 Open `MediaManager.sln`, restore NuGet packages, and build the `x64` configuration. The complete solution is verified in both Debug and Release.
+
+Provider credentials are entered under **Settings > Configure Metadata Providers** and are encrypted for the current Windows user. Environment-variable setup and provider behavior are documented in [docs/metadata-provider-migration.md](docs/metadata-provider-migration.md).
 
 ## Privacy and sample-data policy
 

@@ -58,9 +58,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=1.0.5.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\packages\AngleSharp.1.0.5\lib\net472\AngleSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.1.11\lib\net461\Dapper.dll</HintPath>
     </Reference>
@@ -98,19 +95,10 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NT.Selenium.Extensions.Chrome, Version=2.4.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NT.Selenium.Extensions.Chrome.2.4.3\lib\netstandard2.0\NT.Selenium.Extensions.Chrome.dll</HintPath>
-    </Reference>
     <Reference Include="Ookii.Dialogs.Wpf, Version=5.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
       <HintPath>..\packages\Ookii.Dialogs.Wpf.5.0.0\lib\net462\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
-    <Reference Include="Selenium.Extensions, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sl.Selenium.Extensions.2.1.1\lib\netstandard2.0\Selenium.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -188,20 +176,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UndetectedChromeDriver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.UndetectedChromeDriver.1.1.2-alpha\lib\net47\UndetectedChromeDriver.dll</HintPath>
-    </Reference>
     <Reference Include="VirtualizingWrapPanel, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\VirtualizingWrapPanel.1.5.7\lib\net452\VirtualizingWrapPanel.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.4.14.1\lib\netstandard2.0\WebDriver.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.4.14.1\lib\netstandard2.0\WebDriver.Support.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriverManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebDriverManager.2.17.1\lib\net462\WebDriverManager.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -223,6 +199,14 @@
     <Compile Include="Models\Models\Song.cs" />
     <Compile Include="Models\Models\TVShowFolder.cs" />
     <Compile Include="Models\Models\SeasonFolder.cs" />
+    <Compile Include="Metadata\IMetadataProvider.cs" />
+    <Compile Include="Metadata\IgdbMetadataProvider.cs" />
+    <Compile Include="Metadata\MetadataCache.cs" />
+    <Compile Include="Metadata\MetadataModels.cs" />
+    <Compile Include="Metadata\MetadataService.cs" />
+    <Compile Include="Metadata\MetadataTransport.cs" />
+    <Compile Include="Metadata\ProviderSettingsStore.cs" />
+    <Compile Include="Metadata\TmdbMetadataProvider.cs" />
     <Compile Include="Scripts\Database\Database.cs" />
     <Compile Include="Scripts\Database\Formatter.cs" />
     <Compile Include="Scripts\Database\Fetcher.cs" />
@@ -399,11 +383,9 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\MediaInfo.Native.17.12\build\MediaInfo.Native.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MediaInfo.Native.17.12\build\MediaInfo.Native.targets'))" />
-    <Error Condition="!Exists('..\packages\Selenium.WebDriver.4.14.1\build\Selenium.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.4.14.1\build\Selenium.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\MediaInfo.Native.17.12\build\MediaInfo.Native.targets" Condition="Exists('..\packages\MediaInfo.Native.17.12\build\MediaInfo.Native.targets')" />
-  <Import Project="..\packages\Selenium.WebDriver.4.14.1\build\Selenium.WebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.4.14.1\build\Selenium.WebDriver.targets')" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
 </Project>

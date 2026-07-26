@@ -663,7 +663,21 @@ namespace Media_Manager
             for (int i = 0; i < baseUrls.Length; i++)
             {
                 //Trim white space from current looped url
-                urls[i] = urls[i].Trim();
+                urls[i] = (urls[i] ?? string.Empty).Trim();
+
+                //Provider-neutral and supported-provider references are valid
+                //without coupling validation to a legacy IMDb/Metacritic path.
+                Uri providerUri;
+                if (Uri.TryCreate(urls[i], UriKind.Absolute, out providerUri)
+                    && (string.Equals(providerUri.Scheme, "metadata", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(providerUri.Host, "www.themoviedb.org", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(providerUri.Host, "themoviedb.org", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(providerUri.Host, "www.igdb.com", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(providerUri.Host, "igdb.com", StringComparison.OrdinalIgnoreCase)))
+                {
+                    isValid++;
+                    continue;
+                }
 
                 //Run regex pattern check
                 Regex pattern = new Regex(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=%.]+$");

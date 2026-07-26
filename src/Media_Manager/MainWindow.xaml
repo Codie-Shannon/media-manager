@@ -156,7 +156,12 @@
             <!-- Title -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:optTitle Content="Edit Default Browse Locations"/>
+            <MediaControls:optTitle Content="Settings"/>
+
+
+            <!-- Metadata Providers -->
+            <!-- ============================== -->
+            <MediaControls:optButton Content="Configure Metadata Providers" ButtonBase.Click="btnProviders_Click"/>
 
             
             <!-- Movies Browse Location -->
@@ -219,6 +224,51 @@
                 <!-- Back Button -->
                 <!-- ============================== -->
                 <MediaControls:optButton Content="Back" Grid.Column="2" ButtonBase.Click="btnBack_Click"/>
+            </Grid>
+        </MediaControls:optPanel>
+
+
+
+        <!-- Metadata Provider Settings Panel -->
+        <!-- ========================================================================== -->
+        <MediaControls:optPanel x:Name="ProviderSettingsPanel" PanelWidth="720" Grid.RowSpan="2" Grid.ColumnSpan="2" Panel.ZIndex="2" Visibility="Collapsed">
+            <MediaControls:optTitle Content="Metadata Providers"/>
+
+            <TextBlock x:Name="txtProviderStatus" Margin="20 8" TextWrapping="Wrap" Foreground="White"/>
+
+            <Grid Style="{DynamicResource OptionsPanel.Item}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="TMDB API Read Access Token" Style="{DynamicResource OptionsPanel.Item.Header}"/>
+                <PasswordBox x:Name="pbTmdbAccessToken" Grid.Row="1" Style="{DynamicResource OptionsPanel.TextBox.Rounded.Corners}"/>
+            </Grid>
+
+            <MediaControls:optTextBoxLong x:Name="tbIgdbClientId" Header="IGDB Client ID" Placeholder="Leave blank to keep the saved client ID..."/>
+
+            <Grid Style="{DynamicResource OptionsPanel.Item}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="IGDB Client Secret" Style="{DynamicResource OptionsPanel.Item.Header}"/>
+                <PasswordBox x:Name="pbIgdbClientSecret" Grid.Row="1" Style="{DynamicResource OptionsPanel.TextBox.Rounded.Corners}"/>
+            </Grid>
+
+            <TextBlock Margin="20 10" TextWrapping="Wrap" Foreground="White"
+                       Text="Credentials are encrypted for the current Windows user and stored only in this local profile. Environment variables override saved values."/>
+            <TextBlock Margin="20 4 20 12" TextWrapping="Wrap" Foreground="White"
+                       Text="This product uses the TMDB API but is not endorsed or certified by TMDB. Game metadata is supplied by IGDB."/>
+
+            <Grid Style="{DynamicResource Options.Panel.Buttons.Grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.07*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+                <MediaControls:optButton Content="Apply" ButtonBase.Click="btnProviderApply_Click"/>
+                <MediaControls:optButton Content="Back" Grid.Column="2" ButtonBase.Click="btnProviderBack_Click"/>
             </Grid>
         </MediaControls:optPanel>
 

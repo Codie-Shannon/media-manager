@@ -1,6 +1,6 @@
 # Build status
 
-Date: 2026-07-26
+Date: 2026-07-27
 
 ## Verified
 
@@ -13,6 +13,10 @@ Date: 2026-07-26
 - A fresh Windows profile creates `%LOCALAPPDATA%\Media_Manager`, `MediaManagerDB.db`, and all eight required image directories automatically.
 - A controlled exception raised after managed startup begins displays `Media Manager Startup Error`, its root-cause details, and a working Close button.
 - An isolated Group 3 profile passes the existing-functionality matrix without modifying the real user database.
+- Group 4 removes Selenium and related browser automation from source references and application runtime output.
+- Mocked TMDB/IGDB, cancellation, cache, encrypted-setting, and manual-fallback tests pass.
+- A supported live IGDB authentication/search smoke test passes without printing or committing credentials.
+- The isolated Group 4 application launches with zero new Chrome processes and leaves the real user database unchanged.
 
 ## Restored dependency relationship
 
@@ -40,13 +44,8 @@ Failures that occur before managed WPF startup, such as Windows being unable to 
 
 Warnings are retained in the baseline and will be triaged during restoration.
 
-The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Group 3 introduces no new compiler warnings.
+The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Group 4 introduces no new compiler-warning category.
 
 ## Dependency audit notices
 
-Package restore reports known advisories for the recovered versions of:
-
-- `AngleSharp` 1.0.5 - moderate severity;
-- `System.Text.Json` 7.0.3 - high severity.
-
-The baseline preserves recovered package versions for traceability. Upgrading or removing unused packages is required before release.
+`AngleSharp` was used only by the removed legacy scraping stack and is no longer referenced by the application. The recovered `System.Text.Json` 7.0.3 reference still reports a high-severity advisory and must be upgraded or removed before release.

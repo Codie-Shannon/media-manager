@@ -17,3 +17,4 @@ Completed records:
 
 - [Group 2 restoration verification](group-2-restoration.md)
 - [Group 3 functional verification and stabilization](group-3-stabilization.md)
+- [Group 4 metadata-provider verification](group-4-metadata-providers.md)
