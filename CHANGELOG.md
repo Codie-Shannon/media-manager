@@ -10,6 +10,7 @@
 - Fixed cancellation and deletion-result handling so database removal follows confirmed filesystem outcomes.
 - Fixed folder-browser selection, stale state, duplicate registration, and close cleanup.
 - Fixed crashes caused by blank artwork, missing default covers, invalid dates, missing TV-show parents, and folder selection.
+- Contained legacy movie, TV, and game metadata-search failures so closed or stale provider windows no longer terminate the application.
 - Made missing Explorer paths and game-launch failures non-fatal.
 - Added the x64 `MediaManager.StabilityTests` executable and passed it in Debug and Release.
 

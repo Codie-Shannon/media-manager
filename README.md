@@ -12,6 +12,7 @@ Group 3 is complete. The recovered application now builds, starts, and passes it
 - Startup failures raised after managed startup begins are presented in a dependency-free error window.
 - An isolated synthetic profile verifies all six libraries, hierarchy navigation, card details, add/edit/remove/delete flows, Explorer actions, playback surfaces, game launch, and resize behavior.
 - Critical TV-show ownership, destructive deletion, folder-browser, missing-path, missing-artwork, invalid-date, and game-launch failures are repaired.
+- Legacy metadata searches are failure-contained until their Selenium implementation is replaced in Group 4.
 - A repeatable `MediaManager.StabilityTests` executable protects TV-show ownership isolation and null/invalid metadata formatting.
 - Clean tracked-file checkouts build and launch without inherited `bin`, `obj`, or package output.
 - Metadata retrieval still contains legacy direct-site automation and has not yet been replaced by a provider abstraction.

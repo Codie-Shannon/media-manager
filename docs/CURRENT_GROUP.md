@@ -13,6 +13,7 @@ Completed:
 - Fixed TV-show ownership deletion so removing one show cannot remove a sibling show's seasons or episodes.
 - Made destructive workflows preflight paths and untracked files, preserve cancellation, and report success only after deletion succeeds.
 - Fixed folder-browser selection, duplicate registration, stale selection, and close cleanup.
+- Replaced unsafe metadata-search thread abortion with serialized, exception-contained driver cleanup so provider-window failures remain non-fatal.
 - Made missing Explorer targets and game-launch failures non-fatal.
 - Added and passed `MediaManager.StabilityTests` in Debug x64 and Release x64.
 - Preserved the original user database byte-for-byte during isolated verification.

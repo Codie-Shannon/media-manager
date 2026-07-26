@@ -27,6 +27,8 @@ namespace Media_Manager
         // =================================================
         // =================================================
         private static Thread SearchThread;
+        private static int SearchVersion;
+        private static readonly SemaphoreSlim SearchGate = new SemaphoreSlim(1, 1);
         #endregion Variables
 
 
@@ -72,23 +74,26 @@ namespace Media_Manager
             //Show Loading Text
             searchbox.isLoading = true;
 
-            //Abort Any Previous Search Operation
+            //Invalidate and stop any previous search operation.
+            int version = Interlocked.Increment(ref SearchVersion);
+            Thread activeThread = SearchThread;
             await Task.Run(() =>
             {
-                //Validate Search Thread
-                if (SearchThread != null)
-                {
-                    //Abort Search Thread
-                    SearchThread.Abort();
-                    SearchThread = null;
+                StopDrivers();
 
-                    //Stop Search
-                    Stop();
+                if (activeThread != null
+                    && activeThread != Thread.CurrentThread
+                    && activeThread.IsAlive)
+                {
+                    activeThread.Join(5000);
                 }
             });
 
             //Hide Loading Text
-            searchbox.isLoading = false;
+            if (version == Volatile.Read(ref SearchVersion))
+            {
+                searchbox.isLoading = false;
+            }
         }
 
 
@@ -97,28 +102,50 @@ namespace Media_Manager
         // =================================================
         public static void Stop()
         {
-            //Validate Search Thread
-            if (SearchThread != null)
+            //Invalidate the current operation before closing its browser drivers.
+            Interlocked.Increment(ref SearchVersion);
+            StopDrivers();
+        }
+
+        private static void StopDrivers()
+        {
+            UndetectedChromeDriver defaultDriver = DefaultDriver;
+            UndetectedChromeDriver imdbDriver = IMDBDriver;
+            DefaultDriver = null;
+            IMDBDriver = null;
+
+            if (defaultDriver != null)
             {
-                //Abort Search Thread
-                SearchThread.Abort();
-                SearchThread = null;
+                try
+                {
+                    defaultDriver.Quit();
+                }
+                catch (WebDriverException)
+                {
+                }
+                catch (InvalidOperationException)
+                {
+                }
+                catch (Exception)
+                {
+                }
             }
 
-            //Validate Default Driver
-            if (DefaultDriver != null)
+            if (imdbDriver != null)
             {
-                //Close and Unset Default Driver
-                DefaultDriver.Quit();
-                DefaultDriver = null;
-            }
-
-            //Validate IMDB Driver
-            if (IMDBDriver != null)
-            {
-                //Close and Unset IMDB Driver
-                IMDBDriver.Quit();
-                IMDBDriver = null;
+                try
+                {
+                    imdbDriver.Quit();
+                }
+                catch (WebDriverException)
+                {
+                }
+                catch (InvalidOperationException)
+                {
+                }
+                catch (Exception)
+                {
+                }
             }
         }
         #endregion Operation
@@ -133,43 +160,80 @@ namespace Media_Manager
         {
             //Show Loading Text
             searchbox.isLoading = true;
+            int version = Interlocked.Increment(ref SearchVersion);
 
             //Create Search Thread
-            SearchThread = new Thread(async () =>
+            Thread thread = new Thread(() =>
             {
-                //Start Search
-                await StartAsync(FormatURL(mediatype, search, "https://www.metacritic.com/search/"), FormatURL(mediatype, search, "https://www.imdb.com/find/?q=", "&s=tt&ttype=ft&ref_=fn_ft", "&s=tt&ttype=tv&ref_=fn_tv"));
+                SearchGate.Wait();
 
-                //Run Metacritic and IMDB Search on Different Threads
-                List<MovieSearch> metacriticresults = await Task.Run(() => RetrieveVirtualEntertainmentResultsAsync(DriverType.Default, DefaultDriver, "c-pageSiteSearch-results-item", mediatype));
-                List<MovieSearch> imdbresults = await Task.Run(() => RetrieveVirtualEntertainmentResultsAsync(DriverType.IMDB, IMDBDriver, "find-result-item", mediatype));
-
-                //Stop Search
-                Stop();
-
-                //Combine Virtual Entertainment Results
-                List<MovieSearch> results = CombineVirtualEntertainmentResults(metacriticresults, imdbresults);
-
-                //Run Task on UI Thread
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+                try
                 {
-                    //Clear Search Box Results
-                    searchbox.Clear(true);
-
-                    //Loop through results List
-                    foreach (MovieSearch movie in results)
+                    if (version != Volatile.Read(ref SearchVersion))
                     {
-                        //Add Current Looped Virtual Entertainment Item to Search Box Results Observable Collection
-                        searchbox.Add(movie.Name, movie.CoverImage, movie.MetacriticLink, movie.IMDBLink);
+                        return;
                     }
 
-                    //Hide Loading Text
-                    searchbox.isLoading = false;
-                }));
+                    List<MovieSearch> results = RetrieveVirtualEntertainmentSearchAsync(
+                        search,
+                        mediatype).GetAwaiter().GetResult();
+
+                    if (version == Volatile.Read(ref SearchVersion))
+                    {
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            searchbox.Clear(true);
+
+                            foreach (MovieSearch movie in results)
+                            {
+                                searchbox.Add(movie.Name, movie.CoverImage, movie.MetacriticLink, movie.IMDBLink);
+                            }
+                        }));
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ShowSearchFailure(searchbox, version, exception);
+                }
+                finally
+                {
+                    CompleteSearch(searchbox, version);
+                    SearchGate.Release();
+                }
             });
+            thread.IsBackground = true;
+            SearchThread = thread;
 
             //Run Search Thread
-            SearchThread.Start();
+            thread.Start();
+        }
+
+        private static async Task<List<MovieSearch>> RetrieveVirtualEntertainmentSearchAsync(string search, MediaType mediatype)
+        {
+            await StartAsync(
+                FormatURL(mediatype, search, "https://www.metacritic.com/search/"),
+                FormatURL(
+                    mediatype,
+                    search,
+                    "https://www.imdb.com/find/?q=",
+                    "&s=tt&ttype=ft&ref_=fn_ft",
+                    "&s=tt&ttype=tv&ref_=fn_tv"));
+
+            Task<List<MovieSearch>> metacriticTask = RetrieveVirtualEntertainmentResultsAsync(
+                DriverType.Default,
+                DefaultDriver,
+                "c-pageSiteSearch-results-item",
+                mediatype);
+            Task<List<MovieSearch>> imdbTask = RetrieveVirtualEntertainmentResultsAsync(
+                DriverType.IMDB,
+                IMDBDriver,
+                "find-result-item",
+                mediatype);
+
+            await Task.WhenAll(metacriticTask, imdbTask);
+            return CombineVirtualEntertainmentResults(
+                metacriticTask.Result,
+                imdbTask.Result);
         }
 
         private static async Task<List<MovieSearch>> RetrieveVirtualEntertainmentResultsAsync(DriverType type, IWebDriver driver, string element_classname, MediaType mediatype)
@@ -177,52 +241,82 @@ namespace Media_Manager
             //Variables
             List<MovieSearch> results = new List<MovieSearch>();
 
-            //Validate Search Items
-            if (IsElementPresent(type, By.ClassName(element_classname)))
+            if (driver == null)
             {
-                //Check if the Driver Type is Metacritic
-                if (type == DriverType.Default)
+                return results;
+            }
+
+            try
+            {
+                //Validate Search Items
+                if (IsElementPresent(type, By.ClassName(element_classname), null, driver))
                 {
-                    //Get Category Index (Movies = 3, TV Shows = 4)
-                    int index = mediatype == MediaType.Movies ? 3 : 4;
-
-                    //Get Metacritic Window
-                    Process metacriticwindow = WindowsAPI.RetrieveProcesses("Metacritic").FirstOrDefault();
-
-                    //Set Foreground Window
-                    WindowsAPI.SetWindowFocus(metacriticwindow.MainWindowHandle);
-
-                    //Get Category Button
-                    IWebElement categorybtn = driver.FindElement(By.XPath($"/html/body/div[1]/div/div/div[2]/div[1]/div[1]/div/div/ul/li[{index}]"));
-
-                    //Click Category Button
-                    categorybtn.Click();
-
-                    //Wait for Category Button to be Clicked
-                    await Task.Delay(500);
-
-                    //Set Foreground Window
-                    WindowsAPI.SetWindowFocus();
-
-                    //Wait for Website to Load Category
-                    await Task.Delay(1000);
-                }
-
-                //Get Search Items
-                ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.ClassName(element_classname));
-
-                //Loop through Search Items
-                foreach (IWebElement element in elements)
-                {
-                    //Add Search Item to results List
-                    results.Add(new MovieSearch()
+                    //Check if the Driver Type is Metacritic
+                    if (type == DriverType.Default)
                     {
-                        Name = type == DriverType.Default ? GetMetacriticTitle(element) : GetIMDBTitle(element),
-                        CoverImage = type == DriverType.Default ? GetMetacriticCover(element) : GetIMDBCover(element),
-                        MetacriticLink = type == DriverType.Default ? GetMetacriticLink(element) : string.Empty,
-                        IMDBLink = type == DriverType.Default ? string.Empty : GetIMDBLink(element)
-                    });
+                        //Get Category Index (Movies = 3, TV Shows = 4)
+                        int index = mediatype == MediaType.Movies ? 3 : 4;
+
+                        //Get Metacritic Window
+                        Process metacriticwindow = WindowsAPI.RetrieveProcesses("Metacritic").FirstOrDefault();
+
+                        //Set Foreground Window
+                        if (metacriticwindow != null)
+                        {
+                            WindowsAPI.SetWindowFocus(metacriticwindow.MainWindowHandle);
+                        }
+
+                        //Get Category Button
+                        IWebElement categorybtn = driver.FindElement(By.XPath($"/html/body/div[1]/div/div/div[2]/div[1]/div[1]/div/div/ul/li[{index}]"));
+
+                        //Click Category Button
+                        categorybtn.Click();
+
+                        //Wait for Category Button to be Clicked
+                        await Task.Delay(500);
+
+                        //Set Foreground Window
+                        WindowsAPI.SetWindowFocus();
+
+                        //Wait for Website to Load Category
+                        await Task.Delay(1000);
+                    }
+
+                    //Get Search Items
+                    ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.ClassName(element_classname));
+
+                    //Loop through Search Items
+                    foreach (IWebElement element in elements)
+                    {
+                        try
+                        {
+                            MovieSearch result = new MovieSearch()
+                            {
+                                Name = type == DriverType.Default ? GetMetacriticTitle(element) : GetIMDBTitle(element),
+                                CoverImage = type == DriverType.Default ? GetMetacriticCover(element) : GetIMDBCover(element),
+                                MetacriticLink = type == DriverType.Default ? GetMetacriticLink(element) : string.Empty,
+                                IMDBLink = type == DriverType.Default ? string.Empty : GetIMDBLink(element)
+                            };
+
+                            if (!string.IsNullOrWhiteSpace(result.Name))
+                            {
+                                results.Add(result);
+                            }
+                        }
+                        catch (WebDriverException)
+                        {
+                            //A changed or stale result card should not fail the entire search.
+                        }
+                    }
                 }
+            }
+            catch (WebDriverException)
+            {
+                //A provider window may close or navigate while results are being read.
+            }
+            catch (InvalidOperationException)
+            {
+                //Treat a disposed driver as an unavailable provider.
             }
 
             //Return results List
@@ -231,6 +325,9 @@ namespace Media_Manager
 
         private static List<MovieSearch> CombineVirtualEntertainmentResults(List<MovieSearch> metacriticresults, List<MovieSearch> imdbresults)
         {
+            metacriticresults = metacriticresults ?? new List<MovieSearch>();
+            imdbresults = imdbresults ?? new List<MovieSearch>();
+
             //Get Loop Type
             string type = metacriticresults.Count > imdbresults.Count ? "imdb" : "metacritic";
 
@@ -238,13 +335,13 @@ namespace Media_Manager
             foreach (MovieSearch item in type == "imdb" ? imdbresults : metacriticresults)
             {
                 //Convert Current Looped Virtual Entertainment Item Title to Lowercase
-                string title = item.Name.ToLower();
+                string title = item.Name.ToLowerInvariant();
 
                 //Validate Current Looped Movie Match
-                if (type == "imdb" && metacriticresults.Any(i => i.Name.ToLower() == title))
+                if (type == "imdb" && metacriticresults.Any(i => i.Name.ToLowerInvariant() == title))
                 {
                     //Get Match
-                    MovieSearch match = metacriticresults.FirstOrDefault(i => i.Name.ToLower() == title);
+                    MovieSearch match = metacriticresults.FirstOrDefault(i => i.Name.ToLowerInvariant() == title);
 
                     //Assign Match's Metacritic Link Value into the Current Looped Virtual Entertainment Item's Metacritic Link Value
                     item.MetacriticLink = match.MetacriticLink;
@@ -255,10 +352,10 @@ namespace Media_Manager
                     //Remove Match from Metacritic Results List
                     metacriticresults.Remove(match);
                 }
-                else if (type == "metacritic" && imdbresults.Any(i => i.Name.ToLower() == title))
+                else if (type == "metacritic" && imdbresults.Any(i => i.Name.ToLowerInvariant() == title))
                 {
                     //Get Match
-                    MovieSearch match = imdbresults.First(i => i.Name.ToLower() == title);
+                    MovieSearch match = imdbresults.First(i => i.Name.ToLowerInvariant() == title);
 
                     //Assign Match's IMDB Link Value into the Current Looped Virtual Entertainment Item's IMDB Link Value
                     item.IMDBLink = match.IMDBLink;
@@ -286,33 +383,50 @@ namespace Media_Manager
         {
             //Show Loading Text
             searchbox.isLoading = true;
+            int version = Interlocked.Increment(ref SearchVersion);
 
             //Create Search Thread
-            SearchThread = new Thread(async () =>
+            Thread thread = new Thread(() =>
             {
-                //Perform Game Search
-                List<GameSearch> result = await FindGamesAsync(search);
+                SearchGate.Wait();
 
-                //Run Task on UI Thread
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+                try
                 {
-                    //Clear Search Box Results
-                    searchbox.Clear(true);
-
-                    //Loop through Games List
-                    foreach (GameSearch game in result)
+                    if (version != Volatile.Read(ref SearchVersion))
                     {
-                        //Add Current Looped Game to Search Box Results Observable Collection
-                        searchbox.Add(game.IGDBLink, game.Name, game.CoverImage, game.Type, game.Platforms);
+                        return;
                     }
 
-                    //Hide Loading Text
-                    searchbox.isLoading = false;
-                }));
+                    List<GameSearch> result = FindGamesAsync(search).GetAwaiter().GetResult();
+
+                    if (version == Volatile.Read(ref SearchVersion))
+                    {
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            searchbox.Clear(true);
+
+                            foreach (GameSearch game in result)
+                            {
+                                searchbox.Add(game.IGDBLink, game.Name, game.CoverImage, game.Type, game.Platforms);
+                            }
+                        }));
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ShowSearchFailure(searchbox, version, exception);
+                }
+                finally
+                {
+                    CompleteSearch(searchbox, version);
+                    SearchGate.Release();
+                }
             });
+            thread.IsBackground = true;
+            SearchThread = thread;
 
             //Run Search Thread
-            SearchThread.Start();
+            thread.Start();
         }
 
         private static async Task<List<GameSearch>> FindGamesAsync(string search)
@@ -323,25 +437,97 @@ namespace Media_Manager
             //Start Search
             await StartAsync(FormatURL(MediaType.Games, search));
 
+            if (DefaultDriver == null)
+            {
+                return results;
+            }
+
             //Get Search Results
-            ReadOnlyCollection<IWebElement> elements = DefaultDriver.FindElements(By.ClassName("media"));
+            ReadOnlyCollection<IWebElement> elements;
+            try
+            {
+                elements = DefaultDriver.FindElements(By.ClassName("media"));
+            }
+            catch (WebDriverException)
+            {
+                return results;
+            }
 
             //Loop through Results
             foreach (IWebElement element in elements)
             {
-                //Add Search Item to results List
-                results.Add(new GameSearch()
+                try
                 {
-                    IGDBLink = GetGameLink(element),
-                    Name = GetGameTitle(element),
-                    CoverImage = GetGameCover(element),
-                    Type = GetGameType(element),
-                    Platforms = GetGamePlatforms(element)
-                });
+                    //Add Search Item to results List
+                    results.Add(new GameSearch()
+                    {
+                        IGDBLink = GetGameLink(element),
+                        Name = GetGameTitle(element),
+                        CoverImage = GetGameCover(element),
+                        Type = GetGameType(element),
+                        Platforms = GetGamePlatforms(element)
+                    });
+                }
+                catch (WebDriverException)
+                {
+                    //Skip stale result cards.
+                }
             }
 
             //Return Results KeyValuePair
             return results;
+        }
+
+        private static void ShowSearchFailure(optSearchBox searchbox, int version, Exception exception)
+        {
+            if (version != Volatile.Read(ref SearchVersion))
+            {
+                return;
+            }
+
+            StopDrivers();
+
+            try
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    searchbox.Clear(true);
+                    CustomMessageBox.ShowOK(
+                        $"The metadata search could not be completed.\n\n{exception.Message}",
+                        "ERROR",
+                        "OK",
+                        MessageBoxImage.Error);
+                }));
+            }
+            catch (Exception)
+            {
+                //The application may already be shutting down.
+            }
+        }
+
+        private static void CompleteSearch(optSearchBox searchbox, int version)
+        {
+            StopDrivers();
+
+            if (version == Volatile.Read(ref SearchVersion))
+            {
+                try
+                {
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        searchbox.isLoading = false;
+                    }));
+                }
+                catch (Exception)
+                {
+                    //The application may already be shutting down.
+                }
+            }
+
+            if (ReferenceEquals(SearchThread, Thread.CurrentThread))
+            {
+                SearchThread = null;
+            }
         }
         #endregion Search
 
@@ -379,13 +565,23 @@ namespace Media_Manager
         // Is Element Present
         // =================================================
         // =================================================
-        private static bool IsElementPresent(DriverType type, By by, IWebElement parent = null)
+        private static bool IsElementPresent(DriverType type, By by, IWebElement parent = null, IWebDriver driver = null)
         {
             //Run Try Statement
             try
             {
+                IWebDriver activeDriver = driver
+                    ?? (type == DriverType.Default ? DefaultDriver : IMDBDriver);
+
+                if (parent == null && activeDriver == null)
+                {
+                    return false;
+                }
+
                 //Find Element
-                _ = parent != null ? parent.FindElement(by) : (type == DriverType.Default ? DefaultDriver.FindElement(by) : IMDBDriver.FindElement(by));
+                _ = parent != null
+                    ? parent.FindElement(by)
+                    : activeDriver.FindElement(by);
 
                 //Return Valid
                 return true;
@@ -393,6 +589,16 @@ namespace Media_Manager
             catch (NoSuchElementException)
             {
                 //Return Invalid
+                return false;
+            }
+            catch (WebDriverException)
+            {
+                //A browser window may have closed or navigated.
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                //A disposed driver is equivalent to a missing element.
                 return false;
             }
         }

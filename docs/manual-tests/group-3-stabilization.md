@@ -35,6 +35,7 @@ The disposable fixture initially contained:
 | Explorer | Revealed a synthetic video in Explorer and verified the expected fixture directory opened | Pass |
 | Playback | Opened the internal video player and picture gallery and returned to the library | Pass |
 | Local launch | Confirmed a harmless synthetic game launcher and verified the app remained responsive | Pass |
+| Legacy metadata search | Searched for movies repeatedly, closed provider windows during retrieval, and verified Media Manager stayed responsive while temporary Chrome processes were cleaned up | Pass |
 | Resize | Maximized and restored the main window; the app remained responsive | Pass |
 | Folder-browser cancel | Cancelled without a selection; the save location remained unset and Add stayed disabled | Pass |
 | TV ownership | Removed Show A and verified only its season/episode were removed; Show B's complete branch remained | Pass |
@@ -51,6 +52,7 @@ The disposable fixture initially contained:
 8. Folder-browser command handling assumed a specific template source and could crash; selection state could also leak between dialogs.
 9. Missing Explorer targets and game-launch errors could terminate or destabilize the application.
 10. Game launch used the launcher path as its working directory rather than the game's base directory.
+11. Selenium `NoSuchWindowException` escaped from an `async` raw search thread and terminated Media Manager when an IMDb or Metacritic window disappeared.
 
 ## Automated regression gate
 
