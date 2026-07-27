@@ -13,6 +13,7 @@ Date: 2026-07-27
 - A fresh Windows profile creates `%LOCALAPPDATA%\Media_Manager`, `MediaManagerDB.db`, and all eight required image directories automatically.
 - A controlled exception raised after managed startup begins displays `Media Manager Startup Error`, its root-cause details, and a working Close button.
 - An isolated Group 3 profile passes the existing-functionality matrix without modifying the real user database.
+- The Group 3 matrix result is scoped to its recorded checks: its player test verified open/return behavior but did not cover the full-window layout later corrected in `v1.0.1`.
 - Group 4 removes Selenium and related browser automation from source references and application runtime output.
 - Mocked TMDB/IGDB, cancellation, cache, encrypted-setting, and manual-fallback tests pass.
 - A supported live IGDB authentication/search smoke test passes without printing or committing credentials.

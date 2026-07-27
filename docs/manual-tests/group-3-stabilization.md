@@ -4,6 +4,10 @@ Date: 2026-07-26
 
 Result: pass
 
+## Later verification erratum
+
+This pass was valid within its recorded scope, but the playback coverage was too narrow. It verified that the internal video player and picture gallery opened and returned to the library; it did not verify the full-window layout or every player control. A later live review exposed the constrained player surface. The modern release corrects and evidences the issue in `v1.0.1`, and the original-interface Student Projects edition must receive the corresponding functional correction and a new complete playback pass.
+
 ## Isolation
 
 The application ran with `MEDIA_MANAGER_DATA_DIRECTORY` pointing to a uniquely named directory under `%TEMP%`. The profile created its own SQLite database, image directories, fixture library, and database backup.
@@ -33,7 +37,7 @@ The disposable fixture initially contained:
 | Delete confirm | Recycled a disposable video; verified both its record and source file were gone | Pass |
 | Missing file | Opened an intentionally missing video; received an error dialog and the app remained responsive | Pass |
 | Explorer | Revealed a synthetic video in Explorer and verified the expected fixture directory opened | Pass |
-| Playback | Opened the internal video player and picture gallery and returned to the library | Pass |
+| Playback | Opened the internal video player and picture gallery and returned to the library; full-window layout was not covered | Pass within stated scope |
 | Local launch | Confirmed a harmless synthetic game launcher and verified the app remained responsive | Pass |
 | Legacy metadata search | Searched for movies repeatedly, closed provider windows during retrieval, and verified Media Manager stayed responsive while temporary Chrome processes were cleaned up | Pass |
 | Resize | Maximized and restored the main window; the app remained responsive | Pass |

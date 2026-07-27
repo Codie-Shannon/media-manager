@@ -4,6 +4,10 @@ Date: 2026-07-27
 
 All destructive and generated-data checks used disposable temp profiles. The real user database SHA-256 remained `885446BEF1FDCB43678DE1D9542C3519F516AD0EB8E5B1055F5725D54957DB85`.
 
+## Acceptance clarification
+
+Group 5 was intended to close the fully functional pre-modern acceptance gate. Its data-reliability, packaging, privacy, and isolation checks remain valid. The broader completion label also relied on the Group 3 playback check, however, and that check only covered opening and returning from player surfaces. It missed the constrained full-window player layout later found after `v1.0.0`. The historical record is retained; the defect was corrected and evidenced in modern `v1.0.1`, and the separate original-interface Student Projects edition will receive the functional fix and a new complete verification pass.
+
 ## Matrix
 
 | Area | Verification | Result |

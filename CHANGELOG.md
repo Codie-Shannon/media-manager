@@ -67,7 +67,7 @@ No unreleased changes.
 ### Functional stabilization
 
 - Added an isolated data-directory override and a publication-safe synthetic verification workflow.
-- Verified all six libraries, hierarchy navigation, details, add/edit/remove/delete behavior, Explorer actions, playback surfaces, game launch, and resizing.
+- Verified all six libraries, hierarchy navigation, details, add/edit/remove/delete behavior, Explorer actions, player open/return behavior, game launch, and resizing. The playback check did not cover the complete full-window layout; that escaped defect is documented and corrected in `1.0.1`.
 - Fixed TV-show ownership deletion and cross-season destructive-deletion defects.
 - Fixed cancellation and deletion-result handling so database removal follows confirmed filesystem outcomes.
 - Fixed folder-browser selection, stale state, duplicate registration, and close cleanup.

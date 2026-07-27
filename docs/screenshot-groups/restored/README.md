@@ -2,6 +2,8 @@
 
 Captured on 2026-07-26 from the restored Release x64 application after clean-checkout and fresh-profile verification.
 
+Here, “restored” means that dependencies were reconnected, the application built and launched reproducibly, and the pictured interface states were captured. It does not mean that every workflow had already passed complete functional acceptance.
+
 The set mirrors the Group 1 original-state coverage:
 
 1. `01-main-library-shell-movies.png`

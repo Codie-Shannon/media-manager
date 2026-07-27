@@ -10,3 +10,5 @@ These captures show the recovered full application before source restoration:
 Controls-tester captures containing recovered commercial artwork are intentionally excluded from Git and retained as private recovery evidence.
 
 The matching silent application walkthrough is stored at `docs/evidence/recovered-state-walkthrough.mp4`.
+
+This set documents authentic recovered interface states. The recovered snapshot was partially functional and non-reproducible; these images do not claim that every historical workflow passed or establish the application's exact condition when it was originally submitted.

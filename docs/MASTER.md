@@ -38,6 +38,8 @@ Checkpoint meaning: `group-2-complete` proves reproducible restore, build, start
 - Add backup, export, import, and recovery behavior appropriate to local data.
 - Remove count-derived identifiers and improve transactional consistency.
 
+Acceptance note: Groups 3-5 were intended to establish the fully functional pre-modern application. A later live review found that the recorded playback check proved open/return behavior but did not cover the constrained full-window player layout. The broader Group 5 work remains valid, while `v1.0.1` closes that escaped defect in the modern release. The separate Student Projects edition will receive the functional correction and a new complete acceptance pass without adopting the modern theme.
+
 ## Group 6 - Modern UI redesign
 
 - Use original and restored screenshots as fixed before references.

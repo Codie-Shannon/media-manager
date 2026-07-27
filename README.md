@@ -10,7 +10,19 @@ Media Manager is a local Windows desktop application for organising, enriching, 
 
 Media Manager was the first serious application I built during my software-development diploma. It taught me how application structure, WPF, custom controls, file-system workflows, metadata, persistence, debugging, and interface design fit together.
 
-Years later, I recovered the project from a damaged drive. I preserved that historical baseline, repaired and reconnected the custom controls library, verified the original workflows with isolated synthetic data, replaced brittle site scraping with supported provider APIs, strengthened local data handling, and redesigned the interface. This is a modernised origin project, not a greenfield rewrite and not an unfinished assignment.
+Years later, I recovered the project from a damaged drive. The recovered snapshot preserved substantial real application work, but it was only partially functional and was not a reproducible or release-ready build. I preserved that historical baseline, repaired and reconnected the custom controls library, progressively stabilized its workflows with isolated synthetic data, replaced brittle site scraping with supported provider APIs, strengthened local data handling, and redesigned the interface. This is a modernised origin project, not a greenfield rewrite.
+
+### Historical baseline status
+
+The repository distinguishes three states:
+
+| State | Meaning |
+| --- | --- |
+| Recovered snapshot | Partially functional historical source recovered from a damaged drive. It demonstrates the original scope and interface, but does not prove every historical workflow or establish the condition of the application when originally submitted. |
+| Original-interface functional restoration | A separate Student Projects edition being completed from the pre-modern Group 4 snapshot. It preserves the original interface while receiving the remaining functional corrections and its own complete verification evidence. |
+| Modern release | The corrected `v1.0.1` application in this repository: supported providers, reliability work, modern interface, verified player surfaces, packaging, and release evidence. |
+
+The recovered snapshot being incomplete today does not mean the diploma application never worked. It means the damaged-drive recovery could not provide a complete, reproducible copy or full acceptance evidence on its own.
 
 Read the full [original application history](docs/original-application-history.md) and [modernisation case study](docs/modernisation.md).
 
@@ -26,11 +38,11 @@ Read the full [original application history](docs/original-application-history.m
 
 The evidence is deliberately matched:
 
-| Original recovered state | Restored working state | Modern completed state |
+| Recovered snapshot | Reproducible build checkpoint | Modern completed release |
 | --- | --- | --- |
 | [13 original screenshots](docs/screenshot-groups/original) | [13 restored screenshots](docs/screenshot-groups/restored) | [13 modern screenshots](docs/screenshot-groups/modern) |
 
-Every public capture uses generated artwork and synthetic records. The fixed sequences show the same shell, libraries, forms, sorting, provider state, and selected-item details at each stage.
+Every public capture uses generated artwork and synthetic records. The fixed sequences show the same shell, libraries, forms, sorting, provider state, and selected-item details at each stage. Screenshots prove the states pictured; they are not, by themselves, evidence that every workflow passed.
 
 ## Core features
 
@@ -125,7 +137,7 @@ The suite covers destructive hierarchy behavior, malformed data, provider mappin
 6. completed the modern interface;
 7. completed packaging, public documentation, visual evidence, privacy/licensing review, and release proof.
 
-The historical `group-2-complete` tag records the point where clean builds and startup were restored. It is not a release recommendation and does not claim the later functional, provider, data-safety, interface, or player verification completed by subsequent groups.
+The historical `group-2-complete` tag records the point where clean builds and startup were restored. Groups 3–5 were intended to establish the fully functional pre-modern baseline, but a later live audit found that their playback check had verified open/return behavior without detecting the constrained full-window player layout. The defect was corrected and evidenced in `v1.0.1`; the separate original-interface Student Projects edition will receive the same functional correction without the modern theme.
 
 See [release notes](docs/release.md), [changelog](CHANGELOG.md), and [master plan](docs/MASTER.md).
 

@@ -32,4 +32,6 @@ Corrective release:
 
 The seven required recovery and modernisation groups are complete. `v1.0.1` is the recommended release; `v1.0.0` and the group tags remain honest historical checkpoints. Optional Group 8 is not required: no remaining migration, damaged-file, or packaging blocker justifies another closure pass.
 
+Historical wording is now explicit: the damaged-drive snapshot was partially functional; Group 2 proves reproducible build, startup, and pictured interface states; and the Groups 3-5 playback check missed the full-window layout issue later closed by `v1.0.1`. A separate original-interface functional restoration is being completed for the Student Projects repository with its own verification evidence.
+
 Future improvements are documented as transparent opportunities in the README rather than an unfinished mandatory roadmap.

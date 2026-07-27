@@ -58,4 +58,4 @@ Portfolio card:
 
 Case-study summary:
 
-> Media Manager was the first serious software application I built. It taught me how desktop applications, custom controls, data, files, metadata, persistence, and UI workflows fit together. After recovering the project from a corrupt drive, I restored its control library, replaced brittle scraping with a supported provider architecture, verified the original workflows, and then redesigned the application as a modern Windows desktop product.
+> Media Manager was the first serious software application I built. It taught me how desktop applications, custom controls, data, files, metadata, persistence, and UI workflows fit together. After recovering a partially functional snapshot from a damaged drive, I restored its control library, repaired and verified its workflows, replaced brittle scraping with a supported provider architecture, and redesigned it as a modern Windows desktop product. The original interface will also be preserved and independently verified as a Student Projects edition.
