@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## 1.0.0 - 2026-07-27
+
+### Portfolio and release closure
+
+- Completed the seven-group recovery and modernisation plan.
+- Reframed the public repository as an honest origin-project case study.
+- Added embedded original/restored/modern contrast images built from fixed synthetic captures.
+- Added complete architecture, provider, privacy, testing, release, licensing, and third-party notice paths.
+- Finalised the portable x64 ZIP pipeline with version, release notes, dependency notices, private-path checks, a per-file manifest, and external SHA-256 checksum.
+- Recorded transparent limitations and future opportunities without treating them as hidden blockers.
+
 ### Modern interface
 
 - Rebuilt the WPF shell around a fixed vertical library sidebar, modern section header, local-profile status, and navy/cyan design system.

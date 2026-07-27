@@ -1,6 +1,6 @@
 # Tests
 
-## Group 3, Group 4, and Group 5 stability tests
+## Restoration and release stability tests
 
 `MediaManager.StabilityTests` is a dependency-light executable included in `MediaManager.sln`. It creates and removes its own randomly named database under the system temp directory.
 
@@ -38,3 +38,5 @@ Expected output:
 ```text
 PASS: Group 3, Group 4, and Group 5 stability tests
 ```
+
+The executable retains its historical success string for compatibility. Group 6 and Group 7 add visual, package, privacy, and clean-release verification around this automated core; see `docs/testing.md`.

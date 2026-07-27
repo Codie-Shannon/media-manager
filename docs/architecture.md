@@ -1,10 +1,10 @@
-# Recovered architecture
+# Restored and modernised architecture
 
 ## Projects
 
 ### Media_Manager
 
-The full .NET Framework 4.7.2 WPF application. It contains navigation for Movies, TV Shows, Videos, Pictures, Music, and Games; SQLite/Dapper persistence; local file operations; playback/launching; cover handling; and legacy metadata automation.
+The full .NET Framework 4.7.2 WPF application. It contains navigation for Movies, TV Shows, Videos, Pictures, Music, and Games; SQLite/Dapper persistence; local file operations; playback/launching; cover handling; provider-neutral metadata workflows; backup/recovery; and the application-level modern theme.
 
 ### MediaControlsLibrary
 
@@ -22,7 +22,7 @@ A demonstration harness for the controls library. Some navigation labels are int
 - SQLite schema version 1 records the reviewed compatible format; existing primary keys remain stable.
 - Filesystem changes and database changes are not transactionally coordinated.
 
-The restoration plan first makes this architecture reproducible and safe, then separates responsibilities incrementally without rewriting the product.
+The completed restoration made this architecture reproducible and safer, then separated responsibilities incrementally without rewriting the product.
 
 ## Metadata providers
 

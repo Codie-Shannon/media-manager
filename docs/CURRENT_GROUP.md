@@ -1,27 +1,25 @@
 # Current group
 
-## Group 6 - Modern interface
+## Group 7 - Packaging and portfolio closure
 
 Status: complete
 
 Completed:
 
-- Rebuilt the main window as a modern dark desktop shell with a fixed vertical library sidebar and clearer section header.
-- Added a shared color, typography, focus, status, password-field, tooltip, empty-state, and library-items design system.
-- Modernized navigation, command surfaces, cards, selected states, folder breadcrumbs, information panes, settings, provider configuration, loading, and forms.
-- Made card captions persistent and introduced reusable synthetic empty-state presentation.
-- Made long settings/forms scroll safely and removed empty multiselect scrollbar artifacts.
-- Prevented the legacy window overlay from tinting or intercepting active option panels.
-- Added accessible names to navigation, commands, cards, back/forward controls, provider fields, search, and dialog actions.
-- Added horizontal command-surface scrolling for constrained window widths.
-- Preserved every established workflow and provider/data boundary.
-- Captured the complete 13-image modern-state set for exact original/restored/modern comparisons.
-- Rebuilt Debug and Release x64, passed both stability executables, produced the portable package, and kept the real user database byte-for-byte unchanged.
+- Framed Media Manager as the recovered diploma-era origin project that became a modern local Windows product.
+- Preserved the original, restored, and modern 13-image evidence sets.
+- Added three polished README contrast images sourced from those fixed captures.
+- Completed the repository front door, architecture, modernisation, provider, privacy, testing, release, licensing, and third-party notice paths.
+- Finalised the Release x64 portable ZIP format, version file, release manifest, notices, privacy gate, and external SHA-256 checksum.
+- Reviewed active dependency and metadata-service attribution.
+- Kept the source deliberately unlicensed rather than selecting reuse rights on the author's behalf.
+- Rebuilt and tested Debug x64 and Release x64.
+- Verified the synthetic packaged demo without reading or modifying the normal user profile.
+- Audited tracked files and release contents for credentials, personal paths, databases, logs, caches, backups, and private evidence.
+- Tagged the completed source as `v1.0.0` and `group-7-complete`.
 
-Next group:
+## Project status
 
-- Group 7 completes packaging, portfolio presentation, and project closure.
+The seven required recovery and modernisation groups are complete. Optional Group 8 is not required: no remaining migration, damaged-file, or packaging blocker justifies another closure pass.
 
-Remaining roadmap:
-
-- Group 7 completes packaging and portfolio closure.
+Future improvements are documented as transparent opportunities in the README rather than an unfinished mandatory roadmap.

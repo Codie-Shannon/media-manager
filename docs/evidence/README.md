@@ -13,6 +13,19 @@
 
 The file was spot-checked at the beginning, middle, and end after recording.
 
-Build logs, test summaries, and later release proof may also be stored here when they are reproducible and safe to publish.
+## Modern-interface walkthrough
+
+`modern-interface-walkthrough.mp4` is the Group 7 release walkthrough:
+
+- duration: 00:00:42;
+- video: H.264, 1782 x 964, 24 frames per second;
+- audio: none;
+- scope: application-window capture only;
+- content: synthetic demo profile, modern shell, six library views, generated cards, empty state, and release settings;
+- SHA-256: `722f4a015c1d70f6b04b1f030d792698589c38afa6c96a5340d24e5c729039c3`.
+
+Frames at 2, 8, 14, 20, 26, 32, and 39 seconds were extracted and checked after recording. The capture shows no personal path, credential, real library, or provider response.
+
+Build logs and test summaries remain reproducible command output rather than committed machine-specific files.
 
 Raw private screenshots, databases, personal paths, and copyrighted recovered samples must remain outside Git.

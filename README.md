@@ -1,134 +1,145 @@
 # Media Manager
 
-A privacy-first Windows desktop application for organising, enriching, searching, and maintaining local media libraries.
+Privacy-first C# WPF media library organiser - restored from my diploma-era origin project and modernized with supported metadata providers.
 
-## Project significance
-
-Media Manager was the first serious application I built during my software-development diploma. It became the project through which I learned many of the foundations I still use today: application structure, WPF, custom controls, file-system workflows, metadata handling, persistence, debugging, and user-interface design.
-
-The modern version restores and completes that origin project rather than replacing its history. Years after its original development, I recovered the project from a damaged drive, repaired its custom controls library, replaced unsupported scraping with a provider-based metadata layer, verified the original workflows, strengthened its local data handling, and redesigned the interface for a modern Windows desktop experience.
+Media Manager is a local Windows desktop application for organising, enriching, searching, and maintaining personal media libraries. The completed `v1.0.0` portfolio release preserves the recovered application and its original custom-controls architecture while presenting a verified, modern product.
 
 > **The application that taught me how to build software, completed by the developer it helped me become.**
 
-## What it does
+## Project significance
 
-Media Manager helps users organise and maintain media stored on their own Windows computer. It scans local libraries, displays structured media information, supports search, sorting, filtering, hierarchy, and maintenance workflows, identifies missing or duplicated records, and enriches entries through supported metadata providers.
+Media Manager was the first serious application I built during my software-development diploma. It taught me how application structure, WPF, custom controls, file-system workflows, metadata, persistence, debugging, and interface design fit together.
 
-It manages six local library types:
+Years later, I recovered the project from a damaged drive. I preserved that historical baseline, repaired and reconnected the custom controls library, verified the original workflows with isolated synthetic data, replaced brittle site scraping with supported provider APIs, strengthened local data handling, and redesigned the interface. This is a modernised origin project, not a greenfield rewrite and not an unfinished assignment.
 
-- movies and TV shows;
-- videos and pictures;
-- music;
-- games.
+Read the full [original application history](docs/original-application-history.md) and [modernisation case study](docs/modernisation.md).
 
-Media Manager is a local desktop organiser, not a streaming service or media server. Library data, settings, caches, generated covers, backups, and logs remain on the user’s Windows profile.
+## Original to modern
 
-## Before-and-after engineering case study
+[![Media Manager shell: original recovered interface compared with the completed modern interface](docs/screenshot-groups/contrast/01-shell-original-to-modern.png)](docs/screenshot-groups/contrast/01-shell-original-to-modern.png)
 
-| Original diploma version | Restored functional version | Modernised version |
+[![Media Manager add-movie workflow across original, restored, and modern stages](docs/screenshot-groups/contrast/02-add-movie-three-stage.png)](docs/screenshot-groups/contrast/02-add-movie-three-stage.png)
+
+[![Media Manager selected-card and details workflow: original compared with modern](docs/screenshot-groups/contrast/03-details-original-to-modern.png)](docs/screenshot-groups/contrast/03-details-original-to-modern.png)
+
+The evidence is deliberately matched:
+
+| Original recovered state | Restored working state | Modern completed state |
 | --- | --- | --- |
-| [![Original Media Manager interface](docs/screenshot-groups/original/01-main-library-shell-movies.png)](docs/screenshot-groups/original) | [![Restored Media Manager interface](docs/screenshot-groups/restored/01-main-library-shell-movies.png)](docs/screenshot-groups/restored) | [![Modernised Media Manager interface](docs/screenshot-groups/modern/01-main-library-shell-movies.png)](docs/screenshot-groups/modern) |
-| [View original screenshots](docs/screenshot-groups/original) | [View restored screenshots](docs/screenshot-groups/restored) | [View modern screenshots](docs/screenshot-groups/modern) |
+| [13 original screenshots](docs/screenshot-groups/original) | [13 restored screenshots](docs/screenshot-groups/restored) | [13 modern screenshots](docs/screenshot-groups/modern) |
 
-The three fixed 13-image screenshot sets document the same application surfaces at each stage. They make the project’s history, recovery, functional restoration, and controlled redesign visible without using a personal library or copyrighted sample collection.
+Every public capture uses generated artwork and synthetic records. The fixed sequences show the same shell, libraries, forms, sorting, provider state, and selected-item details at each stage.
 
-## Modernisation work
+## Core features
 
-The modernisation preserved the original application’s intent while replacing fragile or outdated implementation details:
+- Six local library types: movies, TV shows, videos, pictures, music, and games.
+- Folder hierarchies, media cards, selected-item details, search, sorting, filtering, and favourites.
+- Add, edit, remove, delete, reveal-in-Explorer, playback, gallery, and game-launch workflows.
+- TMDB metadata for movies and television; IGDB metadata for games.
+- Manual metadata entry plus no-key, offline, timeout, rate-limit, and stale-cache behavior.
+- SQLite persistence with health checks, path-redacted catalog export, verified backups, staged restore, rollback, and corruption recovery.
+- Disposable `--demo` profile with generated covers and neutral local fixtures.
+- Modern navy/cyan shell with visible focus, accessible names, scroll-safe commands, and responsive long-form layouts.
 
-- restored and reconnected `MediaControlsLibrary`, the original reusable WPF controls project;
-- made Debug and Release builds reproducible from a clean checkout;
-- verified and repaired the original media-management, hierarchy, file, playback, and launch workflows;
-- replaced IMDb and browser scraping with a supported TMDB/IGDB provider abstraction;
-- added cancellation, timeouts, caching, encrypted local provider settings, and offline/manual fallbacks;
-- added safer backup, restore, recovery, health-check, logging, and portable-release behavior;
-- preserved original and restored screenshots before redesigning the interface;
-- redesigned the complete shell, navigation, cards, details, forms, settings, and application states;
-- added automated stability coverage, synthetic demo data, release packaging, and portfolio evidence.
+Media Manager is a desktop organiser. It is not a streaming service, Plex/Kodi replacement, cloud platform, or active IMDb scraper.
 
-## Current status
+## Architecture
 
-Group 6 is complete. The origin application now combines supported metadata providers and recoverable local persistence with a cohesive modern desktop interface:
+| Area | Responsibility |
+| --- | --- |
+| `src/Media_Manager` | .NET Framework 4.7.2 WPF application, views, local workflows, provider boundary, persistence, recovery, and modern application theme |
+| `src/MediaControlsLibrary` | Recovered reusable WPF controls for navigation, cards, details, forms, dialogs, folder browsing, and viewer surfaces |
+| `src/MediaControlsTester` | Demonstration harness for the reusable controls; some labels intentionally demonstrate styling without configured destinations |
+| `tests/MediaManager.StabilityTests` | Dependency-light x64 regression executable using disposable data and mocked provider responses |
+| `sample-data` | Publication-safe fixture policy and generated demo-catalog description |
+| `packaging` | Repeatable Release x64 portable-package pipeline and privacy gate |
 
-- The full solution restores and builds in Debug x64 and Release x64.
-- `Media_Manager` references `MediaControlsLibrary` as a project dependency instead of a stale external DLL.
-- A fresh profile creates its LocalAppData database directory and required image directories automatically.
-- Startup failures raised after managed startup begins are presented in a dependency-free error window.
-- An isolated synthetic profile verifies all six libraries, hierarchy navigation, card details, add/edit/remove/delete flows, Explorer actions, playback surfaces, game launch, and resize behavior.
-- Critical TV-show ownership, destructive deletion, folder-browser, missing-path, missing-artwork, invalid-date, and game-launch failures are repaired.
-- TMDB supplies movie, TV, season, and episode metadata; IGDB supplies game metadata.
-- Search and detail retrieval use `IMetadataProvider`, provider-neutral models, cancellation, timeouts, encrypted local credentials, caching, and stale-cache fallback.
-- Manual results remain available without credentials or network access.
-- Selenium, Chrome-driver, direct IMDb, and direct Metacritic automation are removed from the active application and its runtime output.
-- Existing IMDb references can be resolved through TMDB's supported external-ID endpoint without scraping.
-- The SQLite connection path is held in memory; startup no longer rewrites the executable configuration file.
-- Existing integer primary keys remain stable, and schema version 1 records the reviewed, compatible format without a destructive migration.
-- Settings provides verified backup, restore, path-redacted catalog export, and duplicate/missing-path health checks.
-- Daily automatic backups retain the newest seven snapshots. Restore creates a safety backup first and rolls back failed replacements.
-- Corrupt databases are preserved under the local `Recovery` directory and restored from the newest valid backup when possible.
-- Local rolling logs contain startup, background-task, backup, restore, and recovery failures.
-- `Media_Manager.exe --demo` creates a disposable synthetic profile with generated covers and neutral library items.
-- A repeatable `MediaManager.StabilityTests` executable protects Group 3-5 behavior, including mocked providers, backup/restore, corruption recovery, path redaction, invalid-backup rejection, and a 2,500-record scan.
-- `packaging/build-portable.ps1` rebuilds Release x64 and produces a personal-data-free portable folder, ZIP, and SHA-256 checksum.
-- Clean tracked-file checkouts build and launch without inherited `bin`, `obj`, or package output.
-- No real media library, user database, credentials, or private paths are included.
-- Original and restored screenshot groups are preserved as fixed comparison evidence.
-- A modern navy/cyan shell now unifies all six libraries, command surfaces, cards, details, forms, settings, provider configuration, dialogs, empty states, and loading states.
-- Reusable UI tokens and controls live in `Media_Manager.Controls` while the recovered control library retains the application workflows.
-- Keyboard focus is visible, primary controls have meaningful automation names, command surfaces can scroll at constrained widths, and long forms/settings remain reachable.
-- The 13-image modern screenshot group provides exact original/restored/modern comparisons using only synthetic data.
+The recovery intentionally retains a pragmatic hybrid of view code-behind, view models, and static workflow helpers. Provider and data-recovery boundaries were introduced incrementally where they materially improved safety and testability; the project was not rewritten merely to appear newer. See [architecture](docs/architecture.md).
 
-The next milestone is Group 7, packaging, portfolio presentation, licensing review, and project closure.
+## Metadata providers
 
-Read the [original project history](docs/original-application-history.md), [modernisation case study](docs/modernisation.md), [architecture](docs/architecture.md), and [current milestone](docs/CURRENT_GROUP.md) for the full story.
+`IMetadataProvider` keeps provider response types and authentication out of the UI:
 
-## Repository layout
+- TMDB: movie, TV, season, and episode search/details, including supported lookup of legacy IMDb external IDs.
+- IGDB: game search/details through Twitch application credentials.
 
-- `src/Media_Manager` - recovered full application source
-- `src/MediaControlsLibrary` - recovered WPF controls library
-- `src/MediaControlsTester` - controls demonstration application
-- `docs` - restoration plan, architecture notes, evidence, and screenshots
-- `tests` - automated stability and future provider/persistence tests
-- `sample-data` - generated demo catalog and publication-safe fixture policy
-- `packaging` - repeatable portable Release candidate build
+Provider calls are cancellable, have bounded timeouts, use timestamped local caches, and always retain a manual-entry route. Credentials are optional, stored outside the repository, and protected for the current Windows user with DPAPI. Setup, failure states, and attribution are documented in [metadata-provider-migration.md](docs/metadata-provider-migration.md).
 
-## Build prerequisites
+## Privacy and local-first behavior
 
-- Windows
-- Visual Studio 2022 with .NET desktop development
-- .NET Framework 4.7.2 developer pack
-- NuGet package restore
+Normal use stores the database, settings, encrypted provider configuration, caches, covers, backups, recovery copies, and rolling logs in the current Windows user's local application-data profile. Demo mode instead uses a disposable directory under `%TEMP%` and never opens the normal profile.
 
-Open `MediaManager.sln`, restore NuGet packages, and build the `x64` configuration. The complete solution is verified in both Debug and Release.
+The repository and portable package exclude real libraries, databases, API credentials, logs, personal paths, recovered copyrighted samples, caches, and generated build directories. Backups exclude media files and provider credentials; catalog export redacts local path roots. See the complete [privacy model and release audit](docs/privacy.md).
 
-Run the synthetic demo without accessing a real library:
+## Build and run
+
+Requirements:
+
+- Windows 10/11 x64;
+- Visual Studio 2022 with .NET desktop development;
+- .NET Framework 4.7.2 developer pack;
+- NuGet package restore.
+
+From a Developer PowerShell:
 
 ```powershell
+nuget restore MediaManager.sln -ConfigFile NuGet.Config
+msbuild MediaManager.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64
 src\Media_Manager\bin\x64\Release\Media_Manager.exe --demo
 ```
 
-Create the portable Release candidate:
+The normal executable uses the current user's local profile. Use `--demo` for a completely synthetic portfolio walkthrough.
+
+Build the portable Release:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File packaging\build-portable.ps1
 ```
 
-Provider credentials are entered under **Settings > Configure Metadata Providers** and are encrypted for the current Windows user. Environment-variable setup and provider behavior are documented in [docs/metadata-provider-migration.md](docs/metadata-provider-migration.md).
+The script creates a folder, ZIP, and SHA-256 checksum under `artifacts`. Release contents and verification are documented in [release.md](docs/release.md).
 
-Backup, restore, health-check, catalog-export, and recovery behavior is documented in [docs/data-recovery.md](docs/data-recovery.md).
+## Testing and evidence
 
-## Privacy and sample-data policy
+After building each x64 configuration:
 
-The project is designed to operate locally. This repository must not contain:
+```powershell
+tests\MediaManager.StabilityTests\bin\x64\Debug\MediaManager.StabilityTests.exe
+tests\MediaManager.StabilityTests\bin\x64\Release\MediaManager.StabilityTests.exe
+```
 
-- real media libraries or databases;
-- personal filesystem paths;
-- API credentials;
-- copyrighted poster, cover, or game-library samples;
-- generated `bin`, `obj`, `.vs`, or NuGet package directories.
+The suite covers destructive hierarchy behavior, malformed data, provider mapping and cancellation, encrypted settings, offline fallback, backup/restore, corrupt-database recovery, archive validation, path redaction, demo isolation, and a 2,500-record health scan. Manual matrices verify the complete UI and filesystem workflows. See [testing.md](docs/testing.md), [build-status.md](docs/build-status.md), and the [evidence index](docs/evidence/README.md).
 
-Only synthetic sample data and publication-safe evidence may be committed.
+[Watch the silent modern-interface walkthrough](docs/evidence/modern-interface-walkthrough.mp4).
 
-## License
+## Release status
 
-No license has been selected yet. Dependency and recovered-asset provenance must be reviewed before a license is added.
+`v1.0.0` closes the seven-group recovery and modernisation plan:
+
+1. preserved recovered baseline;
+2. restored reproducible application builds;
+3. stabilised original workflows;
+4. replaced unsupported scraping with provider APIs;
+5. strengthened local data safety and portable release behavior;
+6. completed the modern interface;
+7. completed packaging, public documentation, visual evidence, privacy/licensing review, and release proof.
+
+See [release notes](docs/release.md), [changelog](CHANGELOG.md), and [master plan](docs/MASTER.md).
+
+## Known limitations and possible next steps
+
+- Windows-only .NET Framework 4.7.2 desktop application; no installer or code-signing certificate is provided.
+- The recovered architecture still contains substantial code-behind and duplicated view workflow logic.
+- File-system changes and database updates are not coordinated as one cross-resource transaction.
+- Metadata enrichment requires user-supplied TMDB/IGDB credentials and network access; local use and manual entry do not.
+- Provider logos are intentionally not bundled; attribution is textual.
+- Future work could include targeted view-service extraction, a supported installer, signed binaries, additional accessibility testing, and opt-in schema cleanup after real migration evidence.
+
+These are transparent next-step opportunities, not blockers hidden behind a completed label.
+
+## Licensing
+
+No reuse license has been selected for the Media Manager source. Copyright remains with Codie Shannon and no permission to copy, modify, or redistribute the project is granted by this repository. Third-party components retain their own licenses. See [licensing.md](docs/licensing.md) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
+## AI-assisted development
+
+AI-assisted development tools were used during restoration, debugging, testing, and documentation. Product direction, architecture, scope, review, validation, and final implementation decisions remained under the author's control.

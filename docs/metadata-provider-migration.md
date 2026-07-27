@@ -57,7 +57,7 @@ The Settings surface includes the required notice:
 
 > This product uses the TMDB API but is not endorsed or certified by TMDB.
 
-Game metadata is identified as supplied by IGDB. Provider branding/licensing will receive a final release audit in Group 7.
+Game metadata is identified as supplied by IGDB. Group 7 reviewed provider attribution and deliberately redistributes no provider logos.
 
 Provider references:
 

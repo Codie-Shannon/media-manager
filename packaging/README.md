@@ -1,6 +1,6 @@
-# Packaging
+# Release packaging
 
-Group 5 provides a repeatable portable Release candidate:
+Group 7 publishes Media Manager v1.0.0 as a repeatable portable Release x64 ZIP:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File packaging\build-portable.ps1
@@ -11,10 +11,11 @@ The script:
 1. Rebuilds the complete solution as Release x64.
 2. Stages the application runtime under `artifacts/MediaManager-portable-x64`.
 3. Removes PDB/XML development output.
-4. Adds portable run instructions, README, and changelog.
-5. Rejects database, provider-setting, log, backup, recovery, cache, or `.git` artifacts.
-6. Creates `MediaManager-portable-x64.zip` and a SHA-256 checksum file.
+4. Adds portable instructions, version, README, changelog, release notes, and third-party notices.
+5. Rejects database, provider-setting, log, backup, recovery, cache, key, certificate, private-path, or `.git` artifacts.
+6. Creates a per-file SHA-256 release manifest.
+7. Creates `MediaManager-portable-x64.zip` and a separate SHA-256 checksum file.
 
 Normal launch creates a per-user LocalAppData profile. `Media_Manager.exe --demo` creates a disposable synthetic temp profile.
 
-This is a draft portable process for repeatability testing. Group 7 will decide the final portable/installer format, provenance, signing, and clean-machine distribution evidence.
+The v1.0.0 release format is a portable ZIP. It is not code-signed and does not include an installer. Rebuild and verification details are recorded in `docs/release.md` and `docs/build-status.md`.

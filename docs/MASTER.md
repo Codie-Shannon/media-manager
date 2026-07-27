@@ -1,6 +1,6 @@
 # Media Manager restoration master plan
 
-This repository follows seven required restoration groups. Group 8 is conditional.
+This repository follows seven required restoration groups. All seven are complete. Group 8 remains conditional and is not required.
 
 ## Group 1 - Freeze and prove the recovered baseline
 
@@ -48,7 +48,8 @@ This repository follows seven required restoration groups. Group 8 is conditiona
 - Complete documentation, screenshots, release notes, demo video, and case study.
 - Tag and publish only after the repository and release package pass privacy and licensing review.
 
+Status: complete. The v1.0.0 portable ZIP, release proof, public case study, matched visual evidence, privacy audit, licensing record, and repository tags close the required plan.
+
 ## Optional Group 8
 
-Use only if legacy-data migration, damaged recovered files, or packaging complexity requires a separate closure pass.
-
+Use only if legacy-data migration, damaged recovered files, or packaging complexity requires a separate closure pass. The v1.0.0 closure did not identify such a blocker.

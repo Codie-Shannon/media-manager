@@ -103,20 +103,33 @@ Copy-Item -LiteralPath (Join-Path $repositoryRoot "README.md") `
     -Destination $stageDirectory
 Copy-Item -LiteralPath (Join-Path $repositoryRoot "CHANGELOG.md") `
     -Destination $stageDirectory
+Copy-Item -LiteralPath (
+    Join-Path $repositoryRoot "THIRD-PARTY-NOTICES.md") `
+    -Destination $stageDirectory
+Copy-Item -LiteralPath (Join-Path $repositoryRoot "docs\release.md") `
+    -Destination (Join-Path $stageDirectory "RELEASE-NOTES.md")
 
 $portableReadme = @"
-Media Manager portable build
+Media Manager v1.0.0 portable build
 
 Run Media_Manager.exe for a normal local profile.
 Run Media_Manager.exe --demo for a disposable synthetic demo profile.
 
 Local databases, cover images, logs, provider credentials, and personal
 media are never included in this package. They are created at runtime.
+
+This build is unsigned. Media Manager currently grants no source reuse
+license. Third-party components retain the licenses listed in
+THIRD-PARTY-NOTICES.md.
 "@
 Set-Content -LiteralPath (
     Join-Path $stageDirectory "PORTABLE-README.txt") `
     -Value $portableReadme `
     -Encoding UTF8
+Set-Content -LiteralPath (
+    Join-Path $stageDirectory "VERSION.txt") `
+    -Value "1.0.0" `
+    -Encoding ASCII
 
 $forbidden = Get-ChildItem -LiteralPath $stageDirectory -Force -Recurse |
     Where-Object {
@@ -127,12 +140,45 @@ $forbidden = Get-ChildItem -LiteralPath $stageDirectory -Force -Recurse |
             "Recovery",
             "MetadataCache")) -or
         (-not $_.PSIsContainer -and (
-            $_.Extension -in @(".db", ".log", ".mmbak", ".pdb") -or
-            $_.Name -eq "metadata-providers.json"))
+            $_.Extension -in @(
+                ".db",
+                ".sqlite",
+                ".sqlite3",
+                ".log",
+                ".mmbak",
+                ".pdb",
+                ".pfx",
+                ".key") -or
+            $_.Name -in @(
+                "metadata-providers.json",
+                ".env")))
     }
 if ($forbidden) {
     throw "Runtime or personal data was found in the portable stage."
 }
+
+$privatePathMatches = Get-ChildItem -LiteralPath $stageDirectory -File -Recurse |
+    Where-Object {
+        $_.Extension -in @(".config", ".json", ".md", ".txt")
+    } |
+    Select-String -Pattern "[A-Za-z]:\\Users\\" -SimpleMatch:$false
+if ($privatePathMatches) {
+    throw "A private Windows user path was found in the portable stage."
+}
+
+$manifestLines = Get-ChildItem -LiteralPath $stageDirectory -File -Recurse |
+    Sort-Object FullName |
+    ForEach-Object {
+        $relativePath = $_.FullName.Substring(
+            $stageDirectory.Length).TrimStart("\")
+        $fileHash = (Get-FileHash -Algorithm SHA256 `
+            -LiteralPath $_.FullName).Hash
+        "{0}  {1}  {2}" -f $fileHash, $relativePath, $_.Length
+    }
+Set-Content -LiteralPath (
+    Join-Path $stageDirectory "RELEASE-MANIFEST.txt") `
+    -Value $manifestLines `
+    -Encoding ASCII
 
 Compress-Archive -Path (Join-Path $stageDirectory "*") `
     -DestinationPath $zipPath `

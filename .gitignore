@@ -39,8 +39,8 @@ appsettings.*.local.json
 *.cache
 *.bak
 *.orig
+tmp/
 
 # Private evidence must remain outside the public repository
 docs/evidence/private/
 docs/screenshot-groups/private/
-
