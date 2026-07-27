@@ -1,10 +1,54 @@
 # Media Manager
 
-Media Manager is a local-first Windows desktop application for organizing movies, TV shows, videos, pictures, music, and games. This repository is a curated restoration of an original C#/WPF project and its reusable controls library.
+A privacy-first Windows desktop application for organising, enriching, searching, and maintaining local media libraries.
+
+## Project significance
+
+Media Manager was the first serious application I built during my software-development diploma. It became the project through which I learned many of the foundations I still use today: application structure, WPF, custom controls, file-system workflows, metadata handling, persistence, debugging, and user-interface design.
+
+The modern version restores and completes that origin project rather than replacing its history. Years after its original development, I recovered the project from a damaged drive, repaired its custom controls library, replaced unsupported scraping with a provider-based metadata layer, verified the original workflows, strengthened its local data handling, and redesigned the interface for a modern Windows desktop experience.
+
+> **The application that taught me how to build software, completed by the developer it helped me become.**
+
+## What it does
+
+Media Manager helps users organise and maintain media stored on their own Windows computer. It scans local libraries, displays structured media information, supports search, sorting, filtering, hierarchy, and maintenance workflows, identifies missing or duplicated records, and enriches entries through supported metadata providers.
+
+It manages six local library types:
+
+- movies and TV shows;
+- videos and pictures;
+- music;
+- games.
+
+Media Manager is a local desktop organiser, not a streaming service or media server. Library data, settings, caches, generated covers, backups, and logs remain on the user’s Windows profile.
+
+## Before-and-after engineering case study
+
+| Original diploma version | Restored functional version | Modernised version |
+| --- | --- | --- |
+| [![Original Media Manager interface](docs/screenshot-groups/original/01-main-library-shell-movies.png)](docs/screenshot-groups/original) | [![Restored Media Manager interface](docs/screenshot-groups/restored/01-main-library-shell-movies.png)](docs/screenshot-groups/restored) | [![Modernised Media Manager interface](docs/screenshot-groups/modern/01-main-library-shell-movies.png)](docs/screenshot-groups/modern) |
+| [View original screenshots](docs/screenshot-groups/original) | [View restored screenshots](docs/screenshot-groups/restored) | [View modern screenshots](docs/screenshot-groups/modern) |
+
+The three fixed 13-image screenshot sets document the same application surfaces at each stage. They make the project’s history, recovery, functional restoration, and controlled redesign visible without using a personal library or copyrighted sample collection.
+
+## Modernisation work
+
+The modernisation preserved the original application’s intent while replacing fragile or outdated implementation details:
+
+- restored and reconnected `MediaControlsLibrary`, the original reusable WPF controls project;
+- made Debug and Release builds reproducible from a clean checkout;
+- verified and repaired the original media-management, hierarchy, file, playback, and launch workflows;
+- replaced IMDb and browser scraping with a supported TMDB/IGDB provider abstraction;
+- added cancellation, timeouts, caching, encrypted local provider settings, and offline/manual fallbacks;
+- added safer backup, restore, recovery, health-check, logging, and portable-release behavior;
+- preserved original and restored screenshots before redesigning the interface;
+- redesigned the complete shell, navigation, cards, details, forms, settings, and application states;
+- added automated stability coverage, synthetic demo data, release packaging, and portfolio evidence.
 
 ## Current status
 
-Group 6 is complete. The recovered application now combines supported metadata providers and recoverable local persistence with a cohesive modern desktop interface:
+Group 6 is complete. The origin application now combines supported metadata providers and recoverable local persistence with a cohesive modern desktop interface:
 
 - The full solution restores and builds in Debug x64 and Release x64.
 - `Media_Manager` references `MediaControlsLibrary` as a project dependency instead of a stale external DLL.
@@ -34,9 +78,9 @@ Group 6 is complete. The recovered application now combines supported metadata p
 - Keyboard focus is visible, primary controls have meaningful automation names, command surfaces can scroll at constrained widths, and long forms/settings remain reachable.
 - The 13-image modern screenshot group provides exact original/restored/modern comparisons using only synthetic data.
 
-The next milestone is Group 7, packaging, portfolio presentation, and project closure.
+The next milestone is Group 7, packaging, portfolio presentation, licensing review, and project closure.
 
-See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
+Read the [original project history](docs/original-application-history.md), [modernisation case study](docs/modernisation.md), [architecture](docs/architecture.md), and [current milestone](docs/CURRENT_GROUP.md) for the full story.
 
 ## Repository layout
 
