@@ -14,19 +14,19 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="NavigationViewItemTemplate"  TargetType="{x:Type MediaControls:NavigationViewItem}">
-        <Button x:Name="PART_Content" Style="{StaticResource NavigationViewItem.Button}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Label}" Style="{StaticResource NavigationViewItem.Button}">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="MenuItemStates">
                     <VisualState x:Name="MouseOver">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Transparent}" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.MouseOver.Background}" Duration="0:0:0.12"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Transparent}" Duration="0"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.MouseOver.Foreground}" Duration="0:0:0.3"/>
                         </Storyboard>
                     </VisualState>
                     <VisualState x:Name="Selected">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Transparent}" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Selected.Background}" Duration="0:0:0.12"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Selected.Border}" Duration="0:0:0.3"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource NavigationViewItem.Selected.Foreground}" Duration="0:0:0.3"/>
                         </Storyboard>

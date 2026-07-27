@@ -62,11 +62,12 @@ namespace Media_Manager
                 //Show Element
                 element.Visibility = Visibility.Visible;
 
-                //Check if the Panel Requires an Overlay Toggle
+                //Option panels provide their own overlay in their control template.
+                //Keeping the window-level overlay hidden prevents it from tinting
+                //and intercepting the active panel.
                 if (isOverlayToggle == true)
                 {
-                    //Show Main Window Overlay
-                    Overlay(Visibility.Visible, 0.75f);
+                    Overlay(Visibility.Collapsed);
                 }
             }
             else

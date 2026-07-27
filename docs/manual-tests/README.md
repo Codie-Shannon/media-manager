@@ -19,3 +19,4 @@ Completed records:
 - [Group 3 functional verification and stabilization](group-3-stabilization.md)
 - [Group 4 metadata-provider verification](group-4-metadata-providers.md)
 - [Group 5 data reliability and Release preparation](group-5-data-reliability.md)
+- [Group 6 modern interface verification](group-6-modern-interface.md)

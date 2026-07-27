@@ -14,13 +14,13 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="ImageFolderTemplate" TargetType="{x:Type MediaControls:ImageFolder}">
-        <Button x:Name="PART_Content" Style="{StaticResource Image.Folder.Button}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Image.Folder.Button}">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="ElementStates">
                     <VisualState x:Name="Unselected"/>
                     <VisualState x:Name="Selected">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                             <ThicknessAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="BorderThickness" To="2" Duration="0" FillBehavior="HoldEnd"/>
                         </Storyboard>
                     </VisualState>

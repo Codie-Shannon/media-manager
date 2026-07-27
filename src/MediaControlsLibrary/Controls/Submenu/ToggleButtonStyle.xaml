@@ -14,7 +14,7 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="ToggleButtonTemplate" TargetType="{x:Type MediaControls:subToggleButton}">
-        <ToggleButton x:Name="PART_Content" Style="{StaticResource Submenu.Toggle.Button}" Width="{TemplateBinding Width}">
+        <ToggleButton x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Submenu.Toggle.Button}" Width="{TemplateBinding Width}">
             <Grid Style="{StaticResource Submenu.Button.Grid}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.3*"/>

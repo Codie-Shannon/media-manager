@@ -4,7 +4,7 @@ Media Manager is a local-first Windows desktop application for organizing movies
 
 ## Current status
 
-Group 5 is complete. The recovered application now combines supported metadata providers with recoverable local persistence and a repeatable Release path:
+Group 6 is complete. The recovered application now combines supported metadata providers and recoverable local persistence with a cohesive modern desktop interface:
 
 - The full solution restores and builds in Debug x64 and Release x64.
 - `Media_Manager` references `MediaControlsLibrary` as a project dependency instead of a stale external DLL.
@@ -29,8 +29,12 @@ Group 5 is complete. The recovered application now combines supported metadata p
 - Clean tracked-file checkouts build and launch without inherited `bin`, `obj`, or package output.
 - No real media library, user database, credentials, or private paths are included.
 - Original and restored screenshot groups are preserved as fixed comparison evidence.
+- A modern navy/cyan shell now unifies all six libraries, command surfaces, cards, details, forms, settings, provider configuration, dialogs, empty states, and loading states.
+- Reusable UI tokens and controls live in `Media_Manager.Controls` while the recovered control library retains the application workflows.
+- Keyboard focus is visible, primary controls have meaningful automation names, command surfaces can scroll at constrained widths, and long forms/settings remain reachable.
+- The 13-image modern screenshot group provides exact original/restored/modern comparisons using only synthetic data.
 
-The next milestone is Group 6, the visible modern UI redesign and exact before/after evidence.
+The next milestone is Group 7, packaging, portfolio presentation, and project closure.
 
 See [docs/CURRENT_GROUP.md](docs/CURRENT_GROUP.md), [docs/build-status.md](docs/build-status.md), and [docs/ui-resource-inventory.md](docs/ui-resource-inventory.md) for the precise state.
 

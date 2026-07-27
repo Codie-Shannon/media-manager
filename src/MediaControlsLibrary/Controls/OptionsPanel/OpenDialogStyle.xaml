@@ -66,7 +66,7 @@
                 <!-- ==================================== -->
                 <!-- ==================================== -->
                 <!-- ==================================== -->
-                <TextBox x:Name="PART_Text" Text="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.Dialog.Content}" Padding="{TemplateBinding IsClear, Converter={StaticResource PaddingConverter}}"/>
+                <TextBox x:Name="PART_Text" AutomationProperties.Name="{TemplateBinding Header}" Text="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.Dialog.Content}" Padding="{TemplateBinding IsClear, Converter={StaticResource PaddingConverter}}"/>
 
 
 
@@ -109,7 +109,7 @@
             <!-- ==================================== -->
             <!-- ==================================== -->
             <!-- ==================================== -->
-            <Button x:Name="PART_Button" Content="{TemplateBinding ButtonContent}" Style="{StaticResource OptionsPanel.Dialog.Button}"/>
+            <Button x:Name="PART_Button" AutomationProperties.Name="{TemplateBinding ButtonContent}" Content="{TemplateBinding ButtonContent}" Style="{StaticResource OptionsPanel.Dialog.Button}"/>
 
 
 
@@ -120,7 +120,17 @@
             <!-- ==================================== -->
             <!-- ==================================== -->
             <!-- ==================================== -->
-            <ItemsControl x:Name="PART_Items" Grid.Row="2" Grid.ColumnSpan="2" Background="White" Margin="1 0 0 0">
+            <ItemsControl x:Name="PART_Items" Grid.Row="2" Grid.ColumnSpan="2" Background="Transparent" Margin="1 0 0 0">
+                <ItemsControl.Style>
+                    <Style TargetType="{x:Type ItemsControl}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <Trigger Property="HasItems" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
                 <!-- Items Panel -->
                 <!-- ==================================== -->
                 <!-- ==================================== -->
@@ -176,7 +186,7 @@
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="ItemsControl">
                         <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-                            <ScrollViewer CanContentScroll="True" Padding="{TemplateBinding Padding}" Focusable="False" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible">
+                            <ScrollViewer CanContentScroll="True" Padding="{TemplateBinding Padding}" Focusable="False" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
                                 <ItemsPresenter />
                             </ScrollViewer>
                         </Border>

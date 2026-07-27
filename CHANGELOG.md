@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Modern interface
+
+- Rebuilt the WPF shell around a fixed vertical library sidebar, modern section header, local-profile status, and navy/cyan design system.
+- Modernized all six libraries, command surfaces, cards, persistent captions, selected states, breadcrumbs, detail panes, settings, provider configuration, loading, and option forms.
+- Added shared design tokens plus reusable empty-state and library-items templates under `Media_Manager.Controls`.
+- Added scroll-safe long panels, constrained-width command scrolling, visible keyboard focus, and meaningful automation names.
+- Removed redundant window-overlay behavior that tinted and intercepted active option panels.
+- Captured a publication-safe 13-image modern-state set for exact baseline/restored/modern comparison.
+
 ### Data reliability and Release preparation
 
 - Stopped rewriting the executable configuration file at startup; SQLite now uses an in-memory profile connection path.

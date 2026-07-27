@@ -24,13 +24,13 @@
                 <!-- Back Button -->
                 <!-- ================================= -->
                 <!-- ================================= -->
-                <Button x:Name="PART_Back" Content="&#xF0D3;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="0"/>
+                <Button x:Name="PART_Back" AutomationProperties.Name="Back" Content="&#xF0D3;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="0"/>
 
 
                 <!-- Forward Button -->
                 <!-- ================================= -->
                 <!-- ================================= -->
-                <Button x:Name="PART_Forward" Content="&#xF0D2;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="1"/>
+                <Button x:Name="PART_Forward" AutomationProperties.Name="Forward" Content="&#xF0D2;" Style="{StaticResource NavigationBar.IconButton}" FontSize="{TemplateBinding FontSize}" Grid.Column="1"/>
 
 
                 <!-- Folder Items -->

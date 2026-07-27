@@ -24,13 +24,33 @@
             <!-- Menu -->
             <!-- ==================================== -->
             <!-- ==================================== -->
-            <StackPanel IsItemsHost="True" Style="{StaticResource NavigationView}"/>
+            <StackPanel IsItemsHost="True" Margin="0 0 0 64" Style="{StaticResource NavigationView}"/>
 
             
             <!-- Settings Button -->
             <!-- ==================================== -->
             <!-- ==================================== -->
-            <Button x:Name="PART_Button" Content="&#xe713;" Style="{StaticResource NavigationViewSettings.Button}" Visibility="{TemplateBinding IsSettings, Converter={StaticResource NavigationViewSettingsConverter}}"/>
+            <Button
+                x:Name="PART_Button"
+                AutomationProperties.Name="Settings"
+                Style="{StaticResource NavigationViewSettings.Button}"
+                ToolTip="Settings"
+                Visibility="{TemplateBinding IsSettings, Converter={StaticResource NavigationViewSettingsConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0 0 13 0"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="18"
+                        Text="&#xe713;"/>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Text="Settings"/>
+                </StackPanel>
+            </Button>
         </Grid>
     </ControlTemplate>
 

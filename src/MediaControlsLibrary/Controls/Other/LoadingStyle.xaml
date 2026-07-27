@@ -23,11 +23,13 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="LoadingTemplate" TargetType="{x:Type Other:Loading}">
-        <Grid Background="{TemplateBinding Background}" Visibility="{TemplateBinding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Background="#D90B1016" Visibility="{TemplateBinding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <!-- Ellipse -->
             <!-- ==================================== -->
             <!-- ==================================== -->
             <Ellipse
+            HorizontalAlignment="Center"
             Width="{TemplateBinding Diameter}"
             Height="{TemplateBinding Diameter}"
             RenderTransformOrigin="0.5 0.5"
@@ -64,6 +66,13 @@
                     </EventTrigger>
                 </Ellipse.Triggers>
             </Ellipse>
+                <TextBlock
+                    Margin="0 16 0 0"
+                    FontFamily="Segoe UI"
+                    FontSize="13"
+                    Foreground="#FFB7C3CF"
+                    Text="Updating your local library..."/>
+            </StackPanel>
         </Grid>
     </ControlTemplate>
 

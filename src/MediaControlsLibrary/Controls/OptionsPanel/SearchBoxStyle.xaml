@@ -58,7 +58,10 @@
                 <!-- ====================================================== -->
                 <!-- ====================================================== -->
                 <!-- ====================================================== -->
-                <Button x:Name="PART_Button" Style="{StaticResource OptionsPanel.Search.Content.Button}">
+                <Button
+                    x:Name="PART_Button"
+                    AutomationProperties.Name="{TemplateBinding Header}"
+                    Style="{StaticResource OptionsPanel.Search.Content.Button}">
                     <StackPanel Style="{StaticResource OptionsPanel.Search.Content.StackPanel}" Width="{Binding ElementName=PART_Button, Path=ActualWidth}">
                         <Border Style="{StaticResource OptionsPanel.Search.Content.Image.Border}">
                             <Border.Background>
@@ -123,7 +126,7 @@
             <!-- ====================================================== -->
             <!-- ====================================================== -->
             <Popup x:Name="PART_Popup" Height="{TemplateBinding PopupHeight}" Width="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.ActualWidth}" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_Button}">
-                <StackPanel>
+                <StackPanel Background="{StaticResource Search.Popup.Message.Background}">
                     <!-- Grid -->
                     <!-- ====================================================== -->
                     <!-- ====================================================== -->
@@ -132,7 +135,10 @@
                         <Grid>
                             <!-- Search Text -->
                             <!-- ====================================================== -->
-                            <TextBox x:Name="PART_SearchText" Style="{StaticResource OptionsPanel.Search.Popup.TextBox}"/>
+                            <TextBox
+                                x:Name="PART_SearchText"
+                                AutomationProperties.Name="{TemplateBinding SearchPlaceholder}"
+                                Style="{StaticResource OptionsPanel.Search.Popup.TextBox}"/>
 
                             <!-- Search Placeholder -->
                             <!-- ====================================================== -->
@@ -181,7 +187,15 @@
                     <!-- ====================================================== -->
                     <!-- ====================================================== -->
                     <!-- ====================================================== -->
-                    <ListBox x:Name="PART_ListBox" ItemTemplateSelector="{Binding Source={StaticResource ElementSelector}}" ItemsSource="{TemplateBinding Items}" BorderThickness="1 0 1 1">
+                    <ListBox
+                        x:Name="PART_ListBox"
+                        AutomationProperties.Name="Metadata search results"
+                        Background="{StaticResource Search.Popup.Message.Background}"
+                        BorderBrush="{StaticResource Search.Popup.Message.Border}"
+                        Foreground="{StaticResource Search.Content.TextBlock.Foreground}"
+                        ItemTemplateSelector="{Binding Source={StaticResource ElementSelector}}"
+                        ItemsSource="{TemplateBinding Items}"
+                        BorderThickness="1 0 1 1">
                         <ListBox.Resources>
                             <!-- Movie Template -->
                             <!-- ====================================================== -->

@@ -125,11 +125,14 @@ namespace Media_Manager
         // =========================================
         private void Navigation_Click(object sender, RoutedEventArgs e)
         {
+            NavigationViewItem item = (NavigationViewItem)sender;
+
             //Set Selected Navigation Item
-            SelectNavItem((NavigationViewItem)sender);
+            SelectNavItem(item);
+            txtCurrentSection.Text = item.Label;
 
             //Load Associated View
-            LoadView(((NavigationViewItem)sender).Name);
+            LoadView(item.Name);
         }
 
 
@@ -148,6 +151,8 @@ namespace Media_Manager
         // =========================================
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
+            txtCurrentSection.Text = "Settings";
+
             //Show Browse Locations Panel
             BrowseLocationsPanel.Visibility = Visibility.Visible;
 
@@ -157,6 +162,7 @@ namespace Media_Manager
 
         private void btnProviders_Click(object sender, RoutedEventArgs e)
         {
+            txtCurrentSection.Text = "Metadata Providers";
             BrowseLocationsPanel.Visibility = Visibility.Collapsed;
             ProviderSettingsPanel.Visibility = Visibility.Visible;
             LoadProviderStatus();
@@ -176,6 +182,7 @@ namespace Media_Manager
 
         private void btnProviderBack_Click(object sender, RoutedEventArgs e)
         {
+            txtCurrentSection.Text = "Settings";
             ProviderSettingsPanel.Visibility = Visibility.Collapsed;
             BrowseLocationsPanel.Visibility = Visibility.Visible;
         }
@@ -358,6 +365,7 @@ namespace Media_Manager
         {
             //Hide Browse Locations Panel
             BrowseLocationsPanel.Visibility = Visibility.Collapsed;
+            txtCurrentSection.Text = selectedNavItem?.Label ?? "Library";
         }
         #endregion Event Handlers
 

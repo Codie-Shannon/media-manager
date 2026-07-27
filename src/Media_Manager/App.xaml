@@ -5,6 +5,10 @@
              xmlns:Selectors="clr-namespace:Media_Manager.Selectors"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Controls/ModernTheme.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
         <!-- Converters -->
         <Converters:CoverImageConverter x:Key="CoverImageConverter"/>
         <Converters:CoverImageMultiConverter x:Key="CoverImageMultiConverter"/>
@@ -19,22 +23,22 @@
 
         <!-- #region Colour Brushes -->
         <!-- Application -->
-        <SolidColorBrush x:Key="Application.Background" Color="#FF0E0E0E"/>
+        <SolidColorBrush x:Key="Application.Background" Color="#FF0B1016"/>
 
 
         <!-- Navigation Menu -->
-        <SolidColorBrush x:Key="Overlay.Grid.Background" Color="Black"/>
+        <SolidColorBrush x:Key="Overlay.Grid.Background" Color="#D9000000"/>
 
 
         <!-- Item's Context Menu -->
-        <SolidColorBrush x:Key="Item.ContextMenu.Static.Background" Color="#FF191919"/>
-        <SolidColorBrush x:Key="Item.ContextMenu.Static.Border" Color="Transparent"/>
-        <SolidColorBrush x:Key="Item.ContextMenu.Static.Foreground" Color="White"/>
+        <SolidColorBrush x:Key="Item.ContextMenu.Static.Background" Color="#FF18232F"/>
+        <SolidColorBrush x:Key="Item.ContextMenu.Static.Border" Color="#FF3A4B5D"/>
+        <SolidColorBrush x:Key="Item.ContextMenu.Static.Foreground" Color="#FFF5F8FB"/>
 
 
         <!-- Information Pane -->
-        <SolidColorBrush x:Key="Information.Pane.Static.Border" Color="Gray"/>
-        <SolidColorBrush x:Key="Information.Pane.Static.Background" Color="#FF191919"/>
+        <SolidColorBrush x:Key="Information.Pane.Static.Border" Color="#FF293746"/>
+        <SolidColorBrush x:Key="Information.Pane.Static.Background" Color="#FF121B25"/>
         
 
         <!-- Viewer -->
@@ -99,6 +103,7 @@
         <Style x:Key="InformationPane.Border" TargetType="{x:Type Border}">
             <Setter Property="BorderBrush" Value="{StaticResource Information.Pane.Static.Border}"/>
             <Setter Property="BorderThickness" Value="1 0 0 0"/>
+            <Setter Property="Padding" Value="18 0 14 0"/>
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Grid.Column" Value="1"/>
         </Style>
@@ -110,14 +115,14 @@
 
         <!-- Options Panel -->
         <Style x:Key="Options.Panel.Item" TargetType="{x:Type Grid}">
-            <Setter Property="Height" Value="65"/>
-            <Setter Property="Margin" Value="10 0 10 3"/>
+            <Setter Property="Height" Value="72"/>
+            <Setter Property="Margin" Value="18 0 18 6"/>
         </Style>
 
         <Style x:Key="Options.Panel.Buttons.Grid" TargetType="{x:Type Grid}">
-            <Setter Property="Width" Value="320"/>
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Margin" Value="0 7 0 10"/>
+            <Setter Property="Width" Value="360"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0 14 0 18"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="Grid.Row" Value="13"/>
@@ -248,7 +253,7 @@
 
 
         <!-- Title -->
-        <SolidColorBrush x:Key="OptionsPanel.Title.TextBox.Static.Foreground" Color="White" />
+        <SolidColorBrush x:Key="OptionsPanel.Title.TextBox.Static.Foreground" Color="#FFF5F8FB" />
 
 
         <!-- Radio Button -->
@@ -270,18 +275,18 @@
 
 
         <Style x:Key="OptionsPanel.Item" TargetType="{x:Type Grid}">
-            <Setter Property="Height" Value="65"/>
-            <Setter Property="Margin" Value="10 0 10 3"/>
+            <Setter Property="Height" Value="72"/>
+            <Setter Property="Margin" Value="18 0 18 6"/>
         </Style>
 
         <Style x:Key="OptionsPanel.Item.Header" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="TextTrimming" Value="None"/>
 
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Title.TextBox.Static.Foreground}"  />
-            <Setter Property="Padding" Value="9 0"/>
+            <Setter Property="Padding" Value="0 0 0 6"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
@@ -379,11 +384,6 @@
         </Style>
 
 
-
-
-
-
-
-
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

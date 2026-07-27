@@ -53,3 +53,14 @@ Group 5 adds a bounded recovery layer inside `Media_Manager.Data`:
 - The original view-level duplicate checks remain; the new library-wide health scan finds duplicates and unavailable paths without deleting records automatically.
 
 Filesystem delete workflows remain intentionally separate from database backup/restore. Broader transactional coordination is deferred unless real testing demonstrates a blocking defect.
+
+## Modern interface
+
+Group 6 adds a small application-level design system under `Media_Manager.Controls`:
+
+- `ModernTheme.xaml` owns shell colors, typography, focus/accessibility styling, reusable empty states, and the shared library-items template.
+- `ModernEmptyState` gives every library the same synthetic-safe zero-content presentation.
+- The recovered `MediaControlsLibrary` remains the reusable workflow-control layer; its navigation, submenu, cards, information panes, forms, settings, and loading templates now consume one consistent visual language.
+- `MainWindow` owns the fixed desktop shell and current-section heading, while each existing view keeps its established commands and code-behind behavior.
+
+The redesign deliberately avoids a framework migration. It modernizes the visible product while preserving the verified provider, persistence, filesystem, and playback boundaries.

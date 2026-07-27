@@ -22,13 +22,13 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="CoverFolderTemplate" TargetType="{x:Type MediaControls:CoverFolder}">
-        <Button x:Name="PART_Content" Style="{StaticResource Cover.Folder.Button}" Command="{TemplateBinding Command}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Cover.Folder.Button}" Command="{TemplateBinding Command}">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="ElementStates">
                     <VisualState x:Name="Unselected"/>
                     <VisualState x:Name="Selected">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                             <ThicknessAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="BorderThickness" To="2" Duration="0" FillBehavior="HoldEnd"/>
                         </Storyboard>
                     </VisualState>
@@ -41,12 +41,12 @@
             <Grid>
                 <!-- Cover Image -->
                 <!-- ==================================== -->
-                <Image x:Name="PART_Image"/>
+                <Image x:Name="PART_Image" Stretch="UniformToFill"/>
 
                 
                 <!-- Content -->
                 <!-- ==================================== -->
-                <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Folder.Button.Overlay.TextBlock}" Visibility="{TemplateBinding IsTVShow, Converter={StaticResource TVShowFolderToggle}}"/>
+                <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Folder.Button.Overlay.TextBlock}"/>
             </Grid>
         </Button>
     </ControlTemplate>

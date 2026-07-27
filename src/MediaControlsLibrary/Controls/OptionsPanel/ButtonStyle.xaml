@@ -13,7 +13,7 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="ButtonTemplate"  TargetType="{x:Type MediaControls:optButton}">
-        <Button Content="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.Button}"/>
+        <Button AutomationProperties.Name="{TemplateBinding Content}" Content="{TemplateBinding Content}" Style="{StaticResource OptionsPanel.Button}"/>
     </ControlTemplate>
 
 

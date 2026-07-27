@@ -188,6 +188,7 @@
     <Compile Include="Converters\CoverImageConverter.cs" />
     <Compile Include="Converters\CoverImageMultiConverter.cs" />
     <Compile Include="Converters\SelectionConverter.cs" />
+    <Compile Include="Controls\ModernEmptyState.cs" />
     <Compile Include="Data\ApplicationLog.cs" />
     <Compile Include="Data\LibraryDataModels.cs" />
     <Compile Include="Data\LibraryDataService.cs" />
@@ -263,6 +264,10 @@
       <DependentUpon>VideosView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ModernTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

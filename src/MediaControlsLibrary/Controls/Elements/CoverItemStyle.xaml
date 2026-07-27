@@ -13,13 +13,13 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="CoverItemTemplate" TargetType="{x:Type MediaControls:CoverItem}">
-        <Button x:Name="PART_Content" Style="{StaticResource Cover.Item.Button}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Cover.Item.Button}">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="ElementStates">
                     <VisualState x:Name="Unselected"/>
                     <VisualState x:Name="Selected">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                             <ThicknessAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="BorderThickness" To="2" Duration="0" FillBehavior="HoldEnd"/>
                         </Storyboard>
                     </VisualState>
@@ -30,9 +30,27 @@
             <!-- ==================================== -->
             <!-- ==================================== -->
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="42"/>
+                </Grid.RowDefinitions>
                 <!-- Cover Image -->
                 <!-- ==================================== -->
-                <Image x:Name="PART_Image"/>
+                <Image x:Name="PART_Image" Stretch="UniformToFill"/>
+                <Border
+                    Grid.Row="1"
+                    Padding="12 0"
+                    Background="{StaticResource Item.Overlay.Background}"
+                    BorderBrush="{StaticResource Element.Static.Border}"
+                    BorderThickness="0 1 0 0">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource Element.Overlay.Foreground}"
+                        Text="{TemplateBinding Content}"
+                        TextTrimming="CharacterEllipsis"/>
+                </Border>
             </Grid>
         </Button>
     </ControlTemplate>

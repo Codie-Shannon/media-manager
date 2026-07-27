@@ -14,13 +14,13 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="ImageItemTemplate" TargetType="{x:Type MediaControls:ImageItem}">
-        <Button x:Name="PART_Content" Style="{StaticResource Image.Item.Button}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Image.Item.Button}">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="ElementStates">
                     <VisualState x:Name="Unselected"/>
                     <VisualState x:Name="Selected">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" To="Red" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                             <ThicknessAnimation Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="BorderThickness" To="2" Duration="0" FillBehavior="HoldEnd"/>
                             <DoubleAnimation Storyboard.TargetName="PART_Overlay" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0"/>
                         </Storyboard>
@@ -33,14 +33,18 @@
             <!-- ==================================== -->
             <!-- ==================================== -->
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
                 <!-- Cover Image -->
                 <!-- ==================================== -->
-                <Image x:Name="PART_Image"/>
+                <Image x:Name="PART_Image" Stretch="UniformToFill"/>
 
                 
                 <!-- Overlay -->
                 <!-- ==================================== -->
-                <Grid x:Name="PART_Overlay" Style="{StaticResource Image.Item.Overlay}">
+                <Grid x:Name="PART_Overlay" Grid.Row="1" Style="{StaticResource Image.Item.Overlay}">
                     <!-- Content -->
                     <TextBlock Text="{TemplateBinding Content}" Style="{StaticResource Image.Item.Content.TextBlock}"/>
                 </Grid>

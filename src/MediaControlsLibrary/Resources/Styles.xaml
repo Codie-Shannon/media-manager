@@ -134,24 +134,25 @@
     <Style x:Key="Folder.Button.Overlay.TextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="Foreground" Value="{StaticResource Element.Overlay.Foreground}"/>
         <Setter Property="TextAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="20"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="12 10"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Background" Value="{StaticResource Item.Overlay.Background}"/>
     </Style>
 
 
     <!-- Cover Folder -->
     <Style x:Key="Cover.Folder.Button" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="198.8"/>
-        <Setter Property="Height" Value="291"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Margin" Value="3 3 0 0"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Width" Value="184"/>
+        <Setter Property="Height" Value="300"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="9"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -161,7 +162,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -180,11 +181,11 @@
 
     <!-- Image Item -->
     <Style x:Key="Image.Folder.Button" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="401"/>
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Margin" Value="3 3 0 0"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Width" Value="318"/>
+        <Setter Property="Height" Value="214"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="9"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -194,7 +195,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -213,11 +214,11 @@
 
     <!-- Cover Item -->
     <Style x:Key="Cover.Item.Button" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="198.8"/>
-        <Setter Property="Height" Value="291"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Margin" Value="3 3 0 0"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Width" Value="184"/>
+        <Setter Property="Height" Value="300"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="9"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -227,7 +228,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -246,11 +247,11 @@
 
     <!-- Image Item -->
     <Style x:Key="Image.Item.Button" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="401"/>
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Margin" Value="3 3 0 0"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Width" Value="318"/>
+        <Setter Property="Height" Value="214"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="9"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -260,7 +261,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -278,17 +279,19 @@
 
     <Style x:Key="Image.Item.Overlay" TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="{StaticResource Item.Overlay.Background}"/>
-        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Opacity" Value="1"/>
     </Style>
 
     <Style x:Key="Image.Item.Content.TextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource Element.Overlay.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="13 0"/>
     </Style>
     <!-- #endregion Elements -->
     
@@ -440,6 +443,7 @@
     <Style x:Key="InformationPane.Border" TargetType="{x:Type Border}">
         <Setter Property="BorderBrush" Value="{StaticResource Information.Pane.Static.Border}"/>
         <Setter Property="BorderThickness" Value="1 0 0 0"/>
+        <Setter Property="Padding" Value="18 0 14 0"/>
         <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="Grid.Column" Value="1"/>
     </Style>
@@ -449,11 +453,11 @@
     </Style>
 
     <Style x:Key="InformationPane.Title" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="25"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
-        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
@@ -469,19 +473,19 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="FontSize" Value="21.5"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="0 10 0 20"/>
+        <Setter Property="Padding" Value="0 18 0 12"/>
     </Style>
     
     <Style x:Key="InformationPane.Property.Header" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
@@ -489,11 +493,11 @@
     <Style x:Key="InformationPane.Property.Content" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="Margin" Value="0 10 0 20"/>
-        <Setter Property="LineHeight" Value="39"/>
+        <Setter Property="Margin" Value="0 4 0 14"/>
+        <Setter Property="LineHeight" Value="22"/>
     </Style>
 
     <!-- Rating -->
@@ -501,23 +505,23 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="Margin" Value="0 10 20 20"/>
-        <Setter Property="LineHeight" Value="39"/>
+        <Setter Property="Margin" Value="0 4 20 14"/>
+        <Setter Property="LineHeight" Value="22"/>
     </Style>
 
     <Style x:Key="InformationPane.Rating.Icon" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
         
-        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontSize" Value="17"/>
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
         <Setter Property="Foreground" Value="{StaticResource InformationPane.Static.Foreground}"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="Margin" Value="0 10 20 20"/>
-        <Setter Property="LineHeight" Value="39"/>
+        <Setter Property="Margin" Value="0 4 20 14"/>
+        <Setter Property="LineHeight" Value="22"/>
     </Style>
     <!-- #endregion -->
     
@@ -643,7 +647,7 @@
     <!-- #region Navigation View -->
     <Style x:Key="NavigationView" TargetType="{x:Type StackPanel}">
         <Setter Property="Background" Value="{StaticResource NavigationView.Static.Background}"/>
-        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Orientation" Value="Vertical"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
@@ -691,11 +695,11 @@
     </Style>
 
     <Style x:Key="NavigationViewItemHeader" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Background" Value="{StaticResource NavigationViewItemHeader.Static.Background}"/>
         <Setter Property="Foreground" Value="{StaticResource NavigationViewItemHeader.Static.Foreground}"/>
-        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Padding" Value="12 18 12 8"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -715,17 +719,20 @@
     </Style>
 
     <Style x:Key="NavigationViewItem.Button" TargetType="{x:Type Button}">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Height" Value="28"/>
-        <Setter Property="Margin" Value="12 2 12 0"/>
-        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="8 2"/>
+        <Setter Property="Padding" Value="15 0"/>
+        <Setter Property="BorderThickness" Value="3 0 0 0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="6" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -741,18 +748,19 @@
 
     <Style x:Key="NavigationViewItem.Icon" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-        <Setter Property="Padding" Value="0 2 8 0"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="0 1 13 0"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
 
     <Style x:Key="NavigationViewItem.Label" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="NavigationViewSettings.Button" TargetType="{x:Type Button}">
-        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource NavigationViewSettings.Static.Foreground}"/>
@@ -761,14 +769,16 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="Margin" Value="8 0 8 10"/>
+        <Setter Property="Padding" Value="14 0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="6" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -776,6 +786,7 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource NavigationViewSettings.MouseOver.Foreground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
@@ -801,6 +812,7 @@
         <Setter Property="Background" Value="{StaticResource OptionsPanel.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource OptionsPanel.Static.Border}"/>
         <Setter Property="Width" Value="650"/>
+        <Setter Property="MaxHeight" Value="720"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
@@ -813,44 +825,44 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Height" Value="58"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Title.Static.Foreground}"/>
-        <Setter Property="Padding" Value="13"/>
+        <Setter Property="Padding" Value="20 18 20 10"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
 
     
     <!-- Main -->
     <Style x:Key="OptionsPanel.Item" TargetType="{x:Type Grid}">
-        <Setter Property="Height" Value="65"/>
-        <Setter Property="Margin" Value="10 0 10 3"/>
+        <Setter Property="Height" Value="72"/>
+        <Setter Property="Margin" Value="20 0 20 6"/>
     </Style>
 
     <Style x:Key="OptionsPanel.Item.Header" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Title.TextBox.Static.Foreground}"  />
-        <Setter Property="Padding" Value="9 0"/>
+        <Setter Property="Padding" Value="0 0 0 6"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="OptionsPanel.TextBox.Rounded.Corners" TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Padding" Value="6 0 6 0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="10 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Grid.Row" Value="1"/>
 
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource OptionsPanel.NumericBox.Content.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource OptionsPanel.TextBox.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Foreground" Value="{StaticResource OptionsPanel.NumericBox.Content.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -861,7 +873,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5 5 0 0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -984,11 +996,11 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Padding" Value="12 7"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5 5 0 0" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -1015,9 +1027,9 @@
     </Style>
 
     <Style x:Key="OptionsPanel.Buttons.Grid" TargetType="{x:Type Grid}">
-        <Setter Property="Width" Value="320"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Margin" Value="0 7 0 10"/>
+        <Setter Property="Width" Value="360"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0 14 0 18"/>
         <Setter Property="Grid.Column" Value="1"/>
         <Setter Property="Grid.ColumnSpan" Value="4"/>
         <Setter Property="Grid.Row" Value="13"/>
@@ -1233,9 +1245,9 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Height" Value="32.5"/>
 
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource OptionsPanel.ComboBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource OptionsPanel.TextBox.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Foreground" Value="{StaticResource OptionsPanel.Title.TextBox.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -1619,7 +1631,7 @@
     <!-- #region Submenu -->
     <Style x:Key="Submenu.Border" TargetType="{x:Type Border}">
         <Setter Property="BorderBrush" Value="{StaticResource Menu.Static.Border}"/>
-        <Setter Property="BorderThickness" Value="0 1 0 1"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
     </Style>
 
     <Style x:Key="Submenu.StackPanel" TargetType="{x:Type StackPanel}">
@@ -1630,18 +1642,18 @@
     
     <!-- Group -->
     <Style x:Key="Submenu.Group.Grid" TargetType="{x:Type Grid}">
-        <Setter Property="Margin" Value="5 0 5 0"/>
+        <Setter Property="Margin" Value="8 0"/>
     </Style>
 
     <Style x:Key="Submenu.Group.Title.TextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
 
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource Submenu.Group.Title.Static.Foreground}"/>
         <Setter Property="Margin" Value="1"/>
-        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
     </Style>
 
@@ -1654,8 +1666,8 @@
     
     <!-- Group Separator -->
     <Style x:Key="Submenu.GroupSeparator" TargetType="{x:Type StackPanel}">
-        <Setter Property="Width" Value="35"/>
-        <Setter Property="Height" Value="100"/>
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="76"/>
         <Setter Property="Orientation" Value="Vertical"/>
     </Style>
 
@@ -1669,8 +1681,8 @@
     
     <!-- Button -->
     <Style x:Key="Submenu.Button" TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="85"/>
-        <Setter Property="Width" Value="125"/>
+        <Setter Property="Height" Value="72"/>
+        <Setter Property="Width" Value="104"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -1679,11 +1691,11 @@
         <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Padding" Value="8"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="6" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -1710,14 +1722,14 @@
     </Style>
 
     <Style x:Key="Submenu.Button.Grid" TargetType="{x:Type Grid}">
-        <Setter Property="Width" Value="125"/>
-        <Setter Property="Height" Value="85"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="54"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="Submenu.Button.Icon" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
         <Setter Property="Foreground" Value="{StaticResource Submenu.Button.Icon.Static.Foreground}"/>
         <Setter Property="TextAlignment" Value="Center"/>
@@ -1725,7 +1737,7 @@
     </Style>
 
     <Style x:Key="Submenu.Button.Text" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource Submenu.Button.Text.Static.Foreground}"/>
         <Setter Property="Grid.Row" Value="1"/>
         <Setter Property="TextAlignment" Value="Center"/>
@@ -1736,7 +1748,7 @@
     
     <!-- Toggle Button -->
     <Style x:Key="Submenu.Toggle.Button" TargetType="{x:Type ToggleButton}">
-        <Setter Property="Height" Value="85"/>
+        <Setter Property="Height" Value="72"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
@@ -1747,7 +1759,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="6" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -2430,7 +2442,7 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    <Rectangle Margin="2" RadiusX="5" RadiusY="5" SnapsToDevicePixels="true" Stroke="#FF43B5FF" StrokeThickness="2"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

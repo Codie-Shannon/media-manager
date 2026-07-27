@@ -23,6 +23,9 @@ Date: 2026-07-27
 - Release `--demo` creates five generated items, original synthetic covers, a log, and one automatic backup under a disposable temp profile.
 - `packaging/build-portable.ps1` produces a 51-file Release x64 portable folder, ZIP, and SHA-256 checksum with zero database, credential, log, cache, recovery, or personal-data artifacts.
 - The packaged demo remains responsive, starts zero new Chrome processes, and leaves the real database SHA-256 unchanged.
+- Group 6 Debug x64 rebuilds with zero errors and the complete stability executable passes.
+- The synthetic demo verifies the modern shell, six libraries, cards/details, empty state, settings, add forms, metadata-search state, and exact 13-image evidence set.
+- The real database SHA-256 remains `885446BEF1FDCB43678DE1D9542C3519F516AD0EB8E5B1055F5725D54957DB85`.
 
 ## Restored dependency relationship
 
@@ -50,7 +53,7 @@ Failures that occur before managed WPF startup, such as Windows being unable to 
 
 Warnings are retained in the baseline and will be triaged during restoration.
 
-The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Groups 4 and 5 introduce no new compiler-warning category.
+The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Groups 4-6 introduce no new compiler-warning category.
 
 ## Dependency audit notices
 

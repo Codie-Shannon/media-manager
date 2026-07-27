@@ -11,8 +11,8 @@
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080" SizeChanged="View_SizeChanged" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="42"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions >
@@ -202,7 +202,7 @@
         <!-- Elements -->
         <!-- ========================================================================== -->
         <!-- ========================================================================== -->
-        <ItemsControl x:Name="icItems" Grid.Row="2" Padding="2" Background="{StaticResource Application.Background}" ItemTemplateSelector="{Binding Source={StaticResource ElementSelector}}" ItemsSource="{Binding Composite}" MouseUp="ItemsControl_MouseUp">
+        <ItemsControl x:Name="icItems" Grid.Row="2" Padding="18" Background="{StaticResource Application.Background}" Template="{StaticResource Modern.LibraryItemsTemplate}" ItemTemplateSelector="{Binding Source={StaticResource ElementSelector}}" ItemsSource="{Binding Composite}" MouseUp="ItemsControl_MouseUp">
             <!-- Items Panel -->
             <!-- ============================== -->
             <!-- ============================== -->
@@ -223,7 +223,7 @@
                 <!-- ============================== -->
                 <DataTemplate x:Key="ItemTemplate" DataType="{x:Type Models:Movie}">
                     <!-- Cover Item -->
-                    <MediaControls:CoverItem Id="{Binding Id, Mode=OneTime}" Background="{Binding CoverImage, Mode=OneTime, Converter={StaticResource CoverImageConverter}, ConverterParameter='Movies'}" Click="Element_Click" ContextMenuService.ContextMenuOpening="Element_ContextMenuOpening">
+                    <MediaControls:CoverItem Id="{Binding Id, Mode=OneTime}" MName="{Binding Name, Mode=OneTime}" MCustomName="{Binding CustomName, Mode=OneTime}" Background="{Binding CoverImage, Mode=OneTime, Converter={StaticResource CoverImageConverter}, ConverterParameter='Movies'}" Click="Element_Click" ContextMenuService.ContextMenuOpening="Element_ContextMenuOpening">
                         <!-- IsSelected MultiBinding -->
                         <MediaControls:CoverItem.IsSelected>
                             <MultiBinding Converter="{StaticResource SelectionConverter}">
@@ -264,18 +264,6 @@
             </ItemsControl.Resources>
 
 
-            <!-- Items Control Template -->
-            <!-- ============================== -->
-            <!-- ============================== -->
-            <ItemsControl.Template>
-                <ControlTemplate TargetType="ItemsControl">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-                        <ScrollViewer CanContentScroll="True" Padding="{TemplateBinding Padding}" Focusable="False">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </ItemsControl.Template>
         </ItemsControl>
 
 
@@ -287,7 +275,7 @@
             <!-- Title -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:optTitle Content="Select a Element Type to Add"/>
+            <MediaControls:optTitle Content="Select an Element Type to Add"/>
 
 
             <!-- Icon Button Group -->

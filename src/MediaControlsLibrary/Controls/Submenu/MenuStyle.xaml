@@ -14,7 +14,12 @@
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="SubmenuTemplate" TargetType="{x:Type MediaControls:subMenu}">
         <Border Style="{StaticResource Submenu.Border}">
-            <StackPanel IsItemsHost="True" Style="{StaticResource Submenu.StackPanel}"/>
+            <ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                PanningMode="HorizontalOnly"
+                VerticalScrollBarVisibility="Disabled">
+                <StackPanel IsItemsHost="True" Style="{StaticResource Submenu.StackPanel}"/>
+            </ScrollViewer>
         </Border>
     </ControlTemplate>
 

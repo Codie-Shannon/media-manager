@@ -16,7 +16,9 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="SearchBoxMovieTemplate" TargetType="{x:Type MediaControls:optSearchBoxMovie}">
-        <StackPanel Style="{StaticResource OptionsPanel.Search.Content.StackPanel}">
+        <StackPanel
+            AutomationProperties.Name="{TemplateBinding Content}"
+            Style="{StaticResource OptionsPanel.Search.Content.StackPanel}">
             <Border Style="{StaticResource OptionsPanel.Search.Content.Image.Border}">
                 <Border.Background>
                     <!-- Image -->

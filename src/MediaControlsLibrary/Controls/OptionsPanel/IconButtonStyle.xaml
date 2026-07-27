@@ -14,7 +14,9 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="IconButtonTemplate" TargetType="{x:Type MediaControls:optIconButton}">
-        <Button Style="{StaticResource Options.Panel.IconButton}">
+        <Button
+            AutomationProperties.Name="{TemplateBinding Content}"
+            Style="{StaticResource Options.Panel.IconButton}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>

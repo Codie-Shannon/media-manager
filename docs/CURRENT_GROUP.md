@@ -1,28 +1,26 @@
 # Current group
 
-## Group 5 - Data, reliability, and release preparation
+## Group 6 - Modern interface
 
 Status: complete
 
 Completed:
 
-- Reviewed the established SQLite format and retained its integer identifiers and compatible tables.
-- Added schema version 1 and repair of tables missing from an interrupted first launch; no destructive migration was required.
-- Replaced executable-configuration rewriting with an in-memory profile connection path.
-- Added consistent database/image backups with manifests and SHA-256 file verification.
-- Added automatic daily backups, manual backup/restore, pre-restore safety backups, staged replacement, and rollback.
-- Added corrupt-database preservation and automatic recovery from the newest valid local backup.
-- Added path-redacted JSON catalog export and duplicate/missing file/directory health checks.
-- Added bounded archive validation and rejection of malformed or unsafe backups.
-- Added rolling local logging and application-level exception containment.
-- Added a generated synthetic `--demo` profile with five neutral library items and original covers.
-- Added a repeatable Release x64 portable-package script and verified its personal-data exclusions.
-- Added automated backup/restore, recovery, export, demo, invalid-backup, and 2,500-record scan coverage.
-- Kept the real user database byte-for-byte unchanged during all isolated verification.
+- Rebuilt the main window as a modern dark desktop shell with a fixed vertical library sidebar and clearer section header.
+- Added a shared color, typography, focus, status, password-field, tooltip, empty-state, and library-items design system.
+- Modernized navigation, command surfaces, cards, selected states, folder breadcrumbs, information panes, settings, provider configuration, loading, and forms.
+- Made card captions persistent and introduced reusable synthetic empty-state presentation.
+- Made long settings/forms scroll safely and removed empty multiselect scrollbar artifacts.
+- Prevented the legacy window overlay from tinting or intercepting active option panels.
+- Added accessible names to navigation, commands, cards, back/forward controls, provider fields, search, and dialog actions.
+- Added horizontal command-surface scrolling for constrained window widths.
+- Preserved every established workflow and provider/data boundary.
+- Captured the complete 13-image modern-state set for exact original/restored/modern comparisons.
+- Rebuilt Debug and Release x64, passed both stability executables, produced the portable package, and kept the real user database byte-for-byte unchanged.
 
 Next group:
 
-- Group 6 modernizes the application shell and all primary interaction surfaces, then captures exact before/after evidence.
+- Group 7 completes packaging, portfolio presentation, and project closure.
 
 Remaining roadmap:
 

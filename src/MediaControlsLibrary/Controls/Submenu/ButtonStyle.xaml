@@ -14,7 +14,7 @@
     <!-- ========================================================================== -->
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="ButtonTemplate"  TargetType="{x:Type MediaControls:subButton}">
-        <Button x:Name="PART_Content" Style="{StaticResource Submenu.Button}">
+        <Button x:Name="PART_Content" AutomationProperties.Name="{TemplateBinding Content}" Style="{StaticResource Submenu.Button}">
             <Grid Style="{StaticResource Submenu.Button.Grid}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.3*"/>

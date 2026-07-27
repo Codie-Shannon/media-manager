@@ -14,10 +14,21 @@
     <!-- ========================================================================== -->
     <ControlTemplate x:Key="PanelTemplate" TargetType="{x:Type MediaControls:optPanel}">
         <Grid x:Name="PART_Content" Style="{StaticResource OptionsPanel.Overlay}">
-            <Border x:Name="PART_Border" Style="{StaticResource OptionsPanel.Border}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding PanelWidth}" Height="{TemplateBinding PanelHeight}">
-                <StackPanel Style="{StaticResource OptionsPanel.Background}">
-                    <ItemsPresenter/>
-                </StackPanel>
+            <Border
+                x:Name="PART_Border"
+                Width="{TemplateBinding PanelWidth}"
+                Height="{TemplateBinding PanelHeight}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="14"
+                Style="{StaticResource OptionsPanel.Border}">
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Disabled"
+                    PanningMode="VerticalOnly"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel Style="{StaticResource OptionsPanel.Background}">
+                        <ItemsPresenter/>
+                    </StackPanel>
+                </ScrollViewer>
             </Border>
         </Grid>
     </ControlTemplate>
