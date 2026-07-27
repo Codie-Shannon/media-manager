@@ -36,14 +36,14 @@
                     </VisualState>
                     <VisualState x:Name="MouseOver">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#FF3D3D3D" Duration="0"/>
-                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="LightGray" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#263FAEFF" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                         </Storyboard>
                     </VisualState>
                     <VisualState x:Name="Active">
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#FF3D3D3D" Duration="0"/>
-                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="LightGray" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.Background).(SolidColorBrush.Color)" To="#263FAEFF" Duration="0"/>
+                            <ColorAnimation Storyboard.TargetProperty="(ComboBox.BorderBrush).(SolidColorBrush.Color)" To="#FF43B5FF" Duration="0"/>
                         </Storyboard>
                     </VisualState>
                 </VisualStateGroup>

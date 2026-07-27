@@ -105,6 +105,7 @@
 
         <!-- Desktop identity and primary navigation -->
         <Border
+            x:Name="SidebarChrome"
             Grid.RowSpan="2"
             Background="{StaticResource Modern.Sidebar}"
             BorderBrush="{StaticResource Modern.Border}"
@@ -197,6 +198,7 @@
 
         <!-- Current section header -->
         <Border
+            x:Name="SectionHeader"
             Grid.Column="1"
             Background="{StaticResource Modern.Header}"
             BorderBrush="{StaticResource Modern.Border}"

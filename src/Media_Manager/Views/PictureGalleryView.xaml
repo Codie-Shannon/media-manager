@@ -8,60 +8,30 @@
     <MediaControls:Viewer Background="{StaticResource Application.Background}" Loaded="View_Loaded" Unloaded="View_Unloaded" SizeChanged="View_SizeChanged" MouseEnter="Pane_MouseLeave">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="48"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="74"/>
             </Grid.RowDefinitions>
             <!-- Navigation Menu -->
             <!-- ========================================================================== -->
             <!-- ========================================================================== -->
-            <MediaControls:NavigationView x:Name="NavigationMenu" Grid.Row="0">
+            <MediaControls:NavigationView x:Name="NavigationMenu" Grid.Row="0" Style="{StaticResource Modern.PlayerNavigation}">
                 <!-- Back Button -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:NavigationViewBack x:Name="btnBack" Content="&#xE72B;" Click="Back_Click"/>
+                <MediaControls:NavigationViewBack x:Name="btnBack" Content="&#xE72B;" Style="{StaticResource Modern.PlayerNavigationBack}" Click="Back_Click"/>
 
 
                 <!-- Libraries Header -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:NavigationViewItemHeader Content="Libraries" Margin="0 0 5 0"/>
+                <MediaControls:NavigationViewItemHeader Content="PICTURE VIEWER" Style="{StaticResource Modern.PlayerNavigationHeader}"/>
 
 
                 <!-- Movies Button -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE8B2;" Label="Movies" IsEnabled="False"/>
-
-
-                <!-- TV Shows Button -->
-                <!-- ============================== -->
-                <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE786;" Label="TV Shows" IsEnabled="False"/>
-
-
-                <!-- Videos Button -->
-                <!-- ============================== -->
-                <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE714;" Label="Videos" IsEnabled="False"/>
-
-
-                <!-- Pictures Button -->
-                <!-- ============================== -->
-                <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE8B9;" Label="Pictures" IsSelected="True" ButtonBase.Click="Back_Click"/>
-
-
-                <!-- Music Button -->
-                <!-- ============================== -->
-                <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE8D6;" Label="Music" IsEnabled="False"/>
-
-
-                <!-- Games Button -->
-                <!-- ============================== -->
-                <!-- ============================== -->
-                <MediaControls:NavigationViewItem Icon="&#xE990;" Label="Games" IsEnabled="False"/>
+                <MediaControls:NavigationViewItem Icon="&#xE8B9;" Label="Pictures" IsSelected="True" Style="{StaticResource Modern.PlayerNavigationItem}" ButtonBase.Click="Back_Click"/>
             </MediaControls:NavigationView>
 
 
@@ -88,25 +58,25 @@
                 <!-- Back Button -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xe892;" Click="btnSkipItem_Click"/>
+                <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xe892;" ToolTip="Previous picture" Click="btnSkipItem_Click"/>
 
                 
                 <!-- Rotate Right -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:viewIconButton x:Name="btnRotateRight" Icon="&#xe80c;" FontSize="30" Click="btnRotate_Click"/>
+                <MediaControls:viewIconButton x:Name="btnRotateRight" Icon="&#xe80c;" FontSize="24" ToolTip="Rotate right" Click="btnRotate_Click"/>
 
                 
                 <!-- Rotate Left -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:viewIconButton x:Name="btnRotateLeft" Icon="&#xe80d;" FontSize="30" Click="btnRotate_Click"/>
+                <MediaControls:viewIconButton x:Name="btnRotateLeft" Icon="&#xe80d;" FontSize="24" ToolTip="Rotate left" Click="btnRotate_Click"/>
 
                 
                 <!-- Next Button -->
                 <!-- ============================== -->
                 <!-- ============================== -->
-                <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xe893;" Click="btnSkipItem_Click"/>
+                <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xe893;" ToolTip="Next picture" Click="btnSkipItem_Click"/>
             </MediaControls:viewBar>
 
 

@@ -1,6 +1,6 @@
-# Media Manager v1.0.0 release
+# Media Manager v1.0.1 release
 
-`v1.0.0` is the portfolio closure release for the recovered and modernised Media Manager origin project.
+`v1.0.1` is the corrected portfolio release for the recovered and modernised Media Manager origin project. It supersedes `v1.0.0` after a live review found that the original player shell was still constrained to the former application-header row.
 
 ## Release contents
 
@@ -10,6 +10,7 @@
 - local database, backup, restore, recovery, health-check, export, and log behavior;
 - disposable synthetic `--demo` mode;
 - original, restored, modern, and README contrast evidence;
+- corrected full-window video and picture viewers plus the modern inline music player;
 - automated stability executable in the solution;
 - repeatable portable ZIP pipeline and checksum.
 
@@ -40,6 +41,10 @@ The final Group 7 build record, ZIP SHA-256, file count, smoke-test outcome, rea
 - Provider credentials are optional and entered by the user after launch.
 - The application source currently has no reuse license; third-party components retain their own licenses and notices.
 - No GitHub Release binary is committed to the repository. The tag and reproducible packaging command identify the source release.
+
+## Historical checkpoints
+
+The group tags preserve the actual recovery sequence. In particular, `group-2-complete` means the solution could restore, build, launch, and produce the restored screenshot set. It was never the final product release: Groups 3-7 and the `v1.0.1` player correction contain the later functional, provider, reliability, interface, packaging, and playback work. The history is intentionally retained rather than rewritten.
 
 ## Public project copy
 

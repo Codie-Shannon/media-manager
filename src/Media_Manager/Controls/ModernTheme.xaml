@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Media_Manager.Controls">
+    xmlns:controls="clr-namespace:Media_Manager.Controls"
+    xmlns:mediaControls="clr-namespace:MediaControlsLibrary;assembly=MediaControlsLibrary">
 
     <SolidColorBrush x:Key="Modern.Window" Color="#FF0B1016"/>
     <SolidColorBrush x:Key="Modern.Sidebar" Color="#FF0E151D"/>
@@ -17,6 +18,8 @@
     <SolidColorBrush x:Key="Modern.TextMuted" Color="#FF7F8D9C"/>
     <SolidColorBrush x:Key="Modern.Success" Color="#FF73D475"/>
     <SolidColorBrush x:Key="Modern.Danger" Color="#FFFF6B76"/>
+    <SolidColorBrush x:Key="Modern.PlayerChrome" Color="#F2111922"/>
+    <SolidColorBrush x:Key="Modern.PlayerCanvas" Color="#FF05090E"/>
 
     <Style x:Key="Modern.WindowHeaderTitle" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{StaticResource Modern.TextPrimary}"/>
@@ -47,6 +50,252 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="LineHeight" Value="19"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="Modern.PlayerButton" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="46"/>
+        <Setter Property="Height" Value="46"/>
+        <Setter Property="Margin" Value="3 0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="{StaticResource Modern.TextPrimary}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        x:Name="Chrome"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource Modern.AccentSoft}"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource Modern.Accent}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Modern.Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource Modern.Accent}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Modern.Window}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource Modern.Accent}"/>
+                            <Setter TargetName="Chrome" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Modern.PlayerIconButtonTemplate" TargetType="{x:Type mediaControls:viewIconButton}">
+        <Button
+            x:Name="PART_Content"
+            AutomationProperties.Name="{TemplateBinding ToolTip}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            Content="{TemplateBinding Icon}"
+            FontSize="{TemplateBinding FontSize}"
+            Style="{StaticResource Modern.PlayerButton}"/>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type mediaControls:viewIconButton}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template" Value="{StaticResource Modern.PlayerIconButtonTemplate}"/>
+    </Style>
+
+    <ControlTemplate x:Key="Modern.PlayerBarTemplate" TargetType="{x:Type mediaControls:viewBar}">
+        <Border
+            Background="{StaticResource Modern.PlayerChrome}"
+            BorderBrush="{StaticResource Modern.Border}"
+            BorderThickness="0 1 0 0"
+            Padding="{TemplateBinding Padding}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="52"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsItemsHost="True"
+                    Orientation="Horizontal"/>
+                <mediaControls:viewIconButton
+                    x:Name="PART_Button"
+                    Grid.Column="1"
+                    PrimaryIcon="&#xE740;"
+                    SecondaryIcon="&#xE73F;"
+                    ToolTip="Toggle full screen"/>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type mediaControls:viewBar}">
+        <Setter Property="Panel.ZIndex" Value="1"/>
+        <Setter Property="Padding" Value="16 10"/>
+        <Setter Property="Template" Value="{StaticResource Modern.PlayerBarTemplate}"/>
+    </Style>
+
+    <Style TargetType="{x:Type mediaControls:Viewer}">
+        <Setter Property="Background" Value="{StaticResource Modern.PlayerCanvas}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Key="Modern.PlayerNavigationBack" TargetType="{x:Type mediaControls:NavigationViewBack}">
+        <Setter Property="Width" Value="42"/>
+        <Setter Property="Height" Value="38"/>
+        <Setter Property="Margin" Value="10 5 8 5"/>
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{StaticResource Modern.TextPrimary}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Modern.BorderStrong}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ToolTip" Value="Back to library"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type mediaControls:NavigationViewBack}">
+                    <Border
+                        x:Name="Chrome"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="9">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource Modern.AccentSoft}"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource Modern.Accent}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Modern.Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{StaticResource Modern.Accent}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Modern.Window}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Modern.PlayerNavigationHeader" TargetType="{x:Type mediaControls:NavigationViewItemHeader}">
+        <Setter Property="Margin" Value="0 0 12 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type mediaControls:NavigationViewItemHeader}">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="10"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource Modern.TextMuted}"
+                        Text="{TemplateBinding Content}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Modern.PlayerNavigationItem" TargetType="{x:Type mediaControls:NavigationViewItem}">
+        <Setter Property="Height" Value="38"/>
+        <Setter Property="Margin" Value="2 5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type mediaControls:NavigationViewItem}">
+                    <Button
+                        x:Name="PART_Content"
+                        Padding="12 0"
+                        AutomationProperties.Name="{TemplateBinding Label}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="1"
+                        FocusVisualStyle="{x:Null}"
+                        Foreground="{StaticResource Modern.TextSecondary}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
+                                    x:Name="Chrome"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="9"
+                                    Padding="{TemplateBinding Padding}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                                            Margin="0 0 7 0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="15"
+                                            Text="{TemplateBinding Tag}"/>
+                                        <ContentPresenter VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Tag>
+                            <Binding Path="Icon" RelativeSource="{RelativeSource TemplatedParent}"/>
+                        </Button.Tag>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Text="{TemplateBinding Label}"/>
+                    </Button>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Content" Property="Background" Value="{StaticResource Modern.SurfaceRaised}"/>
+                            <Setter TargetName="PART_Content" Property="BorderBrush" Value="{StaticResource Modern.BorderStrong}"/>
+                            <Setter TargetName="PART_Content" Property="Foreground" Value="{StaticResource Modern.TextPrimary}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Content" Property="Background" Value="{StaticResource Modern.AccentSoft}"/>
+                            <Setter TargetName="PART_Content" Property="BorderBrush" Value="{StaticResource Modern.Accent}"/>
+                            <Setter TargetName="PART_Content" Property="Foreground" Value="{StaticResource Modern.Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Content" Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Modern.PlayerNavigationTemplate" TargetType="{x:Type mediaControls:NavigationView}">
+        <Border
+            Background="{StaticResource Modern.PlayerChrome}"
+            BorderBrush="{StaticResource Modern.Border}"
+            BorderThickness="0 0 0 1">
+            <Grid>
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    IsItemsHost="True"
+                    Orientation="Horizontal"/>
+                <Button x:Name="PART_Button" Width="0" Height="0" IsHitTestVisible="False" Visibility="Hidden"/>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="Modern.PlayerNavigation" TargetType="{x:Type mediaControls:NavigationView}">
+        <Setter Property="Panel.ZIndex" Value="1"/>
+        <Setter Property="Template" Value="{StaticResource Modern.PlayerNavigationTemplate}"/>
     </Style>
 
     <Style x:Key="Modern.PasswordBox" TargetType="{x:Type PasswordBox}">

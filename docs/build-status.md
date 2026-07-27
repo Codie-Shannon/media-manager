@@ -35,6 +35,14 @@ Date: 2026-07-27
 - The final local ZIP SHA-256 is `7C0C01E005C9A022C4914A5921557AAB179BF5D39D6C3AFB7C0C0E32292C8306`.
 - The packaged v1.0.0 `--demo` launches responsively, starts zero new Chrome processes, contains zero forbidden runtime/private artifacts, and leaves the real user database byte-for-byte unchanged.
 - The real database SHA-256 remains `885446BEF1FDCB43678DE1D9542C3519F516AD0EB8E5B1055F5725D54957DB85`.
+- Live v1.0.1 verification found and corrected the legacy viewer-frame defect that constrained playback to the former 72-pixel header cell.
+- The corrected synthetic video player occupies the complete window, exposes a 1,860-pixel responsive seek surface at the verified maximized size, and returns to the Videos library without leaving the catalog shell displaced.
+- The synthetic music now-playing card and full-window picture viewer were visually checked; play/pause, stop, skip, volume, rotate, previous/next, back, and fullscreen controls remain wired.
+- Debug x64 and Release x64 rebuild with zero errors after the player correction, and both stability executables pass.
+- The v1.0.1 portable stage contains 55 files and 25,557,067 bytes, including 54 entries in its per-file SHA-256 manifest.
+- The v1.0.1 ZIP is 10,688,206 bytes with SHA-256 `803CFBB7A6D4B4C9D6C9E395196FBB093C93EA80BCE999190F760FF67638FE38`.
+- The packaged v1.0.1 `--demo` launches responsively, opens and exits the corrected video player, starts zero new Chrome processes, and contains zero forbidden runtime/private artifacts.
+- The real database SHA-256 still remains `885446BEF1FDCB43678DE1D9542C3519F516AD0EB8E5B1055F5725D54957DB85` after the v1.0.1 build and packaged-demo checks.
 
 ## Restored dependency relationship
 
@@ -45,6 +53,8 @@ The recovered project previously referenced a generated DLL through a path outsi
 ```
 
 Group 2 replaced it with a project reference to `src/MediaControlsLibrary/MediaControlsLibrary.csproj`. The application no longer depends on stale generated output.
+
+The `group-2-complete` tag is retained as a historical build/startup milestone. It is not the recommended application release and predates Groups 3-7 plus the v1.0.1 player correction.
 
 ## Restored startup
 
@@ -62,7 +72,7 @@ Failures that occur before managed WPF startup, such as Windows being unable to 
 
 Warnings are retained in the baseline and will be triaged during restoration.
 
-The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Groups 4-7 introduce no new compiler-warning category.
+The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Groups 4-7 and v1.0.1 introduce no new compiler-warning category.
 
 ## Dependency audit notices
 

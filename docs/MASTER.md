@@ -18,6 +18,8 @@ This repository follows seven required restoration groups. All seven are complet
 - Fix startup directory creation and surface startup failures.
 - Capture restored-state screenshots.
 
+Checkpoint meaning: `group-2-complete` proves reproducible restore, build, startup, and restored-state capture only. It is a historical milestone, not the recommended release and not a claim that the later functional-verification or player work was already complete.
+
 ## Group 3 - Verify and stabilize existing functionality
 
 - Test navigation, folders, media cards, details, add, edit, remove, delete, Explorer actions, and local launching/playback.
@@ -48,8 +50,8 @@ This repository follows seven required restoration groups. All seven are complet
 - Complete documentation, screenshots, release notes, demo video, and case study.
 - Tag and publish only after the repository and release package pass privacy and licensing review.
 
-Status: complete. The v1.0.0 portable ZIP, release proof, public case study, matched visual evidence, privacy audit, licensing record, and repository tags close the required plan.
+Status: complete. The corrected v1.0.1 portable ZIP, release proof, public case study, matched visual evidence, privacy audit, licensing record, and repository tags close the required plan.
 
 ## Optional Group 8
 
-Use only if legacy-data migration, damaged recovered files, or packaging complexity requires a separate closure pass. The v1.0.0 closure did not identify such a blocker.
+Use only if legacy-data migration, damaged recovered files, or packaging complexity requires a separate closure pass. The v1.0.1 correction did not identify such a blocker.

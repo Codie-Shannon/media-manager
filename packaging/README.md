@@ -1,6 +1,6 @@
 # Release packaging
 
-Group 7 publishes Media Manager v1.0.0 as a repeatable portable Release x64 ZIP:
+Media Manager v1.0.1 is published as a repeatable portable Release x64 ZIP:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File packaging\build-portable.ps1
@@ -18,4 +18,4 @@ The script:
 
 Normal launch creates a per-user LocalAppData profile. `Media_Manager.exe --demo` creates a disposable synthetic temp profile.
 
-The v1.0.0 release format is a portable ZIP. It is not code-signed and does not include an installer. Rebuild and verification details are recorded in `docs/release.md` and `docs/build-status.md`.
+The v1.0.1 release format is a portable ZIP. It is not code-signed and does not include an installer. Rebuild and verification details are recorded in `docs/release.md` and `docs/build-status.md`.

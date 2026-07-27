@@ -48,6 +48,9 @@ namespace Media_Manager.Views
         {
             //Set Viewer
             ViewerModel.SetViewer();
+
+            //Present the controls on entry; inactivity still hides them.
+            ViewerModel.MouseHover();
         }
 
         private void View_Unloaded(object sender, RoutedEventArgs e)

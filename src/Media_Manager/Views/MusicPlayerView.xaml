@@ -6,65 +6,85 @@
              xmlns:MediaControls="clr-namespace:MediaControlsLibrary;assembly=MediaControlsLibrary" xmlns:FFME="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.9*" />
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="5.3*"/>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <!-- Title -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <MediaControls:ipTitle x:Name="Title" Content="Hello World" Grid.Row="1" Grid.Column="1"/>
+    <Border
+        Padding="14"
+        Background="{StaticResource Modern.Surface}"
+        BorderBrush="{StaticResource Modern.Border}"
+        BorderThickness="1"
+        CornerRadius="14">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="14"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel>
+                <TextBlock
+                    FontSize="10"
+                    FontWeight="SemiBold"
+                    Foreground="{StaticResource Modern.Accent}"
+                    Text="NOW PLAYING"/>
+                <TextBlock
+                    Margin="0 4 0 0"
+                    FontSize="12"
+                    Foreground="{StaticResource Modern.TextMuted}"
+                    Text="Private, local playback"/>
+            </StackPanel>
 
+            <MediaControls:ipTitle
+                x:Name="Title"
+                Grid.Row="1"
+                Margin="0 10 0 0"
+                AutomationProperties.Name="Current track"
+                Content="Select a track"/>
 
-        <!-- Cover -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <MediaControls:ipCover x:Name="Cover" Source="../Textures/Music_Cover_Default.png" Grid.Row="3" Grid.Column="1"/>
+            <Border
+                Grid.Row="3"
+                Background="{StaticResource Modern.Window}"
+                BorderBrush="{StaticResource Modern.BorderStrong}"
+                BorderThickness="1"
+                CornerRadius="10">
+                <MediaControls:ipCover
+                    x:Name="Cover"
+                    Margin="1"
+                    Source="../Textures/Music_Cover_Default.png"
+                    Stretch="UniformToFill"/>
+            </Border>
 
-
-
-        <!-- Controls -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <!-- ============================== -->
-        <UniformGrid Grid.Row="5" HorizontalAlignment="Stretch" Rows="1" MaxWidth="325">
+            <UniformGrid Grid.Row="5" HorizontalAlignment="Center" Rows="1" MaxWidth="280">
             <!-- Previous Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xf8ac;" ButtonBase.Click="btnSkipItem_Click"/>
+            <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xf8ac;" ToolTip="Previous track" ButtonBase.Click="btnSkipItem_Click"/>
 
 
             <!-- Play / Pause Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnPlay" PrimaryIcon="&#xE769;" SecondaryIcon="&#xf5b0;" ButtonBase.Click="btnPlay_Click"/>
+            <MediaControls:viewIconButton x:Name="btnPlay" PrimaryIcon="&#xE769;" SecondaryIcon="&#xf5b0;" ToolTip="Play or pause" Background="{StaticResource Modern.AccentSoft}" BorderBrush="{StaticResource Modern.Accent}" ButtonBase.Click="btnPlay_Click"/>
 
 
             <!-- Stop Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnStop" Icon="&#xe002;" ButtonBase.Click="btnStop_Click"/>
+            <MediaControls:viewIconButton x:Name="btnStop" Icon="&#xe002;" ToolTip="Stop" ButtonBase.Click="btnStop_Click"/>
 
 
             <!-- Next Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xf8ad;" ButtonBase.Click="btnSkipItem_Click"/>
+            <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xf8ad;" ToolTip="Next track" ButtonBase.Click="btnSkipItem_Click"/>
 
 
             <!-- Volume Bar -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewVolumeBar x:Name="VolumeBar" MuteClick="VolumeBar_MuteClick" ValueUpdated="VolumeBar_ValueUpdated"/>
-        </UniformGrid>
+            <MediaControls:viewVolumeBar x:Name="VolumeBar" ToolTip="Volume" MuteClick="VolumeBar_MuteClick" ValueUpdated="VolumeBar_ValueUpdated"/>
+            </UniformGrid>
 
 
 
@@ -72,6 +92,7 @@
         <!-- ============================== -->
         <!-- ============================== -->
         <!-- ============================== -->
-        <FFME:MediaElement x:Name="meMusic" Visibility="Hidden" LoadedBehavior="Manual"/>
-    </Grid>
+            <FFME:MediaElement x:Name="meMusic" Visibility="Hidden" LoadedBehavior="Manual"/>
+        </Grid>
+    </Border>
 </UserControl>

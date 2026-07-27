@@ -42,12 +42,12 @@
         
 
         <!-- Viewer -->
-        <SolidColorBrush x:Key="Viewer.VideoSlider.Static.Background" Color="White"/>
-        <SolidColorBrush x:Key="Viewer.VideoSlider.MouseOver.Background" Color="#FFCDCDCD"/>
-        <SolidColorBrush x:Key="Viewer.VideoSlider.Pressed.Background" Color="#FFB3B3B3"/>
-        <SolidColorBrush x:Key="Viewer.VideoSlider.Disabled.Background" Color="DarkGray"/>
-        <SolidColorBrush x:Key="Viewer.VideoSlider.Track.Background" Color="White"/>
-        <SolidColorBrush x:Key="Viewer.VideoSlider.Track.Fill" Color="Red"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.Static.Background" Color="#FFF5F8FB"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.MouseOver.Background" Color="#FF43B5FF"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.Pressed.Background" Color="#FF8AD4FF"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.Disabled.Background" Color="#FF7F8D9C"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.Track.Background" Color="#FF3A4B5D"/>
+        <SolidColorBrush x:Key="Viewer.VideoSlider.Track.Fill" Color="#FF43B5FF"/>
         <!-- #endregion Colour Brushes -->
 
 
@@ -151,7 +151,7 @@
 
         <ControlTemplate x:Key="Viewer.VideoSlider.Default" TargetType="{x:Type Thumb}">
             <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-                <Path x:Name="grip" Data="M 0,0 C0,0 11,0 11,0 11,0 11,18 11,18 11,18 0,18 0,18 0,18 0,0 0,0 z" Fill="{StaticResource Viewer.VideoSlider.Static.Background}" Stretch="Fill" SnapsToDevicePixels="True" UseLayoutRounding="True" VerticalAlignment="Center"/>
+                <Ellipse x:Name="grip" Width="14" Height="14" Fill="{StaticResource Viewer.VideoSlider.Static.Background}" Stroke="{StaticResource Modern.PlayerCanvas}" StrokeThickness="2" SnapsToDevicePixels="True"/>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
@@ -176,14 +176,14 @@
                     </Grid.RowDefinitions>
                     <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
                     <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
-                    <Border x:Name="TrackBackground" Background="{StaticResource Viewer.VideoSlider.Track.Background}" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="center">
-                        <Canvas Margin="-6,-1">
-                            <Rectangle x:Name="PART_SelectionRange" Fill="{StaticResource Viewer.VideoSlider.Track.Fill}" Height="5.0" Visibility="Hidden"/>
+                    <Border x:Name="TrackBackground" Background="{StaticResource Viewer.VideoSlider.Track.Background}" CornerRadius="2" Height="4" Margin="7,0" Grid.Row="1" VerticalAlignment="Center">
+                        <Canvas Margin="-7,0">
+                            <Rectangle x:Name="PART_SelectionRange" Fill="{StaticResource Viewer.VideoSlider.Track.Fill}" Height="4" RadiusX="2" RadiusY="2" Visibility="Hidden"/>
                         </Canvas>
                     </Border>
                     <Track x:Name="PART_Track" Grid.Row="1">
                         <Track.Thumb>
-                            <Thumb x:Name="Thumb" Focusable="False" Height="18" OverridesDefaultStyle="True" Template="{StaticResource Viewer.VideoSlider.Default}" VerticalAlignment="Center" Width="11"/>
+                            <Thumb x:Name="Thumb" Focusable="False" Height="18" OverridesDefaultStyle="True" Template="{StaticResource Viewer.VideoSlider.Default}" VerticalAlignment="Center" Width="18"/>
                         </Track.Thumb>
                     </Track>
                 </Grid>
@@ -197,15 +197,17 @@
                     <Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocused" Value="true">
-                    <Setter Property="Foreground" TargetName="Thumb" Value="Blue"/>
+                    <Setter Property="Foreground" TargetName="Thumb" Value="{StaticResource Modern.Accent}"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
         <Style x:Key="Viewer.VideoSlider" TargetType="{x:Type Slider}">
             <Setter Property="Stylus.IsPressAndHoldEnabled" Value="True"/>
-            <Setter Property="Width" Value="1775"/>
-            <Setter Property="Height" Value="50"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Margin" Value="24 0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Template" Value="{StaticResource Viewer.VideoSlider.Template}"/>
             <Setter Property="IsMoveToPointEnabled" Value="True"/>
             <Setter Property="IsSelectionRangeEnabled" Value="True"/>

@@ -4,6 +4,19 @@
 
 No unreleased changes.
 
+## 1.0.1 - 2026-07-27
+
+### Player correction
+
+- Fixed the viewer frame so video and picture playback occupy the complete window instead of being constrained to the former 72-pixel shell-header row.
+- Restored the catalog shell exactly when leaving a full-window viewer.
+- Rebuilt video transport chrome around a responsive seek bar, modern controls, compact playback navigation, fullscreen, volume, skip, and play/pause states.
+- Rebuilt the inline music player as a modern now-playing card while preserving local playback, stop, skip, and volume behavior.
+- Modernized the picture viewer header and rotate, previous, next, and fullscreen controls.
+- Added meaningful tooltips and automation names to player actions.
+- Added publication-safe synthetic screenshots for all three corrected playback surfaces.
+- Clarified that the Group 2 tag is a historical build/startup checkpoint, not the current release or a claim of completed functional verification.
+
 ## 1.0.0 - 2026-07-27
 
 ### Portfolio and release closure

@@ -8,60 +8,42 @@
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080">
     <MediaControls:Viewer Loaded="View_Loaded" Unloaded="View_Unloaded" SizeChanged="View_SizeChanged" MouseEnter="Pane_MouseLeave">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="84"/>
         </Grid.RowDefinitions>
         <!-- Navigation Menu -->
         <!-- ========================================================================== -->
         <!-- ========================================================================== -->
-        <MediaControls:NavigationView x:Name="NavigationMenu" Grid.Row="0">
+        <MediaControls:NavigationView x:Name="NavigationMenu" Grid.Row="0" Style="{StaticResource Modern.PlayerNavigation}">
             <!-- Back Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:NavigationViewBack x:Name="btnBack" Content="&#xE72B;" Click="Back_Click"/>
+            <MediaControls:NavigationViewBack x:Name="btnBack" Content="&#xE72B;" Style="{StaticResource Modern.PlayerNavigationBack}" Click="Back_Click"/>
 
 
             <!-- Libraries Header -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:NavigationViewItemHeader Content="Libraries" Margin="0 0 5 0"/>
+            <MediaControls:NavigationViewItemHeader Content="NOW PLAYING" Style="{StaticResource Modern.PlayerNavigationHeader}"/>
 
 
             <!-- Movies Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:NavigationViewItem x:Name="btnMovies" Icon="&#xE8B2;" Label="Movies" ButtonBase.Click="Back_Click"/>
+            <MediaControls:NavigationViewItem x:Name="btnMovies" Icon="&#xE8B2;" Label="Movies" Style="{StaticResource Modern.PlayerNavigationItem}" ButtonBase.Click="Back_Click"/>
 
 
             <!-- TV Shows Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:NavigationViewItem x:Name="btnTVShows" Icon="&#xE786;" Label="TV Shows" ButtonBase.Click="Back_Click"/>
+            <MediaControls:NavigationViewItem x:Name="btnTVShows" Icon="&#xE786;" Label="TV Shows" Style="{StaticResource Modern.PlayerNavigationItem}" ButtonBase.Click="Back_Click"/>
 
 
             <!-- Videos Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:NavigationViewItem x:Name="btnVideos" Icon="&#xE714;" Label="Videos" ButtonBase.Click="Back_Click"/>
-
-
-            <!-- Pictures Button -->
-            <!-- ============================== -->
-            <!-- ============================== -->
-            <MediaControls:NavigationViewItem Icon="&#xE8B9;" Label="Pictures" IsEnabled="False"/>
-
-
-            <!-- Music Button -->
-            <!-- ============================== -->
-            <!-- ============================== -->
-            <MediaControls:NavigationViewItem Icon="&#xE8D6;" Label="Music" IsEnabled="False"/>
-
-
-            <!-- Games Button -->
-            <!-- ============================== -->
-            <!-- ============================== -->
-            <MediaControls:NavigationViewItem Icon="&#xE990;" Label="Games" IsEnabled="False"/>
+            <MediaControls:NavigationViewItem x:Name="btnVideos" Icon="&#xE714;" Label="Videos" Style="{StaticResource Modern.PlayerNavigationItem}" ButtonBase.Click="Back_Click"/>
         </MediaControls:NavigationView>
 
 
@@ -76,11 +58,11 @@
         <!-- Bar -->
         <!-- ========================================================================== -->
         <!-- ========================================================================== -->
-        <MediaControls:viewBar x:Name="Bar" Click="btnFullscreen_Click" Grid.Row="2">
+        <MediaControls:viewBar x:Name="Bar" Click="btnFullscreen_Click" Grid.Row="2" Padding="18 22 14 8">
             <!-- Play / Pause -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnPlay" PrimaryIcon="&#xE769;" SecondaryIcon="&#xf5b0;" Click="btnPlay_Click"/>
+            <MediaControls:viewIconButton x:Name="btnPlay" PrimaryIcon="&#xE769;" SecondaryIcon="&#xf5b0;" ToolTip="Play or pause" Click="btnPlay_Click"/>
 
 
             <!-- Movie Controls -->
@@ -88,13 +70,13 @@
             <!-- Go Backward 10 Seconds -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnReverse" Icon="&#xed3c;" Click="btnPositionSkip_Click"/>
+            <MediaControls:viewIconButton x:Name="btnReverse" Icon="&#xed3c;" ToolTip="Back 10 seconds" Click="btnPositionSkip_Click"/>
 
             
             <!-- Go Forward 30 Seconds -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnForward" Icon="&#xed3d;" Click="btnPositionSkip_Click"/>
+            <MediaControls:viewIconButton x:Name="btnForward" Icon="&#xed3d;" ToolTip="Forward 30 seconds" Click="btnPositionSkip_Click"/>
             <!-- ================================================================================ -->
             
             
@@ -103,27 +85,30 @@
             <!-- Previous Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xe892;" Click="btnSkipItem_Click"/>
+            <MediaControls:viewIconButton x:Name="btnPrevious" Icon="&#xe892;" ToolTip="Previous item" Click="btnSkipItem_Click"/>
 
             
             <!-- Next Button -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xe893;" Click="btnSkipItem_Click"/>
+            <MediaControls:viewIconButton x:Name="btnNext" Icon="&#xe893;" ToolTip="Next item" Click="btnSkipItem_Click"/>
             <!-- ================================================================================ -->
             
 
             <!-- Volume -->
             <!-- ============================== -->
             <!-- ============================== -->
-            <MediaControls:viewVolumeBar x:Name="VolumeBar" MuteClick="VolumeBar_MuteClick" ValueUpdated="VolumeBar_ValueUpdated"/>
-
-            
-            <!-- Duration Slider -->
-            <!-- ============================== -->
-            <!-- ============================== -->
-            <Slider x:Name="videoSlider" Style="{DynamicResource Viewer.VideoSlider}" ValueChanged="videoSlider_ValueChanged"/>
+            <MediaControls:viewVolumeBar x:Name="VolumeBar" ToolTip="Volume" MuteClick="VolumeBar_MuteClick" ValueUpdated="VolumeBar_ValueUpdated"/>
         </MediaControls:viewBar>
+
+        <!-- Responsive duration control sits above the transport row. -->
+        <Slider x:Name="videoSlider"
+                Grid.Row="2"
+                Panel.ZIndex="2"
+                VerticalAlignment="Top"
+                AutomationProperties.Name="Playback position"
+                Style="{DynamicResource Viewer.VideoSlider}"
+                ValueChanged="videoSlider_ValueChanged"/>
 
 
 

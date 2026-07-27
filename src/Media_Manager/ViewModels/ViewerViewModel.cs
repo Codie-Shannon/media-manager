@@ -67,11 +67,16 @@ namespace Media_Manager
             //Get The Main Window
             Window mainWindow = Application.Current.MainWindow;
 
-            //Hide Navigation Menu For Main Window
-            (mainWindow.FindName("NavigationMenu") as NavigationView).Visibility = Visibility.Collapsed;
+            //Hide the catalog shell so the viewer can use the complete window.
+            (mainWindow.FindName("SidebarChrome") as Border).Visibility = Visibility.Collapsed;
+            (mainWindow.FindName("SectionHeader") as Border).Visibility = Visibility.Collapsed;
 
-            //Set Grid Row of Frame to 0
-            Grid.SetRow((ContentControl)mainWindow.FindName("Frame"), 0);
+            //Expand the frame across both shell rows and columns.
+            ContentControl frame = (ContentControl)mainWindow.FindName("Frame");
+            Grid.SetRow(frame, 0);
+            Grid.SetRowSpan(frame, 2);
+            Grid.SetColumn(frame, 0);
+            Grid.SetColumnSpan(frame, 2);
         }
 
 
@@ -83,11 +88,16 @@ namespace Media_Manager
             //Get The Main Window
             Window mainWindow = Application.Current.MainWindow;
 
-            //Show Navigation Menu For Main Window
-            (mainWindow.FindName("NavigationMenu") as NavigationView).Visibility = Visibility.Visible;
+            //Restore the catalog shell.
+            (mainWindow.FindName("SidebarChrome") as Border).Visibility = Visibility.Visible;
+            (mainWindow.FindName("SectionHeader") as Border).Visibility = Visibility.Visible;
 
-            //Set Grid Row of Frame to 1
-            Grid.SetRow((ContentControl)mainWindow.FindName("Frame"), 1);
+            //Return the frame to the catalog content cell.
+            ContentControl frame = (ContentControl)mainWindow.FindName("Frame");
+            Grid.SetRow(frame, 1);
+            Grid.SetRowSpan(frame, 1);
+            Grid.SetColumn(frame, 1);
+            Grid.SetColumnSpan(frame, 1);
 
             //Set Pane IsViewerControlOpen Boolean to False
             Pane.isViewerControlsOpen = false;

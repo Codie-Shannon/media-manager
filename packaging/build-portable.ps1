@@ -110,7 +110,7 @@ Copy-Item -LiteralPath (Join-Path $repositoryRoot "docs\release.md") `
     -Destination (Join-Path $stageDirectory "RELEASE-NOTES.md")
 
 $portableReadme = @"
-Media Manager v1.0.0 portable build
+Media Manager v1.0.1 portable build
 
 Run Media_Manager.exe for a normal local profile.
 Run Media_Manager.exe --demo for a disposable synthetic demo profile.
@@ -128,7 +128,7 @@ Set-Content -LiteralPath (
     -Encoding UTF8
 Set-Content -LiteralPath (
     Join-Path $stageDirectory "VERSION.txt") `
-    -Value "1.0.0" `
+    -Value "1.0.1" `
     -Encoding ASCII
 
 $forbidden = Get-ChildItem -LiteralPath $stageDirectory -Force -Recurse |

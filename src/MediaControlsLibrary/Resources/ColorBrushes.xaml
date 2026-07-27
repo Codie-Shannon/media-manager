@@ -273,11 +273,11 @@
     
     <!-- #region Viewer -->
     <!-- Viewer -->
-    <SolidColorBrush x:Key="Viewer.Background" Color="Black"/>
+    <SolidColorBrush x:Key="Viewer.Background" Color="#FF05090E"/>
 
     
     <!-- Bar -->
-    <SolidColorBrush x:Key="Viewer.Bar.Background" Color="#FF191919"/>
+    <SolidColorBrush x:Key="Viewer.Bar.Background" Color="#F2111922"/>
 
     
     <!-- Volume Bar -->
@@ -286,28 +286,28 @@
     <!-- Volume Bar Button -->
     <SolidColorBrush x:Key="VolumeBar.Static.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="VolumeBar.Static.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="VolumeBar.Static.Foreground" Color="White"/>
-    <SolidColorBrush x:Key="VolumeBar.MouseOver.Background" Color="#FF3D3D3D"/>
-    <SolidColorBrush x:Key="VolumeBar.MouseOver.Border" Color="LightGray"/>
-    <SolidColorBrush x:Key="VolumeBar.Pressed.Background" Color="#FF6E6E6E"/>
+    <SolidColorBrush x:Key="VolumeBar.Static.Foreground" Color="#FFF5F8FB"/>
+    <SolidColorBrush x:Key="VolumeBar.MouseOver.Background" Color="#263FAEFF"/>
+    <SolidColorBrush x:Key="VolumeBar.MouseOver.Border" Color="#FF43B5FF"/>
+    <SolidColorBrush x:Key="VolumeBar.Pressed.Background" Color="#FF43B5FF"/>
     <SolidColorBrush x:Key="VolumeBar.Pressed.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="VolumeBar.Disabled.Background" Color="#FF3D3D3D"/>
     <SolidColorBrush x:Key="VolumeBar.Disabled.Border" Color="#FFADB2B5"/>
     <SolidColorBrush x:Key="VolumeBar.Disabled.Foreground" Color="#FF838383"/>
     
     <!-- Volume Bar Menu -->
-    <SolidColorBrush x:Key="VolumeBar.Menu.Static.Background" Color="#FF191919"/>
+    <SolidColorBrush x:Key="VolumeBar.Menu.Static.Background" Color="#FF18232F"/>
 
     <!-- Volume Bar Slider -->
-    <SolidColorBrush x:Key="VolumeBar.Slider.Static.Background" Color="White"/>
-    <SolidColorBrush x:Key="VolumeBar.Slider.MouseOver.Background" Color="#FFCDCDCD"/>
-    <SolidColorBrush x:Key="VolumeBar.Slider.Pressed.Background" Color="#FFB3B3B3"/>
-    <SolidColorBrush x:Key="VolumeBar.Slider.Disabled.Background" Color="DarkGray"/>
-    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Background" Color="White"/>
-    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Fill" Color="Red"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Static.Background" Color="#FFF5F8FB"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.MouseOver.Background" Color="#FF43B5FF"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Pressed.Background" Color="#FF8AD4FF"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Disabled.Background" Color="#FF7F8D9C"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Background" Color="#FF3A4B5D"/>
+    <SolidColorBrush x:Key="VolumeBar.Slider.Track.Fill" Color="#FF43B5FF"/>
 
     <!-- Volume Bar Value Text -->
-    <SolidColorBrush x:Key="VolumeBar.Value.Text.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="VolumeBar.Value.Text.Foreground" Color="#FFF5F8FB"/>
     <!-- #endregion Viewer -->
     
     

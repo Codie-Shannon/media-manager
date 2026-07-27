@@ -2,7 +2,7 @@
 
 Privacy-first C# WPF media library organiser - restored from my diploma-era origin project and modernized with supported metadata providers.
 
-Media Manager is a local Windows desktop application for organising, enriching, searching, and maintaining personal media libraries. The completed `v1.0.0` portfolio release preserves the recovered application and its original custom-controls architecture while presenting a verified, modern product.
+Media Manager is a local Windows desktop application for organising, enriching, searching, and maintaining personal media libraries. The corrected `v1.0.1` portfolio release preserves the recovered application and its original custom-controls architecture while presenting a verified, modern product.
 
 > **The application that taught me how to build software, completed by the developer it helped me become.**
 
@@ -21,6 +21,8 @@ Read the full [original application history](docs/original-application-history.m
 [![Media Manager add-movie workflow across original, restored, and modern stages](docs/screenshot-groups/contrast/02-add-movie-three-stage.png)](docs/screenshot-groups/contrast/02-add-movie-three-stage.png)
 
 [![Media Manager selected-card and details workflow: original compared with modern](docs/screenshot-groups/contrast/03-details-original-to-modern.png)](docs/screenshot-groups/contrast/03-details-original-to-modern.png)
+
+[![Media Manager modern video, music, and picture playback surfaces](docs/screenshot-groups/contrast/04-modern-playback-surfaces.png)](docs/screenshot-groups/contrast/04-modern-playback-surfaces.png)
 
 The evidence is deliberately matched:
 
@@ -113,7 +115,7 @@ The suite covers destructive hierarchy behavior, malformed data, provider mappin
 
 ## Release status
 
-`v1.0.0` closes the seven-group recovery and modernisation plan:
+`v1.0.1` is the current release. It retains the seven-group recovery and modernisation closure and adds the corrective player pass:
 
 1. preserved recovered baseline;
 2. restored reproducible application builds;
@@ -122,6 +124,8 @@ The suite covers destructive hierarchy behavior, malformed data, provider mappin
 5. strengthened local data safety and portable release behavior;
 6. completed the modern interface;
 7. completed packaging, public documentation, visual evidence, privacy/licensing review, and release proof.
+
+The historical `group-2-complete` tag records the point where clean builds and startup were restored. It is not a release recommendation and does not claim the later functional, provider, data-safety, interface, or player verification completed by subsequent groups.
 
 See [release notes](docs/release.md), [changelog](CHANGELOG.md), and [master plan](docs/MASTER.md).
 
