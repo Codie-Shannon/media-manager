@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Data reliability and Release preparation
+
+- Stopped rewriting the executable configuration file at startup; SQLite now uses an in-memory profile connection path.
+- Recorded the reviewed compatible schema as version 1 without changing existing identifiers or legacy column names.
+- Added integrity-checked `.mmbak` backups containing a consistent SQLite snapshot, managed cover images, a manifest, and per-file SHA-256 hashes.
+- Added daily automatic backups with seven-snapshot retention, pre-restore safety backups, staged restore, rollback, corrupt-database preservation, and startup recovery from the newest valid backup.
+- Added Settings actions for manual backup, restore, path-redacted JSON catalog export, and duplicate/missing-path health checks.
+- Added bounded archive extraction with path-traversal, size, entry-count, schema-version, integrity, and hash verification.
+- Added rolling local application logs and containment for dispatcher, background-task, and unhandled failures.
+- Added a generated `--demo` profile with neutral media placeholders and original synthetic cover art.
+- Added a repeatable portable Release script that excludes databases, credentials, logs, caches, backups, debug symbols, and personal data.
+- Removed the unused advisory-bearing `System.Text.Json` 7.0.3 package from the application runtime.
+- Added backup/restore, corruption recovery, invalid-backup, catalog-redaction, demo-profile, and 2,500-record scan tests.
+
 ### Metadata provider architecture
 
 - Replaced active IMDb, Metacritic, and IGDB browser automation with `IMetadataProvider`.

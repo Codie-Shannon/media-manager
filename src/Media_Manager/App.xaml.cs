@@ -1,7 +1,12 @@
 using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
+using Media_Manager.Data;
 
 namespace Media_Manager
 {
@@ -9,6 +14,12 @@ namespace Media_Manager
     {
         public App()
         {
+            DispatcherUnhandledException += OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException +=
+                OnUnhandledException;
+            TaskScheduler.UnobservedTaskException +=
+                OnUnobservedTaskException;
+
             //Show Splash Screen for 3 Seconds
             System.Threading.Thread.Sleep(3000);
         }
@@ -19,13 +30,41 @@ namespace Media_Manager
 
             try
             {
+                ConfigureDemoMode(e.Args);
                 CreateAndShowMainWindow();
                 ShutdownMode = ShutdownMode.OnMainWindowClose;
             }
             catch (Exception exception)
             {
+                ApplicationLog.Error(
+                    "Media Manager startup failed.",
+                    exception.GetBaseException());
                 ShowStartupError(exception.GetBaseException());
             }
+        }
+
+        private static void ConfigureDemoMode(string[] arguments)
+        {
+            if (arguments == null
+                || !arguments.Any(value => string.Equals(
+                    value,
+                    "--demo",
+                    StringComparison.OrdinalIgnoreCase)))
+            {
+                return;
+            }
+
+            string demoDirectory = Path.Combine(
+                Path.GetTempPath(),
+                "MediaManagerDemoProfile");
+            Environment.SetEnvironmentVariable(
+                "MEDIA_MANAGER_DATA_DIRECTORY",
+                demoDirectory,
+                EnvironmentVariableTarget.Process);
+            Environment.SetEnvironmentVariable(
+                "MEDIA_MANAGER_DEMO_MODE",
+                "1",
+                EnvironmentVariableTarget.Process);
         }
 
         private void CreateAndShowMainWindow()
@@ -88,6 +127,41 @@ namespace Media_Manager
             MainWindow = errorWindow;
             ShutdownMode = ShutdownMode.OnMainWindowClose;
             errorWindow.Show();
+        }
+
+        private static void OnUnhandledException(
+            object sender,
+            UnhandledExceptionEventArgs e)
+        {
+            ApplicationLog.Error(
+                "An unhandled application exception occurred.",
+                e.ExceptionObject as Exception);
+        }
+
+        private static void OnUnobservedTaskException(
+            object sender,
+            UnobservedTaskExceptionEventArgs e)
+        {
+            ApplicationLog.Error(
+                "An unobserved background task failed.",
+                e.Exception);
+            e.SetObserved();
+        }
+
+        private static void OnDispatcherUnhandledException(
+            object sender,
+            DispatcherUnhandledExceptionEventArgs e)
+        {
+            ApplicationLog.Error(
+                "A user-interface operation failed.",
+                e.Exception);
+            MessageBox.Show(
+                "Media Manager contained an unexpected error. "
+                + "Your library was not deleted. Details were written to the local log.",
+                "Media Manager Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            e.Handled = true;
         }
     }
 }

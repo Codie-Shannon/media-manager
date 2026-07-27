@@ -1,0 +1,36 @@
+{
+  "format": "Media Manager synthetic demo catalog",
+  "formatVersion": 1,
+  "pathsRedacted": true,
+  "notice": "Generated names and paths only. No external artwork or personal data.",
+  "items": [
+    {
+      "library": "Movies",
+      "name": "Sample Horizon",
+      "path": "sample://Movies/sample-horizon.mp4",
+      "cover": "sample://Movies/sample-horizon.png"
+    },
+    {
+      "library": "Videos",
+      "name": "Sample Reel",
+      "path": "sample://Videos/sample-reel.mp4",
+      "cover": "sample://Videos/sample-reel.png"
+    },
+    {
+      "library": "Pictures",
+      "name": "Sample Frame",
+      "path": "sample://Pictures/sample-frame.png"
+    },
+    {
+      "library": "Music",
+      "name": "Sample Tone",
+      "path": "sample://Music/sample-tone.wav"
+    },
+    {
+      "library": "Games",
+      "name": "Sample Quest",
+      "path": "sample://Games/sample-quest.cmd",
+      "cover": "sample://Games/sample-quest.png"
+    }
+  ]
+}

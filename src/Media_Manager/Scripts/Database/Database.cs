@@ -4,7 +4,6 @@ using System.Data;
 using System;
 using System.Linq;
 using System.Data.SQLite;
-using System.Configuration;
 using Media_Manager.Models;
 using System.Collections.Generic;
 using MediaControlsLibrary.Models;
@@ -15,6 +14,8 @@ namespace Media_Manager
 {
     public class Database
     {
+        public const int SchemaVersion = 1;
+
         #region Variables
         // Database Variables
         // =======================================================
@@ -42,6 +43,9 @@ namespace Media_Manager
         private static readonly List<string> pictureFields = new List<string> { "OwnerId", "isFavourite", "FilePath", "CoverImage", "CustomName", "Name", "Width", "Height", "Format", "FileSize", "CreationTime", "CreationDate", "ColourSpace", "BitDepth", "CompMode" };
         private static readonly List<string> musicFields = new List<string> { "OwnerId", "isFavourite", "FilePath", "CoverImage", "CustomName", "Name", "Duration", "Format", "FileSize", "CreationTime", "CreationDate", "SampleRate", "AudioChannels", "CompMode" };
         private static readonly List<string> gameFields = new List<string> { "OwnerId", "isFavourite", "BaseDirectory", "FilePath", "CoverImage", "CustomName", "Name", "Format", "FileSize", "CreationTime", "CreationDate", "IGDBLink", "Publisher", "ReleaseDate", "Type", "UserScore", "UserReviewCount", "CriticScore", "CriticReviewCount", "SerializedGenres", "SerializedAvailablePlatforms" };
+        private static string connectionString;
+
+        public static string DatabasePath { get; private set; }
         #endregion Variables
 
 
@@ -49,28 +53,15 @@ namespace Media_Manager
         // Connection String
         // =======================================================
         // =======================================================
-        private static string LoadConnectionString(string id = "Default")
+        private static string LoadConnectionString()
         {
-            //Return app.config connection string
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
-        }
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException(
+                    "The Media Manager database has not been initialized.");
+            }
 
-        private static void UpdateConnectionString(string id, string connectionstring)
-        {
-            //Create Configuration Object from App.Config
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            //Get Connection Strings Section from Configuration Object
-            ConnectionStringsSection connectionStringsSection = (ConnectionStringsSection)configuration.GetSection("connectionStrings");
-
-            //Set Configuration String
-            connectionStringsSection.ConnectionStrings[id].ConnectionString = connectionstring;
-
-            //Save Configuration
-            configuration.Save();
-
-            //Refresh the Connection Strings Section of App.Config
-            ConfigurationManager.RefreshSection("connectionStrings");
+            return connectionString;
         }
 
 
@@ -79,7 +70,7 @@ namespace Media_Manager
         // Initialize
         // =======================================================
         // =======================================================
-        public static void Initialize(string localdata, string connectionstringId = "Default")
+        public static void Initialize(string localdata)
         {
             if (string.IsNullOrWhiteSpace(localdata))
             {
@@ -91,37 +82,56 @@ namespace Media_Manager
 
             //Initialize Variables
             string name = "MediaManagerDB.db";
-            string databasePath = Path.Combine(localdata, name);
-            string connectionstring = $"Data Source={databasePath};Version=3;";
-
-            //Update Connection String
-            UpdateConnectionString(connectionstringId, connectionstring);
+            DatabasePath = Path.Combine(Path.GetFullPath(localdata), name);
+            connectionString = $"Data Source={DatabasePath};Version=3;";
 
             //Check if the Database File Does Not Exist
-            if (!File.Exists(databasePath))
+            if (!File.Exists(DatabasePath))
             {
                 //Create Database File
-                SQLiteConnection.CreateFile(databasePath);
+                SQLiteConnection.CreateFile(DatabasePath);
+            }
 
-                //Initialize Connection String
-                SQLiteConnection connection = new SQLiteConnection(connectionstring);
-
-                //Open Connection String
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
                 connection.Open();
+                int currentVersion;
+                using (SQLiteCommand command = new SQLiteCommand(
+                    "PRAGMA user_version;",
+                    connection))
+                {
+                    currentVersion = Convert.ToInt32(
+                        command.ExecuteScalar());
+                }
 
-                //Create Table
-                CreateTable(FormatCreate(tblFolders, ElementType.Folders, MediaType.Null, FolderType.Folders), ref connection);
-                CreateTable(FormatCreate(tblMovies, ElementType.Files, MediaType.Movies), ref connection);
-                CreateTable(FormatCreate(tblTVShowFolders, ElementType.Folders, MediaType.Null, FolderType.TVShowFolders), ref connection);
-                CreateTable(FormatCreate(tblSeasonFolders, ElementType.Folders, MediaType.Null, FolderType.SeasonFolders), ref connection);
-                CreateTable(FormatCreate(tblEpisodes, ElementType.Files, MediaType.Episodes), ref connection);
-                CreateTable(FormatCreate(tblVideos, ElementType.Files, MediaType.Videos), ref connection);
-                CreateTable(FormatCreate(tblPictures, ElementType.Files, MediaType.Pictures), ref connection);
-                CreateTable(FormatCreate(tblMusic, ElementType.Files, MediaType.Music), ref connection);
-                CreateTable(FormatCreate(tblGames, ElementType.Files, MediaType.Games), ref connection);
+                if (currentVersion > SchemaVersion)
+                {
+                    throw new InvalidOperationException(
+                        "This library database was created by a newer "
+                        + "version of Media Manager.");
+                }
 
-                //Close Connection
-                connection.Close();
+                // CREATE TABLE IF NOT EXISTS repairs an interrupted first launch
+                // without changing established columns or identifiers.
+                CreateTable(FormatCreate(tblFolders, ElementType.Folders, MediaType.Null, FolderType.Folders), connection);
+                CreateTable(FormatCreate(tblMovies, ElementType.Files, MediaType.Movies), connection);
+                CreateTable(FormatCreate(tblTVShowFolders, ElementType.Folders, MediaType.Null, FolderType.TVShowFolders), connection);
+                CreateTable(FormatCreate(tblSeasonFolders, ElementType.Folders, MediaType.Null, FolderType.SeasonFolders), connection);
+                CreateTable(FormatCreate(tblEpisodes, ElementType.Files, MediaType.Episodes), connection);
+                CreateTable(FormatCreate(tblVideos, ElementType.Files, MediaType.Videos), connection);
+                CreateTable(FormatCreate(tblPictures, ElementType.Files, MediaType.Pictures), connection);
+                CreateTable(FormatCreate(tblMusic, ElementType.Files, MediaType.Music), connection);
+                CreateTable(FormatCreate(tblGames, ElementType.Files, MediaType.Games), connection);
+
+                if (currentVersion < SchemaVersion)
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(
+                        $"PRAGMA user_version = {SchemaVersion};",
+                        connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
         }
 
@@ -129,13 +139,12 @@ namespace Media_Manager
         // Create
         // =======================================================
         // =======================================================
-        private static void CreateTable(string table, ref SQLiteConnection connection)
+        private static void CreateTable(string table, SQLiteConnection connection)
         {
-            //Create Command for Table String
-            SQLiteCommand command = new SQLiteCommand(table, connection);
-
-            //Execute Command for Table String
-            command.ExecuteNonQuery();
+            using (SQLiteCommand command = new SQLiteCommand(table, connection))
+            {
+                command.ExecuteNonQuery();
+            }
         }
 
 
@@ -660,7 +669,7 @@ namespace Media_Manager
             }
 
             //Initialize tablestring
-            string tablestring = $"create table {name} (";
+            string tablestring = $"create table if not exists {name} (";
 
             //Loop Through Elements in values List
             for (int i = 0; i < values.Count(); i++)

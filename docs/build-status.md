@@ -17,6 +17,12 @@ Date: 2026-07-27
 - Mocked TMDB/IGDB, cancellation, cache, encrypted-setting, and manual-fallback tests pass.
 - A supported live IGDB authentication/search smoke test passes without printing or committing credentials.
 - The isolated Group 4 application launches with zero new Chrome processes and leaves the real user database unchanged.
+- Group 5 keeps SQLite profile paths in memory and records the reviewed compatible format as schema version 1.
+- Disposable tests pass consistent backup/restore, managed-cover recovery, corrupt-database recovery, invalid-backup rejection, path-redacted export, and duplicate/missing-path reporting.
+- A synthetic library with more than 2,500 records completes the practical health-scan gate.
+- Release `--demo` creates five generated items, original synthetic covers, a log, and one automatic backup under a disposable temp profile.
+- `packaging/build-portable.ps1` produces a 51-file Release x64 portable folder, ZIP, and SHA-256 checksum with zero database, credential, log, cache, recovery, or personal-data artifacts.
+- The packaged demo remains responsive, starts zero new Chrome processes, and leaves the real database SHA-256 unchanged.
 
 ## Restored dependency relationship
 
@@ -44,8 +50,8 @@ Failures that occur before managed WPF startup, such as Windows being unable to 
 
 Warnings are retained in the baseline and will be triaged during restoration.
 
-The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Group 4 introduces no new compiler-warning category.
+The verified full-solution rebuild currently reports the recovered warning set and zero errors in each configuration. Groups 4 and 5 introduce no new compiler-warning category.
 
 ## Dependency audit notices
 
-`AngleSharp` was used only by the removed legacy scraping stack and is no longer referenced by the application. The recovered `System.Text.Json` 7.0.3 reference still reports a high-severity advisory and must be upgraded or removed before release.
+`AngleSharp` was used only by the removed legacy scraping stack and is no longer referenced by the application. Group 5 also removes the unused `System.Text.Json` 7.0.3 reference and package, so its high-severity advisory is no longer present in application runtime output.

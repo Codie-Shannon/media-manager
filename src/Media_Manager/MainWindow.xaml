@@ -163,6 +163,14 @@
             <!-- ============================== -->
             <MediaControls:optButton Content="Configure Metadata Providers" ButtonBase.Click="btnProviders_Click"/>
 
+            <!-- Data reliability -->
+            <!-- ============================== -->
+            <MediaControls:optButton Content="Back Up Library" ButtonBase.Click="btnBackupLibrary_Click"/>
+            <MediaControls:optButton Content="Restore Library Backup" ButtonBase.Click="btnRestoreLibrary_Click"/>
+            <MediaControls:optButton Content="Export Catalog (Paths Redacted)" ButtonBase.Click="btnExportCatalog_Click"/>
+            <MediaControls:optButton Content="Check Library Health" ButtonBase.Click="btnCheckLibrary_Click"/>
+            <TextBlock x:Name="txtDataStatus" Margin="20 4 20 12" TextWrapping="Wrap" Foreground="White"/>
+
             
             <!-- Movies Browse Location -->
             <!-- ============================== -->

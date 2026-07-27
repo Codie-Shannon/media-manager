@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Media_Manager;
+using Media_Manager.Data;
 using Media_Manager.Metadata;
 using Media_Manager.Models;
 
@@ -25,7 +28,9 @@ namespace MediaManager.StabilityTests
                 TestTVShowOwnershipIsolation(testDirectory);
                 TestNullAndMissingMetadataFormatting();
                 TestProviderArchitectureAsync(testDirectory).GetAwaiter().GetResult();
-                Console.WriteLine("PASS: Group 3 and Group 4 stability tests");
+                TestDataReliability(testDirectory);
+                Console.WriteLine(
+                    "PASS: Group 3, Group 4, and Group 5 stability tests");
                 return 0;
             }
             catch (Exception exception)
@@ -106,6 +111,246 @@ values
             await TestCancellationAsync();
             TestMetadataCache(testDirectory);
             await TestEncryptedSettingsAndManualFallbackAsync(testDirectory);
+        }
+
+        private static void TestDataReliability(string testDirectory)
+        {
+            string dataDirectory = Path.Combine(testDirectory, "data-reliability");
+            ApplicationLog.Initialize(dataDirectory);
+            LibraryDataService.Initialize(dataDirectory);
+            Database.Initialize(dataDirectory);
+
+            string mediaDirectory = Path.Combine(dataDirectory, "SyntheticMedia");
+            string imageDirectory = Path.Combine(dataDirectory, "Images", "Video Preview");
+            Directory.CreateDirectory(mediaDirectory);
+            Directory.CreateDirectory(imageDirectory);
+            string existingFile = Path.Combine(mediaDirectory, "existing.mp4");
+            string missingFile = Path.Combine(mediaDirectory, "missing.mp4");
+            string cover = Path.Combine(imageDirectory, "cover.png");
+            File.WriteAllText(existingFile, "synthetic media");
+            File.WriteAllText(cover, "synthetic cover");
+
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            {
+                Execute(connection, $@"
+insert into Videos
+    (Id, OwnerId, isFavourite, FilePath, CoverImage, Name, Width, Height,
+     Duration, Framerate, Format, FileSize, CreationTime, CreationDate)
+values
+    (1, 0, 0, '{Sql(existingFile)}', '{Sql(cover)}', 'Existing One',
+     '1920', '1080', 1, 24, 'MP4', 1, '12:00:00', '2026-01-01');
+insert into Videos
+    (Id, OwnerId, isFavourite, FilePath, CoverImage, Name, Width, Height,
+     Duration, Framerate, Format, FileSize, CreationTime, CreationDate)
+values
+    (2, 0, 0, '{Sql(existingFile)}', '{Sql(cover)}', 'Existing Duplicate',
+     '1920', '1080', 1, 24, 'MP4', 1, '12:00:00', '2026-01-01');
+insert into Videos
+    (Id, OwnerId, isFavourite, FilePath, CoverImage, Name, Width, Height,
+     Duration, Framerate, Format, FileSize, CreationTime, CreationDate)
+values
+    (3, 0, 0, '{Sql(missingFile)}', '{Sql(cover)}', 'Missing File',
+     '1920', '1080', 1, 24, 'MP4', 1, '12:00:00', '2026-01-01');");
+                using (SQLiteCommand version = new SQLiteCommand(
+                    "PRAGMA user_version;",
+                    connection))
+                {
+                    AssertEqual(
+                        Database.SchemaVersion.ToString(),
+                        $"{version.ExecuteScalar()}");
+                }
+            }
+
+            LibraryHealthReport health = LibraryDataService.CheckLibrary(
+                CancellationToken.None);
+            AssertEqual("1", health.MissingPaths.ToString());
+            AssertEqual("1", health.DuplicatePaths.ToString());
+
+            string catalog = Path.Combine(testDirectory, "catalog.json");
+            LibraryDataService.ExportCatalog(catalog);
+            string catalogText = File.ReadAllText(catalog);
+            if (catalogText.IndexOf(
+                    dataDirectory,
+                    StringComparison.OrdinalIgnoreCase) >= 0
+                || catalogText.IndexOf(
+                    "sample://Videos/",
+                    StringComparison.Ordinal) < 0)
+            {
+                throw new InvalidOperationException(
+                    "Privacy-safe catalog paths were not redacted.");
+            }
+
+            string backup = Path.Combine(testDirectory, "library.mmbak");
+            LibraryDataService.CreateBackup(backup);
+            if (!File.Exists(backup))
+            {
+                throw new InvalidOperationException(
+                    "Library backup was not created.");
+            }
+
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            {
+                Execute(connection, "delete from Videos;");
+            }
+            File.Delete(cover);
+            LibraryDataService.RestoreBackup(backup);
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            {
+                AssertCount(connection, "Videos", 1, 1);
+                AssertCount(connection, "Videos", 2, 1);
+                AssertCount(connection, "Videos", 3, 1);
+            }
+            if (!File.Exists(cover))
+            {
+                throw new InvalidOperationException(
+                    "Managed cover image was not restored.");
+            }
+
+            string automatic =
+                LibraryDataService.CreateAutomaticBackupIfDue();
+            string sameAutomatic =
+                LibraryDataService.CreateAutomaticBackupIfDue();
+            AssertEqual(automatic, sameAutomatic);
+
+            File.WriteAllText(Database.DatabasePath, "corrupt database");
+            if (!LibraryDataService.RecoverDatabaseIfRequired())
+            {
+                throw new InvalidOperationException(
+                    "Corrupt database was not recovered.");
+            }
+            Database.Initialize(dataDirectory);
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            {
+                AssertCount(connection, "Videos", 1, 1);
+            }
+
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            using (SQLiteTransaction transaction = connection.BeginTransaction())
+            {
+                for (int index = 10; index < 2510; index++)
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(
+                        @"insert into Videos
+                        (Id, OwnerId, isFavourite, FilePath, CoverImage, Name,
+                         Width, Height, Duration, Framerate, Format, FileSize,
+                         CreationTime, CreationDate)
+                        values
+                        (@id, 0, 0, @path, '', @name, '1', '1', 1, 1,
+                         'MP4', 1, '12:00:00', '2026-01-01')",
+                        connection,
+                        transaction))
+                    {
+                        command.Parameters.AddWithValue("@id", index);
+                        command.Parameters.AddWithValue(
+                            "@path",
+                            Path.Combine(
+                                mediaDirectory,
+                                $"large-{index}.mp4"));
+                        command.Parameters.AddWithValue(
+                            "@name",
+                            $"Synthetic {index}");
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                transaction.Commit();
+            }
+
+            Stopwatch scanTimer = Stopwatch.StartNew();
+            LibraryHealthReport largeHealth =
+                LibraryDataService.CheckLibrary(CancellationToken.None);
+            scanTimer.Stop();
+            if (largeHealth.TotalRecords < 2503
+                || scanTimer.Elapsed > TimeSpan.FromSeconds(30))
+            {
+                throw new InvalidOperationException(
+                    "Large-library health scan did not complete practically.");
+            }
+
+            string invalidBackup = Path.Combine(
+                testDirectory,
+                "invalid.mmbak");
+            File.WriteAllText(invalidBackup, "not a zip");
+            try
+            {
+                LibraryDataService.RestoreBackup(invalidBackup);
+                throw new InvalidOperationException(
+                    "Invalid backup was accepted.");
+            }
+            catch (LibraryDataException)
+            {
+            }
+
+            string traversalBackup = Path.Combine(
+                testDirectory,
+                "traversal.mmbak");
+            string escapedPath = Path.Combine(
+                testDirectory,
+                "escaped.txt");
+            using (ZipArchive archive = ZipFile.Open(
+                traversalBackup,
+                ZipArchiveMode.Create))
+            {
+                ZipArchiveEntry entry = archive.CreateEntry(
+                    "../escaped.txt");
+                using (StreamWriter writer = new StreamWriter(entry.Open()))
+                {
+                    writer.Write("unsafe");
+                }
+            }
+            try
+            {
+                LibraryDataService.RestoreBackup(traversalBackup);
+                throw new InvalidOperationException(
+                    "Traversal backup was accepted.");
+            }
+            catch (LibraryDataException)
+            {
+            }
+            if (File.Exists(escapedPath))
+            {
+                throw new InvalidOperationException(
+                    "Traversal backup escaped its staging directory.");
+            }
+
+            string demoDirectory = Path.Combine(testDirectory, "demo");
+            ApplicationLog.Initialize(demoDirectory);
+            LibraryDataService.Initialize(demoDirectory);
+            Database.Initialize(demoDirectory);
+            LibraryDataService.EnsureDemoLibrary();
+            LibraryHealthReport demoHealth =
+                LibraryDataService.CheckLibrary(CancellationToken.None);
+            if (demoHealth.TotalRecords < 5 || demoHealth.MissingPaths != 0)
+            {
+                throw new InvalidOperationException(
+                    "Synthetic demo profile is incomplete.");
+            }
+
+            string futureSchemaDirectory = Path.Combine(
+                testDirectory,
+                "future-schema");
+            Database.Initialize(futureSchemaDirectory);
+            using (SQLiteConnection connection = Open(Database.DatabasePath))
+            {
+                Execute(
+                    connection,
+                    $"PRAGMA user_version = {Database.SchemaVersion + 1};");
+            }
+            try
+            {
+                Database.Initialize(futureSchemaDirectory);
+                throw new InvalidOperationException(
+                    "A database from a newer application version was accepted.");
+            }
+            catch (InvalidOperationException exception)
+            {
+                if (exception.Message.IndexOf(
+                        "newer version",
+                        StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    throw;
+                }
+            }
         }
 
         private static async Task TestTmdbProviderAsync()
@@ -309,6 +554,11 @@ values
                 throw new InvalidOperationException(
                     $"Expected '{expected}', actual '{actual}'.");
             }
+        }
+
+        private static string Sql(string value)
+        {
+            return (value ?? string.Empty).Replace("'", "''");
         }
 
         private sealed class QueueTransport : IMetadataTransport

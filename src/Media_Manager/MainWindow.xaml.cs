@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Media_Manager.ViewModels;
 using System.Collections.Generic;
 using Media_Manager.Metadata;
+using System;
+using System.Threading;
+using Media_Manager.Data;
+using Microsoft.Win32;
 
 namespace Media_Manager
 {
@@ -71,11 +75,33 @@ namespace Media_Manager
                     applicationName)
                 : Path.GetFullPath(dataDirectoryOverride);
 
+            ApplicationLog.Initialize(localdata);
+            LibraryDataService.Initialize(localdata);
+            bool recovered = LibraryDataService.RecoverDatabaseIfRequired();
+
             //Initialize metadata providers and their local encrypted settings/cache.
             MetadataService.Initialize(localdata);
 
             //Initialize Database
             Database.Initialize(localdata);
+            if (string.Equals(
+                Environment.GetEnvironmentVariable("MEDIA_MANAGER_DEMO_MODE"),
+                "1",
+                StringComparison.Ordinal))
+            {
+                LibraryDataService.EnsureDemoLibrary();
+            }
+
+            try
+            {
+                LibraryDataService.CreateAutomaticBackupIfDue();
+            }
+            catch (Exception exception)
+            {
+                ApplicationLog.Error(
+                    "The automatic startup backup could not be created.",
+                    exception);
+            }
 
             //Initialize Save Locations
             Properties.Settings.Default.Movies = CreateSaveLocation(localdata + @"\Images\Movie Covers\");
@@ -86,6 +112,9 @@ namespace Media_Manager
             Properties.Settings.Default.Pictures = CreateSaveLocation(localdata + @"\Images\Image Preview\");
             Properties.Settings.Default.Music = CreateSaveLocation(localdata + @"\Images\Music Covers\");
             Properties.Settings.Default.Games = CreateSaveLocation(localdata + @"\Images\Game Covers\");
+            txtDataStatus.Text = recovered
+                ? "The library database was recovered from a verified backup."
+                : "Automatic daily backups are enabled.";
         }
 
 
@@ -149,6 +178,171 @@ namespace Media_Manager
         {
             ProviderSettingsPanel.Visibility = Visibility.Collapsed;
             BrowseLocationsPanel.Visibility = Visibility.Visible;
+        }
+
+        private async void btnBackupLibrary_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Title = "Back Up Media Manager Library",
+                Filter = "Media Manager Backup (*.mmbak)|*.mmbak",
+                DefaultExt = ".mmbak",
+                AddExtension = true,
+                FileName =
+                    $"MediaManager-{DateTime.Now:yyyy-MM-dd-HHmm}.mmbak"
+            };
+            if (dialog.ShowDialog(this) != true)
+            {
+                return;
+            }
+
+            ToggleState.Loading(true);
+            try
+            {
+                await Task.Run(
+                    () => LibraryDataService.CreateBackup(dialog.FileName));
+                txtDataStatus.Text =
+                    $"Backup completed: {dialog.FileName}";
+                CustomMessageBox.ShowOK(
+                    "The library database and managed cover images were backed up successfully. Provider credentials and logs were not included.",
+                    "Backup Complete",
+                    "OK",
+                    MessageBoxImage.Information);
+            }
+            catch (Exception exception)
+            {
+                ShowDataError("The backup could not be created.", exception);
+            }
+            finally
+            {
+                ToggleState.Loading(false);
+            }
+        }
+
+        private async void btnRestoreLibrary_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Title = "Restore Media Manager Library",
+                Filter = "Media Manager Backup (*.mmbak)|*.mmbak",
+                Multiselect = false
+            };
+            if (dialog.ShowDialog(this) != true)
+            {
+                return;
+            }
+
+            MessageBoxResult confirmation = CustomMessageBox.ShowYesNo(
+                "Restoring replaces the current library database and managed cover images. A safety backup will be created first. Continue?",
+                "Restore Library",
+                "Restore",
+                "Cancel",
+                MessageBoxImage.Warning);
+            if (confirmation != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            ToggleState.Loading(true);
+            try
+            {
+                await Task.Run(
+                    () => LibraryDataService.RestoreBackup(dialog.FileName));
+                CustomMessageBox.ShowOK(
+                    "Restore completed successfully. Media Manager will now close so the restored library can be loaded cleanly.",
+                    "Restore Complete",
+                    "Close",
+                    MessageBoxImage.Information);
+                Application.Current.Shutdown();
+            }
+            catch (Exception exception)
+            {
+                ShowDataError("The backup could not be restored.", exception);
+                ToggleState.Loading(false);
+            }
+        }
+
+        private async void btnExportCatalog_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Title = "Export Media Manager Catalog with Redacted Paths",
+                Filter = "JSON Catalog (*.json)|*.json",
+                DefaultExt = ".json",
+                AddExtension = true,
+                FileName =
+                    $"MediaManager-catalog-{DateTime.Now:yyyy-MM-dd}.json"
+            };
+            if (dialog.ShowDialog(this) != true)
+            {
+                return;
+            }
+
+            ToggleState.Loading(true);
+            try
+            {
+                await Task.Run(
+                    () => LibraryDataService.ExportCatalog(
+                        dialog.FileName,
+                        false));
+                txtDataStatus.Text =
+                    $"Path-redacted catalog exported: {dialog.FileName}";
+                CustomMessageBox.ShowOK(
+                    "Catalog export completed. Filesystem paths were replaced with portable sample references. Media titles and metadata remain in the export.",
+                    "Export Complete",
+                    "OK",
+                    MessageBoxImage.Information);
+            }
+            catch (Exception exception)
+            {
+                ShowDataError("The catalog could not be exported.", exception);
+            }
+            finally
+            {
+                ToggleState.Loading(false);
+            }
+        }
+
+        private async void btnCheckLibrary_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            ToggleState.Loading(true);
+            try
+            {
+                LibraryHealthReport report = await Task.Run(
+                    () => LibraryDataService.CheckLibrary(
+                        CancellationToken.None));
+                txtDataStatus.Text = report.Summary;
+                CustomMessageBox.ShowOK(
+                    report.Summary
+                    + (report.IsHealthy
+                        ? "\nNo duplicate or missing paths were found."
+                        : "\nUnavailable items remain in the library and can be edited or removed without crashing the app."),
+                    report.IsHealthy
+                        ? "Library Healthy"
+                        : "Library Check Complete",
+                    "OK",
+                    report.IsHealthy
+                        ? MessageBoxImage.Information
+                        : MessageBoxImage.Warning);
+            }
+            catch (Exception exception)
+            {
+                ShowDataError(
+                    "The library health check could not be completed.",
+                    exception);
+            }
+            finally
+            {
+                ToggleState.Loading(false);
+            }
         }
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
@@ -268,6 +462,17 @@ namespace Media_Manager
             }
 
             return saveLocation;
+        }
+
+        private void ShowDataError(string message, Exception exception)
+        {
+            ApplicationLog.Error(message, exception);
+            txtDataStatus.Text = message;
+            CustomMessageBox.ShowOK(
+                message + "\n\n" + exception.GetBaseException().Message,
+                "Data Error",
+                "OK",
+                MessageBoxImage.Error);
         }
         #endregion Methods
     }
