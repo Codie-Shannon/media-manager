@@ -47,6 +47,7 @@ The final Group 7 build record, ZIP SHA-256, file count, smoke-test outcome, rea
 - Windows may show an unrecognised-publisher warning.
 - Provider credentials are optional and entered by the user after launch.
 - The application source currently has no reuse license; third-party components retain their own licenses and notices.
+- The GitHub `v1.0.1` release includes the verified portable ZIP, its external SHA-256 checksum, and `RELEASE-MANIFEST.txt`.
 - Release binaries are generated and verified artifacts, never committed source files.
 
 ## Historical checkpoints

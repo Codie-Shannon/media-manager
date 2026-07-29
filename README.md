@@ -146,7 +146,7 @@ The suite covers destructive hierarchy behavior, malformed data, provider mappin
 6. completed the modern interface;
 7. completed packaging, public documentation, visual evidence, privacy/licensing review, and release proof.
 
-The historical `group-2-complete` tag records the point where clean builds and startup were restored. Groups 3–5 were intended to establish the fully functional pre-modern baseline, but a later live audit found that their playback check had verified open/return behavior without detecting the constrained full-window player layout. The defect was corrected and evidenced in `v1.0.1`; the separate original-interface Student Projects edition will receive the same functional correction without the modern theme.
+The historical `group-2-complete` tag records the point where clean builds and startup were restored. Groups 3–5 were intended to establish the fully functional pre-modern baseline, but a later live audit found that their playback check had verified open/return behavior without detecting the constrained full-window player layout. The defect was corrected and evidenced in `v1.0.1`; the separate original-interface Student Projects edition now carries the equivalent functional correction and independent acceptance evidence without adopting the modern theme.
 
 See [release notes](docs/release.md), [changelog](CHANGELOG.md), [closed current bucket](docs/CURRENT_BUCKET.md), and [master plan](docs/MASTER.md).
 

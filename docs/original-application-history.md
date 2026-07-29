@@ -33,9 +33,9 @@ This repository does not rewrite the project as if it were newly invented. It pr
 
 ## Two project lines
 
-The recovered lineage is being completed in two forms:
+The recovered lineage is complete in two forms:
 
-- **Original-interface functional restoration:** a separate Student Projects edition based on the pre-modern Group 4 snapshot. It retains the original visual design while receiving the remaining functional corrections and dedicated verification evidence.
+- **Original-interface functional restoration:** a separate, acceptance-complete Student Projects edition based on the pre-modern Group 4 snapshot. It retains the original visual design while carrying the remaining functional corrections and dedicated verification evidence.
 - **Modern release:** the corrected `v1.0.1` application in this repository, with supported metadata providers, strengthened local data handling, the modern interface, verified player surfaces, packaging, and release evidence.
 
 The original screenshots and walkthrough demonstrate authentic recovered interface states. They do not claim that the recovered snapshot was fully functional.

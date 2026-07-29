@@ -6,7 +6,7 @@ All destructive and generated-data checks used disposable temp profiles. The rea
 
 ## Acceptance clarification
 
-Group 5 was intended to close the fully functional pre-modern acceptance gate. Its data-reliability, packaging, privacy, and isolation checks remain valid. The broader completion label also relied on the Group 3 playback check, however, and that check only covered opening and returning from player surfaces. It missed the constrained full-window player layout later found after `v1.0.0`. The historical record is retained; the defect was corrected and evidenced in modern `v1.0.1`, and the separate original-interface Student Projects edition will receive the functional fix and a new complete verification pass.
+Group 5 was intended to close the fully functional pre-modern acceptance gate. Its data-reliability, packaging, privacy, and isolation checks remain valid. The broader completion label also relied on the Group 3 playback check, however, and that check only covered opening and returning from player surfaces. It missed the constrained full-window player layout later found after `v1.0.0`. The historical record is retained; the defect was corrected and evidenced in modern `v1.0.1`, and the separate original-interface Student Projects edition now carries the corresponding functional fix and complete independent verification.
 
 ## Matrix
 
