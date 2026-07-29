@@ -12,7 +12,7 @@ $repositoryRoot = [System.IO.Path]::GetFullPath(
     (Join-Path $scriptDirectory ".."))
 $solutionPath = Join-Path $repositoryRoot "MediaManager.sln"
 $nugetConfigPath = Join-Path $repositoryRoot "NuGet.Config"
-$packagesDirectory = Join-Path $repositoryRoot "packages"
+$packagesDirectory = Join-Path $repositoryRoot "src\packages"
 $packagingScript = Join-Path $repositoryRoot "packaging\build-portable.ps1"
 
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
