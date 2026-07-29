@@ -35,3 +35,5 @@ The seven required recovery and modernisation groups are complete. `v1.0.1` is t
 Historical wording is now explicit: the damaged-drive snapshot was partially functional; Group 2 proves reproducible build, startup, and pictured interface states; and the Groups 3-5 playback check missed the full-window layout issue later closed by `v1.0.1`. A separate original-interface functional restoration is being completed for the Student Projects repository with its own verification evidence.
 
 Future improvements are documented as transparent opportunities in the README rather than an unfinished mandatory roadmap.
+
+The repository's ongoing state and permitted maintenance boundaries are now recorded in [CURRENT_BUCKET.md](CURRENT_BUCKET.md).

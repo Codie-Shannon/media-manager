@@ -2,7 +2,12 @@
 
 ## Unreleased
 
-No unreleased changes.
+### Verification and maintenance
+
+- Added a Windows GitHub Actions release gate for every main-branch push and pull request.
+- Consolidated restore, Debug/Release builds and tests, privacy scanning, packaging, manifest validation, checksum validation, and clean-tree verification in `tools/verify-release.ps1`.
+- Added a private security-reporting policy and an explicit closed-state maintenance bucket.
+- Exposed the release manifest beside the portable ZIP for CI artifacts and release attachment.
 
 ## 1.0.1 - 2026-07-27
 

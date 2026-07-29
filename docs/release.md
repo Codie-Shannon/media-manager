@@ -26,9 +26,16 @@ Outputs:
 artifacts\MediaManager-portable-x64\
 artifacts\MediaManager-portable-x64.zip
 artifacts\MediaManager-portable-x64.zip.sha256
+artifacts\RELEASE-MANIFEST.txt
 ```
 
 Run `Media_Manager.exe --demo` from the extracted folder for an isolated walkthrough. The package contains no user database, real library, provider credentials, cache, log, backup, recovery copy, or debug symbol.
+
+Run the same complete release gate used by GitHub Actions:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-release.ps1
+```
 
 ## Verification record
 
@@ -40,7 +47,7 @@ The final Group 7 build record, ZIP SHA-256, file count, smoke-test outcome, rea
 - Windows may show an unrecognised-publisher warning.
 - Provider credentials are optional and entered by the user after launch.
 - The application source currently has no reuse license; third-party components retain their own licenses and notices.
-- No GitHub Release binary is committed to the repository. The tag and reproducible packaging command identify the source release.
+- Release binaries are generated and verified artifacts, never committed source files.
 
 ## Historical checkpoints
 

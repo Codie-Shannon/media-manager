@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: media-manager-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-release:
+    name: Verify Windows x64 release
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v3
+
+      - name: Add NuGet to PATH
+        uses: NuGet/setup-nuget@v3
+        with:
+          nuget-version: latest
+
+      - name: Run complete release gate
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-release.ps1
+
+      - name: Upload verified portable release
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaManager-portable-x64-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            artifacts/MediaManager-portable-x64.zip
+            artifacts/MediaManager-portable-x64.zip.sha256
+            artifacts/RELEASE-MANIFEST.txt

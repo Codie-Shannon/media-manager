@@ -19,6 +19,7 @@ $artifactRoot = [System.IO.Path]::GetFullPath($OutputDirectory)
 $stageDirectory = Join-Path $artifactRoot "MediaManager-portable-x64"
 $zipPath = Join-Path $artifactRoot "MediaManager-portable-x64.zip"
 $checksumPath = $zipPath + ".sha256"
+$manifestPath = Join-Path $artifactRoot "RELEASE-MANIFEST.txt"
 $solutionPath = Join-Path $repositoryRoot "MediaManager.sln"
 $releaseDirectory = Join-Path $repositoryRoot (
     "src\Media_Manager\bin\{0}\{1}" -f $Platform, $Configuration)
@@ -43,6 +44,7 @@ function Assert-ContainedPath {
 Assert-ContainedPath -Path $stageDirectory -Root $artifactRoot
 Assert-ContainedPath -Path $zipPath -Root $artifactRoot
 Assert-ContainedPath -Path $checksumPath -Root $artifactRoot
+Assert-ContainedPath -Path $manifestPath -Root $artifactRoot
 
 $msbuild = Get-Command "MSBuild.exe" -ErrorAction SilentlyContinue
 if (-not $msbuild) {
@@ -87,6 +89,9 @@ if (Test-Path -LiteralPath $zipPath) {
 }
 if (Test-Path -LiteralPath $checksumPath) {
     Remove-Item -LiteralPath $checksumPath -Force
+}
+if (Test-Path -LiteralPath $manifestPath) {
+    Remove-Item -LiteralPath $manifestPath -Force
 }
 
 New-Item -ItemType Directory -Path $stageDirectory | Out-Null
@@ -179,6 +184,9 @@ Set-Content -LiteralPath (
     Join-Path $stageDirectory "RELEASE-MANIFEST.txt") `
     -Value $manifestLines `
     -Encoding ASCII
+Copy-Item -LiteralPath (
+    Join-Path $stageDirectory "RELEASE-MANIFEST.txt") `
+    -Destination $manifestPath
 
 Compress-Archive -Path (Join-Path $stageDirectory "*") `
     -DestinationPath $zipPath `
@@ -191,4 +199,5 @@ Set-Content -LiteralPath $checksumPath `
 
 Write-Output "Portable folder: $stageDirectory"
 Write-Output "Portable ZIP: $zipPath"
+Write-Output "Release manifest: $manifestPath"
 Write-Output "SHA-256: $hash"

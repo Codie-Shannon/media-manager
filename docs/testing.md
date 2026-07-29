@@ -47,16 +47,24 @@ The original, restored, and modern directories each contain the same 13 applicat
 
 ## Release verification
 
-Group 7 requires:
+The complete release gate is available as one command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-release.ps1
+```
+
+Both local release work and `.github/workflows/ci.yml` use this script. It performs:
 
 1. NuGet restore from the repository configuration.
 2. Debug x64 and Release x64 solution rebuilds.
 3. Both stability executables passing.
-4. Release and packaged-demo launch smoke tests.
-5. No unexpected browser process.
-6. No change to the real database hash.
-7. Portable-stage and ZIP privacy inspection.
-8. Tracked-file secret/private-path scan.
-9. Clean Git working tree after commit.
+4. Portable Release x64 packaging.
+5. Tracked-file runtime-data, secret, and private-path scans.
+6. Per-file release-manifest verification.
+7. ZIP-to-stage byte verification.
+8. External SHA-256 checksum verification.
+9. Clean Git working-tree verification.
+
+The historical Group 7 manual record additionally covers application/package launch smoke tests, unexpected browser-process checks, and confirmation that the real user database hash did not change. Those user-profile-sensitive checks are not run on a hosted CI machine.
 
 The dated outcome and package checksum are maintained in [build-status.md](build-status.md) and [release.md](release.md).

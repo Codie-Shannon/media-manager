@@ -1,5 +1,8 @@
 # Media Manager
 
+[![CI](https://github.com/Codie-Shannon/media-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/Codie-Shannon/media-manager/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/Codie-Shannon/media-manager?display_name=tag&sort=semver)](https://github.com/Codie-Shannon/media-manager/releases/latest)
+
 Privacy-first C# WPF media library organiser - restored from my diploma-era origin project and modernized with supported metadata providers.
 
 Media Manager is a local Windows desktop application for organising, enriching, searching, and maintaining personal media libraries. The corrected `v1.0.1` portfolio release preserves the recovered application and its original custom-controls architecture while presenting a verified, modern product.
@@ -19,7 +22,7 @@ The repository distinguishes three states:
 | State | Meaning |
 | --- | --- |
 | Recovered snapshot | Partially functional historical source recovered from a damaged drive. It demonstrates the original scope and interface, but does not prove every historical workflow or establish the condition of the application when originally submitted. |
-| Original-interface functional restoration | A separate Student Projects edition being completed from the pre-modern Group 4 snapshot. It preserves the original interface while receiving the remaining functional corrections and its own complete verification evidence. |
+| Original-interface functional restoration | A separate, acceptance-complete Student Projects edition based on the pre-modern Group 4 snapshot. It preserves the original interface while carrying the remaining functional corrections and its own complete verification evidence. |
 | Modern release | The corrected `v1.0.1` application in this repository: supported providers, reliability work, modern interface, verified player surfaces, packaging, and release evidence. |
 
 The recovered snapshot being incomplete today does not mean the diploma application never worked. It means the damaged-drive recovery could not provide a complete, reproducible copy or full acceptance evidence on its own.
@@ -110,7 +113,13 @@ Build the portable Release:
 powershell -NoProfile -ExecutionPolicy Bypass -File packaging\build-portable.ps1
 ```
 
-The script creates a folder, ZIP, and SHA-256 checksum under `artifacts`. Release contents and verification are documented in [release.md](docs/release.md).
+Run the complete clean release gate:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\verify-release.ps1
+```
+
+The verifier restores packages, rebuilds and tests Debug/Release x64, creates the portable package, scans for private data and secrets, validates its manifest/ZIP/checksum, and requires a clean Git working tree. GitHub Actions runs the same script. Release contents and verification are documented in [release.md](docs/release.md).
 
 ## Testing and evidence
 
@@ -139,7 +148,7 @@ The suite covers destructive hierarchy behavior, malformed data, provider mappin
 
 The historical `group-2-complete` tag records the point where clean builds and startup were restored. Groups 3–5 were intended to establish the fully functional pre-modern baseline, but a later live audit found that their playback check had verified open/return behavior without detecting the constrained full-window player layout. The defect was corrected and evidenced in `v1.0.1`; the separate original-interface Student Projects edition will receive the same functional correction without the modern theme.
 
-See [release notes](docs/release.md), [changelog](CHANGELOG.md), and [master plan](docs/MASTER.md).
+See [release notes](docs/release.md), [changelog](CHANGELOG.md), [closed current bucket](docs/CURRENT_BUCKET.md), and [master plan](docs/MASTER.md).
 
 ## Known limitations and possible next steps
 

@@ -4,6 +4,9 @@ Date: 2026-07-27
 
 ## Verified
 
+- On 2026-07-29, the complete release gate was consolidated in `tools/verify-release.ps1` and passed locally: package restore, Debug/Release x64 rebuilds, both stability suites, portable packaging, tracked/untracked publication-file privacy scans, per-file manifest validation, ZIP byte validation, and external checksum validation.
+- Each verifier run emits and validates the checksum for its generated archive; build and ZIP timestamps mean independently rebuilt archives are not expected to have one permanent hash.
+- The separately preserved release attachment remains the originally documented `v1.0.1` ZIP with SHA-256 `803CFBB7A6D4B4C9D6C9E395196FBB093C93EA80BCE999190F760FF67638FE38`.
 - NuGet package restore succeeds using the repository `NuGet.Config`, which declares nuget.org explicitly instead of relying on machine-level feed configuration.
 - The complete `MediaManager.sln` rebuilds in Debug x64 and Release x64 with zero errors.
 - `MediaControlsLibrary`, `MediaControlsTester`, and `Media_Manager` build from their repository project relationships.
